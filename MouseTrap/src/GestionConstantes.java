@@ -20,7 +20,7 @@ public class GestionConstantes
              
         while (line != null) 
         {
-            String[] decompose = line.split(";");
+            String[] decompose = line.split("=");
             String nomConst = decompose[0];
             int valeurConst = Integer.parseInt(decompose[1]);
             
