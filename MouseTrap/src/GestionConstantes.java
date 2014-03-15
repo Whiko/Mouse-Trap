@@ -1,48 +1,40 @@
 import java.io.*;
-
-//UTILISER HASHTABLE !
-
+import java.util.Hashtable;
 
 public class GestionConstantes 
 {	
-	String nom;
-	int valeur;
+	private Hashtable<String, Integer> constantes;
 	
 	public GestionConstantes()
 	{
-		nom = "Null";
-		valeur = 0;
+		super();
 	}
 	
-	public GestionConstantes(String nomC, int valeurC)
+	public GestionConstantes(String path) throws IOException 
 	{
-		nom = nomC;
-		valeur = valeurC;
-	}
-	
-	public GestionConstantes getConst(String path) 
-	{
-        try
-        {
-            FileReader c = new FileReader(path);
-            BufferedReader r = new BufferedReader(c);
+		constantes = new Hashtable<String, Integer>();
+		FileReader c = new FileReader(path);
+        BufferedReader r = new BufferedReader(c);
  
-            String line = r.readLine();
+        String line = r.readLine();
              
-            while (line != null) 
-            {
-                String[] decompose = line.split(";");
-                String nomConst = decompose[0];
-                int valeurConst = Integer.parseInt(decompose[1]);
+        while (line != null) 
+        {
+            String[] decompose = line.split(";");
+            String nomConst = decompose[0];
+            int valeurConst = Integer.parseInt(decompose[1]);
+            
+            constantes.put(nomConst, valeurConst);
 
-                line = r.readLine();
-            }
+            line = r.readLine();
+        }
 
-            r.close();
- 
-        } catch (Exception e) {throw new Error(e);}
-        
-        GestionConstantes constante = new GestionConstantes(nomConst, valeurConst);
-        return constante;
+        r.close();
     }
+
+	public int getValeur(String nom)
+	{
+		Integer valeur = constantes.get(nom);
+		return valeur;
+	}
 }
