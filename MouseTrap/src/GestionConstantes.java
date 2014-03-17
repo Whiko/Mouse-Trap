@@ -4,12 +4,12 @@ import java.util.Hashtable;
 public class GestionConstantes 
 {	
 	private Hashtable<String, Integer> constantes;
-	
+
 	public GestionConstantes()
 	{
 		super();
 	}
-	
+
 	public GestionConstantes(String path) throws IOException 
 	{
 		constantes = new Hashtable<String, Integer>();
