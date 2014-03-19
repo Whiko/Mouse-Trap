@@ -1,3 +1,5 @@
+import org.newdawn.slick.GameContainer;
+
 
 public abstract class Joueur 
 {
@@ -5,6 +7,6 @@ public abstract class Joueur
 	protected int score;
 	protected int vie;
 	//protected Entite perso;
-	
-	public abstract void seDeplacer(); 
+
+	public void seDeplacer(GameContainer container) {} 
 }

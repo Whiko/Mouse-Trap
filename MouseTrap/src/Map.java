@@ -13,12 +13,11 @@ public class Map
 	private GestionConstantes ecX = new GestionConstantes("config/config_map.txt");	//ecart en x entre la fenetre et la map
 	private GestionConstantes ecY = new GestionConstantes("config/config_map.txt");	//ecart en y entre le fenetre et la map
 	private int height, width, tailleMur, ecartX, ecartY;
-
 	
 	public Map(String path) throws SlickException, IOException
 	{	
-		height = x.getValeur("height");
-		width = y.getValeur("width");
+		height = y.getValeur("height");
+		width = x.getValeur("width");
 		tailleMur = tMur.getValeur("tailleMur");
 		ecartX = ecX.getValeur("ecartX");
 		ecartY = ecY.getValeur("ecartY");
@@ -42,6 +41,21 @@ public class Map
 		fichier.close();
 	}
 	
+	public int getHeight()
+	{
+		return height;
+	}
+	
+	public int getWidth()
+	{
+		return width;
+	}
+	
+	public int[][] getCarte()
+	{
+		return carte;
+	}
+	
 	public void afficheMap(Graphics fenetre) throws IOException
 	{		
 		for(int i=0; i<height; i++)
@@ -52,5 +66,5 @@ public class Map
 					fenetre.drawImage(mur, j*tailleMur+ecartX, i*tailleMur+ecartY);
 			}
 		}		
-	}	
+	}
 }
