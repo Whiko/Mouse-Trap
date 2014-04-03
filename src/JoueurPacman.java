@@ -23,7 +23,7 @@ public class JoueurPacman extends Joueur
 		tailleMur = config.getValeur("tailleMur");
 		ecartX = config.getValeur("ecartX");
 		ecartY = config.getValeur("ecartY");
-		mur = new Image("mur.png");
+		mur = new Image("sprites/menu/mur.png");
 		carte = fichierCarte.getCarte();
 	}
 	
