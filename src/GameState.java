@@ -34,7 +34,7 @@ public class GameState extends BasicGameState
     {
     	try{
     	carte.afficheMap(arg);
-    	cs.afficheSouris(arg);
+    	cs.affichePacman(arg);
     	cs.seDeplacer(gc);
 	    } catch (IOException e)			{e.printStackTrace();}
     }

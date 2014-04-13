@@ -19,7 +19,7 @@ public class Map
 		tailleMur = config.getValeur("tailleMur");	//16
 		ecartX = config.getValeur("ecartX");	//40
 		ecartY = config.getValeur("ecartY");	//100
-		mur = new Image("sprites/menu/mur.png");
+		mur = new Image("sprites/sprites_Cyriaque/sprites_Julie/mur.png");
 		carte = new int[width][height];	//taille de la map
 		int c;
 		

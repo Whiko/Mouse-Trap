@@ -7,6 +7,13 @@ public abstract class Joueur
 	protected int score;
 	protected int vie;
 	//protected Entite perso;
+	
+	public Joueur()
+	{
+		pseudo = "";
+		score = 0;
+		vie = 3;
+	}
 
 	public void seDeplacer(GameContainer container) {} 
 }
