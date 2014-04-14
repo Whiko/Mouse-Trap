@@ -14,7 +14,7 @@ public class JoueurPacman extends Joueur
 	private int positionX;
 	private int positionY;
 	private Image pacmanimg; 
-	private Configuration config = new Configuration("config/config_map.txt");
+	private Configuration config;
 	private int tailleMur, taillePacman, ecartX, ecartY;
 	private int[][] carte;
 	
@@ -22,14 +22,15 @@ public class JoueurPacman extends Joueur
 	{
 		nbObjet = 0;
 		fichierCarte = new Map(path);
+		config = new Configuration("config/config_map.txt");
 		tailleMur = config.getValeur("tailleMur");
-		taillePacman = config.getValeur("taillePacman");
+		taillePacman = config.getValeur("taillePerso");
 		ecartX = config.getValeur("ecartX");
 		ecartY = config.getValeur("ecartY");
 		pacmanimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman.png");
 		carte = fichierCarte.getCarte();
-		positionX = 300;
-		positionY = 300;
+		positionX = ecartX + tailleMur;
+		positionY = ecartY + tailleMur;
 	}
 	
 	void setPseudo(String pseudo)

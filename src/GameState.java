@@ -11,6 +11,7 @@ public class GameState extends BasicGameState
 	public static final int stateID = 5;
 	private Map carte;
 	private JoueurPacman cs;
+	private Fantome f1;
    
     @Override
     public int getID() 
@@ -26,6 +27,7 @@ public class GameState extends BasicGameState
     	try{
     	carte = new Map("map/map1.txt");
     	cs= new JoueurPacman("map/map1.txt");
+    	f1 = new Fantome("map/map1.txt");
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -35,6 +37,7 @@ public class GameState extends BasicGameState
     	try{
     	carte.afficheMap(arg);
     	cs.affichePacman(arg);
+    	f1.afficheFantome(arg);
     	cs.seDeplacer(gc);
 	    } catch (IOException e)			{e.printStackTrace();}
     }

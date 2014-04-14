@@ -6,7 +6,7 @@ public class Main
 {
     public static void main(String[] args) throws SlickException
     {
-    	AppGameContainer container = new AppGameContainer(new WindowGame(), 1920, 1080, false);
+    	AppGameContainer container = new AppGameContainer(new WindowGame(), 900, 600, false);
         try {
             container.setTargetFrameRate(60);
             container.setMultiSample(4);
