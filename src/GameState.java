@@ -39,6 +39,7 @@ public class GameState extends BasicGameState
     	cs.affichePacman(arg);
     	f1.afficheFantome(arg);
     	cs.seDeplacer(gc);
+    	f1.seDeplacer(gc);
 	    } catch (IOException e)			{e.printStackTrace();}
     }
  

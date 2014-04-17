@@ -6,3 +6,4 @@ ecartX=160
 ecartY=120
 pointDepartFantomeX=430
 pointDepartFantomeY=320
+vitesse=2
