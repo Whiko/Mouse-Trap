@@ -46,7 +46,7 @@ public class Fantome extends Joueur
 		int position_gauche = positionX-ecartX;
 		int position_bas = positionY-ecartY+tailleFantome;
 		int position_haut = positionY-ecartY;
-		int distance, alea = 0;
+		int distance, alea;
 		int directions[] = new int[3];
 		for(int i=0; i<3; i++)
 			directions[i]=0;
@@ -78,11 +78,13 @@ public class Fantome extends Joueur
 		}
 		
 		//si le fantome se deplace vers le haut
-		else if(mvmt == "haut")
+		else if(mvmt.equals("haut"))
 		{
+			System.out.println("test");
+			//si la case de la position actuelle - 4 est une autre case que celle actuelle
 			if((position_haut-(vitesse+1))/tailleMur != position_haut/tailleMur)
 			{
-				if(carte[position_gauche-(vitesse+1)/tailleMur][position_haut/tailleMur] != 1)
+				if(carte[(position_gauche-(vitesse+1))/tailleMur][position_haut/tailleMur] != 1)
 				{
 					direction += 1;
 					directions[0] = 1; //1 represente la direction 'gauche'
@@ -107,32 +109,32 @@ public class Fantome extends Joueur
 					positionY += vitesse;
 				}
 				
-				else
+				System.out.println("test2");
+				do
 				{
-					while(directions[alea] == 0)
-					{
-						alea = (int)(Math.random()*2);
-					}
-					
-					if(alea == 0) //direction 'gauche'
-					{
-						distance = position_haut - (tailleMur * (position_haut-1)/tailleMur);
-						positionY -= distance;
-						mvmt = "gauche";
-						positionX -= vitesse;
-					}
-					
-					else if(alea == 1) //direction 'haut'
-						positionY -= vitesse;
-					
-					else if(alea == 2) //direction 'droit'
-					{
-						distance = position_haut - (tailleMur * (position_haut-1)/tailleMur);
-						positionY -= distance;
-						mvmt = "droit";
-						positionX += vitesse;
-					}
+					alea = (int)(Math.random()*2);
+					System.out.println(alea);
+				}while(directions[alea] == 0);
+				
+				if(alea == 0) //direction 'gauche'
+				{
+					distance = position_haut - (tailleMur*(position_haut-1)/tailleMur);
+					positionY -= distance;
+					mvmt = "gauche";
+					positionX -= vitesse;
 				}
+				
+				else if(alea == 1) //direction 'haut'
+					positionY -= vitesse;
+				
+				else if(alea == 2) //direction 'droit'
+				{
+					distance = position_haut - (tailleMur * (position_haut-1)/tailleMur);
+					positionY -= distance;
+					mvmt = "droit";
+					positionX += vitesse;
+				}
+				
 				
 				/*
 				else if(direction == 1)
