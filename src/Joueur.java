@@ -6,7 +6,6 @@ public abstract class Joueur
 	protected String pseudo;
 	protected int score;
 	protected int vie;
-	//protected Entite perso;
 	
 	public Joueur()
 	{
@@ -15,5 +14,5 @@ public abstract class Joueur
 		vie = 3;
 	}
 
-	public void seDeplacer(GameContainer container) {} 
+	public void seDeplacer(GameContainer container){}
 }

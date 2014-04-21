@@ -11,7 +11,9 @@ public class GameState extends BasicGameState
 	public static final int stateID = 5;
 	private Map carte;
 	private JoueurPacman cs;
-	private Fantome f1;
+	private Fantome[] fantomes;
+	private Configuration config;
+	private int nbFantomes, ecartX;
    
     @Override
     public int getID() 
@@ -25,9 +27,12 @@ public class GameState extends BasicGameState
     {
     	
     	try{
+		config = new Configuration("config/config_map.txt");
+		nbFantomes = config.getValeur("nbFantomes");
+		ecartX = config.getValeur("ecartX");
     	carte = new Map("map/map1.txt");
     	cs= new JoueurPacman("map/map1.txt");
-    	f1 = new Fantome("map/map1.txt");
+    	fantomes = cs.getFantomes();
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -37,9 +42,16 @@ public class GameState extends BasicGameState
     	try{
     	carte.afficheMap(arg);
     	cs.affichePacman(arg);
-    	f1.afficheFantome(arg);
+    	for(int i=0; i<nbFantomes; i++)
+    		fantomes[i].afficheFantome(arg);
     	cs.seDeplacer(gc);
-    	f1.seDeplacer(gc);
+    	for(int i=0; i<nbFantomes; i++)
+    		fantomes[i].seDeplacer(gc);
+    	
+    	//bandeau fenetre jeu
+    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
+    	arg.drawString("Vie : ", ecartX+20, 80);
+    	
 	    } catch (IOException e)			{e.printStackTrace();}
     }
  
