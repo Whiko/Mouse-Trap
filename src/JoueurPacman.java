@@ -63,6 +63,11 @@ public class JoueurPacman extends Joueur
 		return score;
 	}
 	
+	public int getVie()
+	{
+		return vie;
+	}
+	
 	public void gestionContact()
 	{
 		int i=0;
@@ -110,7 +115,7 @@ public class JoueurPacman extends Joueur
 
 	@Override
 	public void seDeplacer(GameContainer container) 
-	{
+	{		
 		int position_droit = positionX-ecartX+taillePacman;
 		int position_gauche = positionX-ecartX;
 		int position_bas = positionY-ecartY+taillePacman;

@@ -7,7 +7,7 @@ import org.newdawn.slick.SlickException;
 public class Map 
 {
 	private int[][] carte;
-	private Image mur; 
+	private Image mur, piece; 
 	private Configuration config = new Configuration("config/config_map.txt");
 	private int height, width, tailleMur, ecartX, ecartY;
 	
@@ -20,6 +20,7 @@ public class Map
 		ecartX = config.getValeur("ecartX");	//40
 		ecartY = config.getValeur("ecartY");	//100
 		mur = new Image("sprites/sprites_Cyriaque/sprites_Julie/mur.png");
+		piece = new Image("sprites/sprites_Cyriaque/originales/piece.png");
 		carte = new int[width][height];	//taille de la map
 		int c;
 		
@@ -69,5 +70,20 @@ public class Map
 					fenetre.drawImage(mur, i*tailleMur+ecartX, j*tailleMur+ecartY);
 			}
 		}		
+	}
+	
+	public void affichePiece(Graphics fenetre) throws IOException
+	{
+		for(int j=0; j<height; j++)		//j de 0 à 34
+		{
+			for(int i=0; i<width; i++)		//i de 0 à 19
+			{
+				if(carte[i][j] == '3')
+					fenetre.drawImage(piece, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
+			
+				/*if(carte[i][j] == '0')
+					fenetre.drawImage(, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);*/
+			}
+		}	
 	}
 }
