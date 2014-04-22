@@ -11,7 +11,7 @@ public class JoueurPacman extends Joueur
 {
 	private int nbObjet;
 	private Map fichierCarte;
-	private int positionX, positionY, pointDepartX, pointDepartY, tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPoints;
+	private int positionX, positionY, pointDepartX, pointDepartY, tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
 	private Image pacmanimg; 
 	private Configuration config;
 	private int[][] carte;
@@ -22,6 +22,7 @@ public class JoueurPacman extends Joueur
 	public JoueurPacman(String path) throws SlickException, IOException
 	{
 		nbObjet = 0;
+		cptPieces = 0;
 		fichierCarte = new Map(path);
 		config = new Configuration("config/config_map.txt");
 		tailleMur = config.getValeur("tailleMur");
@@ -30,7 +31,7 @@ public class JoueurPacman extends Joueur
 		ecartY = config.getValeur("ecartY");
 		vitesse = config.getValeur("vitesse");
 		nbFantomes = config.getValeur("nbFantomes");
-		nbPoints = config.getValeur("nbPoints");
+		nbPieces = config.getValeur("nbPoints");
 		pacmanimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman.png");
 		carte = fichierCarte.getCarte();
 		positionX = ecartX + tailleMur;
@@ -68,6 +69,11 @@ public class JoueurPacman extends Joueur
 		return vie;
 	}
 	
+	public int getCptPieces()
+	{
+		return cptPieces;
+	}
+	
 	public void gestionContact()
 	{
 		int i=0;
@@ -102,6 +108,7 @@ public class JoueurPacman extends Joueur
 			{
 				carte[position_gauche/tailleMur][position_haut/tailleMur] = 0;
 				score += 100;
+				cptPieces +=1;
 			}
 	 	}
 			
