@@ -89,7 +89,7 @@ public class MainMenuState extends BasicGameState
         	sbg.enterState(MenuOption.stateID);
         }
         
-        if ((mouseX > 530 && mouseX < quitter.getWidth() + 530) && (mouseY >= 530 && mouseY <= quitter.getHeight() + 50)) 
+        if ((mouseX > 530 && mouseX < quitter.getWidth() + 530) && (mouseY >= 530 && mouseY <= quitter.getHeight() + 530)) 
         {
         	gc.exit();
         }    
