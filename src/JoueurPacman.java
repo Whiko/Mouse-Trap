@@ -64,14 +64,29 @@ public class JoueurPacman extends Joueur
 		return score;
 	}
 	
+	public void setScore (int score)
+	{
+		this.score=score;
+	}
+	
 	public int getVie()
 	{
 		return vie;
 	}
 	
+	public void setVie(int vie)
+	{
+		this.vie=vie;
+	}
+	
 	public int getCptPieces()
 	{
 		return cptPieces;
+	}
+	
+	public boolean getGameOver()
+	{
+		return gameOver;
 	}
 	
 	public void gestionContact()

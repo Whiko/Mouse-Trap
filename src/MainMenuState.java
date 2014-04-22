@@ -70,7 +70,7 @@ public class MainMenuState extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
-    	enter(gc,sbg);
+    	//enter(gc,sbg);
     	getPosClicked(gc);
         
         if ((mouseX > 80 && mouseX < jouer.getWidth() + 80) && (mouseY >= 230 && mouseY <= jouer.getHeight() + 230)) 
@@ -91,7 +91,7 @@ public class MainMenuState extends BasicGameState
         
         if ((mouseX > 530 && mouseX < quitter.getWidth() + 530) && (mouseY >= 530 && mouseY <= quitter.getHeight() + 530)) 
         {
-        	gc.exit();
+        	//gc.exit();
         }    
     }
 }

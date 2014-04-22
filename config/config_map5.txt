@@ -8,4 +8,4 @@ pointDepartFantomeX=433
 pointDepartFantomeY=300
 vitesse=2
 nbFantomes=1
-nbPoints=119
+nbPoints=131

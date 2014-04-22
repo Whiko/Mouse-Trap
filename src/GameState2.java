@@ -7,9 +7,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class GameState extends BasicGameState
+public class GameState2 extends BasicGameState
 {
-	public static final int stateID = 5;
+	public static final int stateID = 6;
 	private Map carte;
 	private JoueurPacman cs;
 	private Fantome[] fantomes;
@@ -19,12 +19,12 @@ public class GameState extends BasicGameState
 	private Image finPartie;
 	private Image bienJoue;
    
+	
     @Override
     public int getID() 
     {
         return stateID;
     }
-    
  
     
     @Override
@@ -32,11 +32,11 @@ public class GameState extends BasicGameState
     {
     	
     	try{
-		config = new Configuration("config/config_map.txt");
+		config = new Configuration("config/config_map2.txt");
 		nbFantomes = config.getValeur("nbFantomes");
 		ecartX = config.getValeur("ecartX");
-    	carte = new Map("map/map.txt");
-    	cs= new JoueurPacman("map/map.txt");
+    	carte = new Map("map/map2.txt");
+    	cs= new JoueurPacman("map/map2.txt");
     	fantomes = cs.getFantomes();
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
@@ -68,26 +68,16 @@ public class GameState extends BasicGameState
     	
 	    } catch (IOException e)			{e.printStackTrace();}
     	
-    	if(cs.getCptPieces()==119)
+    	if(cs.getCptPieces()==134)
     	{
     		finPartie.draw(400,270);
     		bienJoue.draw(321,400);
     	}
-    	
-    	
     }
  
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
-    	if(cs.getCptPieces()==119)
-    	{
-    		//sbg.enterState(GameState2.stateID);
-    	}
     	
-    	if(cs.getGameOver())
-    	{
-    		sbg.enterState(GameOverState.stateID);
-    	}
     }
 }
