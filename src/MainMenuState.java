@@ -10,13 +10,11 @@ public class MainMenuState extends BasicGameState
 {
 	public static final int stateID = 1;
      
-    private Image title=null;
-    private Image pacM=null;
-    private Image MrsPacman = null;
     private Image jouer = null;
     private Image multi= null;
     private Image options= null;
     private Image quitter= null;
+    private Image fond= null;
     
     //private Sound debut;
     
@@ -52,27 +50,21 @@ public class MainMenuState extends BasicGameState
     	//debut = new Sound("pacman_beginning.wav");
     	//debut.loop();
     	
-    	title = new Image("sprites/menu/title.png");
-    	pacM= new Image ("sprites/menu/pacM.png");
-        MrsPacman = new Image("sprites/menu/p.png");
         jouer = new Image("sprites/menu/bouton1joueur.png");
         multi= new Image("sprites/menu/multi.png");
         options= new Image("sprites/menu/options.png");
         quitter= new Image("sprites/menu/quitter.png");
+        fond= new Image("sprites/menu/menu2.png");
     }
  
     @Override
     public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException 
     {
-    	title.draw(140,10);
-        MrsPacman.draw(10,285);
-    	pacM.draw(175,182);
-        jouer.draw(200, 175);
-        pacM.draw(280,257);
-        multi.draw(305,250);
-        pacM.draw(395,327);
-        options.draw(420,320);
-        quitter.draw(530,430);
+    	fond.draw(0,0);
+        jouer.draw(80,230);
+        multi.draw(380,230);
+        options.draw(320,380);
+        quitter.draw(530,530);
     }
  
     @Override
@@ -81,23 +73,23 @@ public class MainMenuState extends BasicGameState
     	enter(gc,sbg);
     	getPosClicked(gc);
         
-        if ((mouseX > 200 && mouseX < jouer.getWidth() + 200) && (mouseY >= 175 && mouseY <= jouer.getHeight() + 175)) 
+        if ((mouseX > 80 && mouseX < jouer.getWidth() + 80) && (mouseY >= 230 && mouseY <= jouer.getHeight() + 230)) 
         {
             //jouer
         	sbg.enterState(GameState.stateID);
         }
         
-        if ((mouseX > 305 && mouseX < multi.getWidth() + 305) && (mouseY >= 250 && mouseY <= multi.getHeight() + 250)) 
+        if ((mouseX > 380 && mouseX < multi.getWidth() + 380) && (mouseY >= 230 && mouseY <= multi.getHeight() + 230)) 
         {
         	//Reseau
         }
         
-        if ((mouseX > 420 && mouseX < options.getWidth() + 420) && (mouseY >= 320 && mouseY <= options.getHeight() + 320)) 
+        if ((mouseX > 320 && mouseX < options.getWidth() + 320) && (mouseY >= 380 && mouseY <= options.getHeight() + 380)) 
         {
         	sbg.enterState(MenuOption.stateID);
         }
         
-        if ((mouseX > 540 && mouseX < quitter.getWidth() + 540) && (mouseY >= 430 && mouseY <= quitter.getHeight() + 430)) 
+        if ((mouseX > 530 && mouseX < quitter.getWidth() + 530) && (mouseY >= 530 && mouseY <= quitter.getHeight() + 50)) 
         {
         	gc.exit();
         }    
