@@ -8,9 +8,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class GameState2 extends BasicGameState
+public class GameState3 extends BasicGameState
 {
-	public static final int stateID = 6;
+	public static final int stateID = 7;
 	private Map carte;
 	private JoueurPacman cs;
 	private Fantome[] fantomes;
@@ -33,11 +33,11 @@ public class GameState2 extends BasicGameState
     {
     	
     	try{
-		config = new Configuration("config/config_map2.txt");
+		config = new Configuration("config/config_map3.txt");
 		nbFantomes = config.getValeur("nbFantomes");
 		ecartX = config.getValeur("ecartX");
-    	carte = new Map("map/map2.txt");
-    	cs= new JoueurPacman("map/map2.txt");
+    	carte = new Map("map/map3.txt");
+    	cs= new JoueurPacman("map/map3.txt");
     	fantomes = cs.getFantomes();
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
@@ -83,7 +83,7 @@ public class GameState2 extends BasicGameState
     {
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		sbg.enterState(GameState3.stateID);
+    		sbg.enterState(GameState4.stateID);
     	}
     	
     	if(cs.getGameOver())

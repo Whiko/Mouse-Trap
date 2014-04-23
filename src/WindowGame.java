@@ -19,6 +19,9 @@ public class WindowGame extends StateBasedGame
     private MenuOption option;
     private GameState game;
     private GameState2 game2;
+    private GameState3 game3;
+    private GameState4 game4;
+    private GameState5 game5;
     private GameOverState gameOver;
     static AppGameContainer container;
 
@@ -40,12 +43,18 @@ public class WindowGame extends StateBasedGame
     	 option = new MenuOption();
     	 game= new GameState();
     	 game2= new GameState2();
+    	 game3=new GameState3();
+    	 game4=new GameState4();
+    	 game5=new GameState5();
     	 gameOver= new GameOverState();
     	 
     	 addState(menu);
     	 addState(option);
     	 addState(game);
     	 addState(game2);
+    	 addState(game3);
+    	 addState(game4);
+    	 addState(game5);
     	 addState(gameOver);
     	 container.setShowFPS(false);}
     }

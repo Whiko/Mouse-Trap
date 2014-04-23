@@ -3,6 +3,7 @@ import java.io.IOException;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -18,6 +19,7 @@ public class GameState extends BasicGameState
 	private Image vie;
 	private Image finPartie;
 	private Image bienJoue;
+	private Image continuer;
    
     @Override
     public int getID() 
@@ -35,12 +37,13 @@ public class GameState extends BasicGameState
 		config = new Configuration("config/config_map.txt");
 		nbFantomes = config.getValeur("nbFantomes");
 		ecartX = config.getValeur("ecartX");
-    	carte = new Map("map/map.txt");
-    	cs= new JoueurPacman("map/map.txt");
+    	carte = new Map("map/map1.txt");
+    	cs= new JoueurPacman("map/map1.txt");
     	fantomes = cs.getFantomes();
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
+    	continuer= new Image("sprites/menu/continuer.png");
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -68,10 +71,11 @@ public class GameState extends BasicGameState
     	
 	    } catch (IOException e)			{e.printStackTrace();}
     	
-    	if(cs.getCptPieces()==119)
+    	if(cs.getCptPieces()==config.getValeur("nbPoints"))
     	{
-    		finPartie.draw(400,270);
-    		bienJoue.draw(321,400);
+    		finPartie.draw(400,200);
+    		bienJoue.draw(321,350);
+    		continuer.draw(55,450);
     	}
     	
     	
@@ -80,9 +84,9 @@ public class GameState extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
-    	if(cs.getCptPieces()==119)
+    	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		//sbg.enterState(GameState2.stateID);
+    		sbg.enterState(GameState2.stateID);
     	}
     	
     	if(cs.getGameOver())

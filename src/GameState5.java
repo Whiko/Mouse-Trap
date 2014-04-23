@@ -8,9 +8,9 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class GameState2 extends BasicGameState
+public class GameState5 extends BasicGameState
 {
-	public static final int stateID = 6;
+	public static final int stateID = 9;
 	private Map carte;
 	private JoueurPacman cs;
 	private Fantome[] fantomes;
@@ -19,7 +19,6 @@ public class GameState2 extends BasicGameState
 	private Image vie;
 	private Image finPartie;
 	private Image bienJoue;
-	private Image continuer;
 	
     @Override
     public int getID() 
@@ -33,16 +32,15 @@ public class GameState2 extends BasicGameState
     {
     	
     	try{
-		config = new Configuration("config/config_map2.txt");
+		config = new Configuration("config/config_map5.txt");
 		nbFantomes = config.getValeur("nbFantomes");
 		ecartX = config.getValeur("ecartX");
-    	carte = new Map("map/map2.txt");
-    	cs= new JoueurPacman("map/map2.txt");
+    	carte = new Map("map/map5.txt");
+    	cs= new JoueurPacman("map/map5.txt");
     	fantomes = cs.getFantomes();
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
-    	continuer= new Image("sprites/menu/continuer.png");
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -74,7 +72,6 @@ public class GameState2 extends BasicGameState
     	{
     		finPartie.draw(400,270);
     		bienJoue.draw(321,400);
-    		continuer.draw(55,450);
     	}
     }
  
@@ -83,7 +80,7 @@ public class GameState2 extends BasicGameState
     {
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		sbg.enterState(GameState3.stateID);
+    		sbg.enterState(MainMenuState.stateID);
     	}
     	
     	if(cs.getGameOver())
