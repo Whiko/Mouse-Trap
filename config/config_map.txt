@@ -1,5 +1,5 @@
 height=15
-width=21
+width=20
 tailleMur=30
 taillePerso=28
 ecartX=160

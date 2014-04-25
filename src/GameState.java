@@ -51,24 +51,19 @@ public class GameState extends BasicGameState
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
     	try{
-    	carte.afficheMap(arg);
-    	cs.affichePacman(arg);
-    	
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].afficheFantome(arg);
-    	cs.seDeplacer(gc);
-    	carte.affichePiece(arg);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc);
-    	
-    	//bandeau fenetre jeu
-    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
-    	arg.drawString("Vie : ", ecartX+20, 80);
-    	for(int i=0; i<cs.getVie(); i++) 
-    	{
-			arg.drawImage(vie, ecartX+75+15*i,85);
-		}
-    	
+	    	carte.afficheMap(arg);
+	    	cs.affichePacman(arg);
+	    	for(int i=0; i<nbFantomes; i++)
+	    		fantomes[i].afficheFantome(arg);
+	    	carte.affichePiece(arg);
+	    	
+	    	//bandeau fenetre jeu
+	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
+	    	arg.drawString("Vie : ", ecartX+20, 80);
+	    	for(int i=0; i<cs.getVie(); i++) 
+	    	{
+				arg.drawImage(vie, ecartX+75+15*i,85);
+			}
 	    } catch (IOException e)			{e.printStackTrace();}
     	
     	if(cs.getCptPieces()==config.getValeur("nbPoints"))
@@ -77,13 +72,16 @@ public class GameState extends BasicGameState
     		bienJoue.draw(321,350);
     		continuer.draw(55,450);
     	}
-    	
-    	
     }
  
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
+    	
+    	cs.seDeplacer(gc);
+    	for(int i=0; i<nbFantomes; i++)
+    		fantomes[i].seDeplacer(gc);
+    	
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
     		sbg.enterState(GameState2.stateID);
