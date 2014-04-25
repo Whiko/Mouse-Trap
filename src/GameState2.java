@@ -37,7 +37,7 @@ public class GameState2 extends BasicGameState
 		nbFantomes = config.getValeur("nbFantomes");
 		ecartX = config.getValeur("ecartX");
     	carte = new Map("map/map2.txt");
-    	cs= new JoueurPacman("map/map2.txt");
+    	cs= new JoueurPacman("map/map2.txt","config/config_map2.txt");
     	fantomes = cs.getFantomes();
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
