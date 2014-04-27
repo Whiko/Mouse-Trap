@@ -52,10 +52,10 @@ public class GameState extends BasicGameState
     {
     	try{
 	    	carte.afficheMap(arg);
+	    	carte.affichePiece(arg);
 	    	cs.affichePacman(arg);
 	    	for(int i=0; i<nbFantomes; i++)
 	    		fantomes[i].afficheFantome(arg);
-	    	carte.affichePiece(arg);
 	    	
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);

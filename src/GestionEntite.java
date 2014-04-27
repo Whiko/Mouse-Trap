@@ -12,7 +12,7 @@ public class GestionEntite
 	
 	public void timerMort()
 	{
-		while(timer > 0)
+		if(timer > 0)
 			timer--;
 	}
 }
