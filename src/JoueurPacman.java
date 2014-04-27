@@ -19,17 +19,17 @@ public class JoueurPacman extends Joueur
 	private boolean gameOver, nextLevel;
 	private GestionEntite gestion;
 	
-	public JoueurPacman(String path) throws SlickException, IOException
+	public JoueurPacman(String path, String configu) throws SlickException, IOException
 	{
 		nbObjet = 0;
 		cptPieces = 0;
 		fichierCarte = new Map(path);
-		config = new Configuration("config/config_map.txt");
+		config = new Configuration(configu);
 		tailleMur = config.getValeur("tailleMur");
 		taillePacman = config.getValeur("taillePerso");
 		ecartX = config.getValeur("ecartX");
 		ecartY = config.getValeur("ecartY");
-		vitesse = config.getValeur("vitesse");
+		vitesse = config.getValeur("vitesse")*2;
 		nbFantomes = config.getValeur("nbFantomes");
 		nbPieces = config.getValeur("nbPoints");
 		pacmanimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman.png");
@@ -45,7 +45,7 @@ public class JoueurPacman extends Joueur
 		
 		for(int i=0; i<nbFantomes; i++)
 		{
-			fantomes[i] = new Fantome("map/map1.txt");
+			fantomes[i] = new Fantome("map/map1.txt", configu);
 		}
 	}
 	
@@ -136,6 +136,8 @@ public class JoueurPacman extends Joueur
 	}
 
 	@Override
+	// il doit y avoir une perte de temps quelque part,
+	// Pacman et les fantomes sont sensé avoir la meme vitesse, mais les fantomes sont 2 fois plus rapides...
 	public void seDeplacer(GameContainer container) 
 	{		
 		int position_droit = positionX-ecartX+taillePacman;
