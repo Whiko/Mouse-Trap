@@ -8,28 +8,24 @@ import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-public class GameState extends BasicGameState
+
+public class MultiState extends BasicGameState
 {
-	public static final int stateID = 5;
+	public static final int stateID = 10;
 	private Map carte;
 	private JoueurPacman cs;
 	private Fantome[] fantomes;
 	private Configuration config;
 	private int nbFantomes, ecartX;
 	private Image vie;
-	private Image finPartie;
-	private Image bienJoue;
-	private Image continuer;
-   
-    @Override
+	
+	@Override
     public int getID() 
     {
         return stateID;
     }
-    
- 
-    
-    @Override
+	
+	@Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
     	
@@ -38,16 +34,13 @@ public class GameState extends BasicGameState
 			nbFantomes = config.getValeur("nbFantomes");
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
-	    	cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
+	    	cs= new JoueurPacman("map/map1.txt", "config/config_map.txt");
 	    	fantomes = cs.getFantomes();
 	    	vie = new Image("sprites/heart.png");
-	    	finPartie= new Image("sprites/menu/mp.png");
-	    	bienJoue= new Image("sprites/menu/bienJoue.png");
-	    	continuer= new Image("sprites/menu/continuer.png");
 	    } catch (IOException e)	{e.printStackTrace();}
     }
- 
-    @Override
+	
+	@Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
     	try{
@@ -58,8 +51,8 @@ public class GameState extends BasicGameState
 	    		fantomes[i].afficheFantome(arg);
 	    	
 	    	//bandeau fenetre jeu
-	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
-	    	arg.drawString("Vie : ", ecartX+20, 80);
+	    	arg.drawString("Score PacMan : "+cs.getScore(), ecartX+20, 60);
+	    	arg.drawString("Vie PacMan : ", ecartX+20, 80);
 	    	for(int i=0; i<cs.getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+75+15*i,85);
@@ -69,29 +62,17 @@ public class GameState extends BasicGameState
     	//configuration fin niveau
     	if(cs.getCptPieces()==config.getValeur("nbPoints"))
     	{
-    		finPartie.draw(400,200);
-    		bienJoue.draw(321,350);
-    		continuer.draw(55,450);
+    		
     	}
     }
- 
+	
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
     	//deplacements persos
-    	cs.seDeplacer(gc, carte);
+    	cs.seDeplacer(gc, carte.getCarte());
     	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    		fantomes[i].dplcmtMulti(gc, carte.getCarte());
     	
-    	//changements d'etats
-    	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
-    	{
-    		sbg.enterState(GameState2.stateID);
-    	}
-    	
-    	if(cs.getGameOver())
-    	{
-    		sbg.enterState(GameOverState.stateID);
-    	}
     }
 }

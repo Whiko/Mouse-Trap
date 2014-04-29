@@ -3,24 +3,23 @@ import java.io.IOException;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 
 public class Fantome extends Joueur
 {
-	private Map fichierCarte;
 	private String mvmt;
-	private int positionX, positionY, tailleMur, tailleFantome, ecartX, ecartY, vitesse, pointDepartX, pointDepartY;
+	private int positionX, positionY, tailleMur, tailleFantome, ecartX, ecartY, vitesse, position_droit, position_gauche, position_haut,
+				position_bas, pointDepartX, pointDepartY;
 	private Configuration config;
-	private int carte[][];
 	private Image fantomeimg;
 	
-	public Fantome(String path, String configu) throws IOException, SlickException
+	public Fantome(String path, String configu, int i) throws IOException, SlickException
 	{
 		mvmt = "haut"; // indique la direction actuelle du fantome
-		fichierCarte = new Map(path);
 		config = new Configuration(configu);
-		positionX = config.getValeur("pointDepartFantomeX");	//indiques les positions en x et y
+		positionX = config.getValeur("pointDepartFantomeX");	//indique les positions en x et y
 		positionY = config.getValeur("pointDepartFantomeY");
 		pointDepartX = positionX;
 		pointDepartY = positionY;
@@ -29,19 +28,31 @@ public class Fantome extends Joueur
 		ecartX = config.getValeur("ecartX");	//ecart entre le bord de la fenetre et la map
 		ecartY = config.getValeur("ecartY");
 		vitesse = config.getValeur("vitesse");
-		carte = fichierCarte.getCarte();
-		fantomeimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/fantome_violet.png");
-		
+		fantomeimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/fantome_"+(i+1)+".png");
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
 	}
 	
-	public int getX()
+	public int getGauche()
 	{
-		return positionX;
+		return position_gauche;
 	}
 	
-	public int getY()
+	public int getDroit()
 	{
-		return positionY;
+		return position_droit;
+	}
+	
+	public int getHaut()
+	{
+		return position_haut;
+	}
+	
+	public int getBas()
+	{
+		return position_bas;
 	}
 	
 	public void afficheFantome(Graphics fantome)
@@ -53,12 +64,14 @@ public class Fantome extends Joueur
 	// les fantomes peuvent revenir sur leurs pas a une intersection, si leur vitesse <1... je sais pas pourquoi. A creuser.
 	// Les commentaires d'explication du code sont sur le 1er cas : lorsqu'on se dirige vers la gauche, les autres cas sont construits de la meme maniere.
 	// fantomes peut etre un peu rapides, meme avec une vitesse =1...?
-	public void seDeplacer(GameContainer container)
+	public void seDeplacer(GameContainer container, int carte[][])
 	{
-		int position_droit = positionX-ecartX+tailleFantome;
-		int position_gauche = positionX-ecartX;
-		int position_bas = positionY-ecartY+tailleFantome;
-		int position_haut = positionY-ecartY;
+
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
+		
 		int distance, alea;
 		boolean directions[] = new boolean[3];
 		for(int i=0; i<3; i++)
@@ -274,5 +287,83 @@ public class Fantome extends Joueur
 				mvmt = "droit";
 			}
 		}	
+	}
+	
+	public void dplcmtMulti(GameContainer container, int carte[][])
+	{
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
+		
+		if (container.getInput().isKeyDown(Input.KEY_LEFT))
+		{
+			if  (carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_haut/tailleMur)]!='1'
+				&& carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_bas/tailleMur)]!='1')
+			{
+				positionX -= vitesse;
+			}
+			
+			else
+				positionX -= position_gauche - ((position_gauche/tailleMur)*tailleMur)-1;
+		}
+	
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
+		
+		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) 
+		{
+			if	(carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_haut/tailleMur)]!='1'
+				&& carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
+			{
+				positionX += vitesse;
+			}
+			
+			else
+			{
+				if  (carte[(int)((position_droit)/tailleMur)][(int)(position_haut/tailleMur)]!='1'
+					&& carte[(int)((position_droit)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
+					positionX += ((position_droit/tailleMur)*tailleMur)+tailleMur-1 - position_droit;
+			}
+		}
+
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
+		
+		if (container.getInput().isKeyDown(Input.KEY_UP))
+		{
+			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1'
+				&& carte[(int)((position_droit)/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1')
+			{
+				positionY -= vitesse;
+			}
+			
+			else
+				positionY -= position_haut - ((position_haut/tailleMur)*tailleMur)-1;
+			
+		}	
+		
+		position_droit = positionX-ecartX+tailleFantome;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+tailleFantome;
+		position_haut = positionY-ecartY;
+		
+		if (container.getInput().isKeyDown(Input.KEY_DOWN))
+		{
+			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1'
+				&& carte[(int)(position_droit/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1')
+			{
+				positionY += vitesse;
+			}
+			
+			else
+				if  (carte[(int)((position_droit)/tailleMur)][(int)(position_bas/tailleMur)]!='1'
+				&& carte[(int)((position_gauche)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
+				positionY += (((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas;
+		}
 	}
 }

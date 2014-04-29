@@ -14,5 +14,5 @@ public abstract class Joueur
 		vie = 3;
 	}
 
-	public void seDeplacer(GameContainer container){}
+	public void seDeplacer(GameContainer container, int carte[][]){}
 }

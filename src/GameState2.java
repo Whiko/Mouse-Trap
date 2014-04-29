@@ -55,10 +55,9 @@ public class GameState2 extends BasicGameState
     	
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].afficheFantome(arg);
-    	cs.seDeplacer(gc);
-    	carte.affichePiece(arg);
+    	cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc);
+    		fantomes[i].seDeplacer(gc, carte.getCarte());
     	
     	//bandeau fenetre jeu
     	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);

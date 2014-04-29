@@ -7,7 +7,12 @@ public class GestionEntite
 	public GestionEntite()
 	{
 		visible = true;
-		timer = 200000;
+		timer = 600;
+	}
+	
+	public int getTimer()
+	{
+		return timer;
 	}
 	
 	public void timerMort()

@@ -81,7 +81,7 @@ public class MainMenuState extends BasicGameState
         
         if ((mouseX > 380 && mouseX < multi.getWidth() + 380) && (mouseY >= 230 && mouseY <= multi.getHeight() + 230)) 
         {
-        	//Reseau
+        	sbg.enterState(MultiState.stateID);
         }
         
         if ((mouseX > 320 && mouseX < options.getWidth() + 320) && (mouseY >= 380 && mouseY <= options.getHeight() + 380)) 

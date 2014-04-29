@@ -14,11 +14,11 @@ public class Map
 
 	public Map(String path) throws SlickException, IOException
 	{	
-		height = config.getValeur("height");		//height = 20
-		width = config.getValeur("width");		//width = 35
-		tailleMur = config.getValeur("tailleMur");	//16
-		ecartX = config.getValeur("ecartX");	//40
-		ecartY = config.getValeur("ecartY");	//100
+		height = config.getValeur("height");		
+		width = config.getValeur("width");		
+		tailleMur = config.getValeur("tailleMur");
+		ecartX = config.getValeur("ecartX");	
+		ecartY = config.getValeur("ecartY");	
 		mur = new Image("sprites/sprites_Cyriaque/sprites_Julie/mur.png");
 		piece = new Image("sprites/sprites_Cyriaque/originales/piece.png");
 		carte = new int[width][height];	//taille de la map
@@ -41,6 +41,15 @@ public class Map
 		fichier.close();
 	}
 	
+	public int getCase(int abscisse, int ordonnee)
+	{
+		return carte[abscisse][ordonnee];
+	}
+	
+	public void setCase(int abscisse, int ordonnee, int valeur)
+	{
+		carte[abscisse][ordonnee] = valeur;
+	}
 	
 	public int getHeight()
 	{
@@ -62,27 +71,14 @@ public class Map
 	
 	public void afficheMap(Graphics fenetre) throws IOException
 	{
-		for(int j=0; j<height; j++)		//j de 0 à 34
+		for(int j=0; j<height; j++)
 		{
-			for(int i=0; i<width; i++)		//i de 0 à 19
+			for(int i=0; i<width; i++)
 			{
 				if (carte[i][j] == '1')		//pour chaque caractère '1', on affiche la texture du mur
 					fenetre.drawImage(mur, i*tailleMur+ecartX, j*tailleMur+ecartY);
-			}
-		}		
-	}
-	
-	public void affichePiece(Graphics fenetre) throws IOException
-	{
-		for(int j=0; j<height; j++)		//j de 0 à 34
-		{
-			for(int i=0; i<width; i++)		//i de 0 à 19
-			{
-				if(carte[i][j] == '3')
+				else if(carte[i][j] == '3')
 					fenetre.drawImage(piece, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
-			
-				/*if(carte[i][j] == '0')
-					fenetre.drawImage(, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);*/
 			}
 		}	
 	}
