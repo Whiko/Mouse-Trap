@@ -17,6 +17,7 @@ public class WindowGame extends StateBasedGame
 {
     private MainMenuState menu;
     private MenuOption option;
+    private MultiState multi;
     private GameState game;
     private GameState2 game2;
     private GameState3 game3;
@@ -38,8 +39,9 @@ public class WindowGame extends StateBasedGame
     	{ 
     	      //this.container = (AppGameContainer) container;
     	// on stocke le conteneur du jeu !
-    	 
-    	 menu = new MainMenuState();
+
+       	 menu = new MainMenuState();
+       	 multi = new MultiState();
     	 option = new MenuOption();
     	 game= new GameState();
     	 game2= new GameState2();
@@ -47,8 +49,9 @@ public class WindowGame extends StateBasedGame
     	 game4=new GameState4();
     	 game5=new GameState5();
     	 gameOver= new GameOverState();
-    	 
+
     	 addState(menu);
+    	 addState(multi);
     	 addState(option);
     	 addState(game);
     	 addState(game2);
