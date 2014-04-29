@@ -60,7 +60,6 @@ public class Fantome extends Joueur
 		fantome.drawImage(fantomeimg, positionX, positionY);
 	}
 	
-	@Override
 	// les fantomes peuvent revenir sur leurs pas a une intersection, si leur vitesse <1... je sais pas pourquoi. A creuser.
 	// Les commentaires d'explication du code sont sur le 1er cas : lorsqu'on se dirige vers la gauche, les autres cas sont construits de la meme maniere.
 	// fantomes peut etre un peu rapides, meme avec une vitesse =1...?
@@ -296,7 +295,7 @@ public class Fantome extends Joueur
 		position_bas = positionY-ecartY+tailleFantome;
 		position_haut = positionY-ecartY;
 		
-		if (container.getInput().isKeyDown(Input.KEY_LEFT))
+		if (container.getInput().isKeyDown(Input.KEY_Q))
 		{
 			if  (carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_haut/tailleMur)]!='1'
 				&& carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_bas/tailleMur)]!='1')
@@ -313,7 +312,7 @@ public class Fantome extends Joueur
 		position_bas = positionY-ecartY+tailleFantome;
 		position_haut = positionY-ecartY;
 		
-		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) 
+		if (container.getInput().isKeyDown(Input.KEY_D)) 
 		{
 			if	(carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_haut/tailleMur)]!='1'
 				&& carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
@@ -334,7 +333,7 @@ public class Fantome extends Joueur
 		position_bas = positionY-ecartY+tailleFantome;
 		position_haut = positionY-ecartY;
 		
-		if (container.getInput().isKeyDown(Input.KEY_UP))
+		if (container.getInput().isKeyDown(Input.KEY_Z))
 		{
 			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1'
 				&& carte[(int)((position_droit)/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1')
@@ -352,7 +351,7 @@ public class Fantome extends Joueur
 		position_bas = positionY-ecartY+tailleFantome;
 		position_haut = positionY-ecartY;
 		
-		if (container.getInput().isKeyDown(Input.KEY_DOWN))
+		if (container.getInput().isKeyDown(Input.KEY_S))
 		{
 			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1'
 				&& carte[(int)(position_droit/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1')

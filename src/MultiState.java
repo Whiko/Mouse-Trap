@@ -30,11 +30,11 @@ public class MultiState extends BasicGameState
     {
     	
     	try{
-			config = new Configuration("config/config_map.txt");
+			config = new Configuration("config/config_multi.txt");
 			nbFantomes = config.getValeur("nbFantomes");
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
-	    	cs= new JoueurPacman("map/map1.txt", "config/config_map.txt");
+	    	cs= new JoueurPacman("map/map1.txt", "config/config_multi.txt");
 	    	fantomes = cs.getFantomes();
 	    	vie = new Image("sprites/heart.png");
 	    } catch (IOException e)	{e.printStackTrace();}
@@ -55,7 +55,7 @@ public class MultiState extends BasicGameState
 	    	arg.drawString("Vie PacMan : ", ecartX+20, 80);
 	    	for(int i=0; i<cs.getVie(); i++) 
 	    	{
-				arg.drawImage(vie, ecartX+75+15*i,85);
+				arg.drawImage(vie, ecartX+135+15*i,85);
 			}
 	    } catch (IOException e)			{e.printStackTrace();}
     	
@@ -70,7 +70,7 @@ public class MultiState extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
     	//deplacements persos
-    	cs.seDeplacer(gc, carte.getCarte());
+    	cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].dplcmtMulti(gc, carte.getCarte());
     	

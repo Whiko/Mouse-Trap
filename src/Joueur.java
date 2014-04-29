@@ -13,6 +13,4 @@ public abstract class Joueur
 		score = 0;
 		vie = 3;
 	}
-
-	public void seDeplacer(GameContainer container, int carte[][]){}
 }

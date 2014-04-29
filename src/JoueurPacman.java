@@ -136,6 +136,7 @@ public class JoueurPacman extends Joueur
 	{
 		int i=0;
 		
+		
 		int position_droit = positionX-ecartX+taillePacman;
 		int position_gauche = positionX-ecartX;
 		int position_bas = positionY-ecartY+taillePacman;
