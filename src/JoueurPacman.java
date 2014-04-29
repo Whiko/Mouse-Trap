@@ -260,4 +260,101 @@ public class JoueurPacman extends Joueur
 			score = setScore(carte, position_gauche, position_haut, score);
 		}
 	}
+	
+	public void seDeplacerServeur(GameContainer container, Map carte) 
+	{		
+		gestionContact();
+
+		ferme = (ferme + 1) % 30;
+		
+		int position_droit = positionX-ecartX+taillePacman;
+		int position_gauche = positionX-ecartX;
+		int position_bas = positionY-ecartY+taillePacman;
+		int position_haut = positionY-ecartY;
+		
+		if (false)
+		{
+			mvmt = "left";
+			if (carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_haut/tailleMur))!='1'
+				&& carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_bas/tailleMur))!='1')
+			{
+				positionX -= vitesse;
+			}
+			
+			else
+				positionX -= position_gauche - ((position_gauche/tailleMur)*tailleMur)-1;
+			
+			score = setScore(carte, position_gauche, position_haut, score);
+		}
+	
+		position_droit = positionX-ecartX+taillePacman;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+taillePacman;
+		position_haut = positionY-ecartY;
+		
+		if (false) 
+		{
+			mvmt = "right";
+			if	(carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_haut/tailleMur))!='1'
+				&& carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_bas/tailleMur))!='1')
+			{
+				positionX += vitesse;
+			}
+			
+			else
+			{
+				if  (carte.getCase((int)((position_droit)/tailleMur), (int)(position_haut/tailleMur))!='1'
+					&& carte.getCase((int)((position_droit)/tailleMur), (int)(position_bas/tailleMur))!='1')
+					positionX += ((position_droit/tailleMur)*tailleMur)+tailleMur-1 - position_droit;
+			}
+			
+			score = setScore(carte, position_gauche, position_haut, score);
+		}
+
+		position_droit = positionX-ecartX+taillePacman;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+taillePacman;
+		position_haut = positionY-ecartY;
+		
+		if (false)
+		{
+			if (position_haut - ((position_haut/tailleMur)*tailleMur)-1 != 0)
+				mvmt = "up";
+			
+			if	(carte.getCase((int)(position_gauche/tailleMur), (int)((position_haut-(vitesse+1))/tailleMur))!='1'
+				&& carte.getCase((int)((position_droit)/tailleMur), (int)((position_haut-(vitesse+1))/tailleMur))!='1')
+			{
+				positionY -= vitesse;
+			}
+			
+			else
+				positionY -= position_haut - ((position_haut/tailleMur)*tailleMur)-1;
+			
+			score = setScore(carte, position_gauche, position_haut, score);
+		}	
+		
+		position_droit = positionX-ecartX+taillePacman;
+		position_gauche = positionX-ecartX;
+		position_bas = positionY-ecartY+taillePacman;
+		position_haut = positionY-ecartY;
+		
+		if (false)
+		{
+			if ((((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas != 0)
+				mvmt = "down";
+			
+			if	(carte.getCase((int)(position_gauche/tailleMur), (int)((position_bas+(vitesse+1))/tailleMur))!='1'
+				&& carte.getCase((int)(position_droit/tailleMur),(int)((position_bas+(vitesse+1))/tailleMur))!='1')
+			{
+				positionY += vitesse;
+			}
+			
+			else
+				if  (carte.getCase((int)((position_droit)/tailleMur), (int)(position_bas/tailleMur))!='1'
+				&& carte.getCase((int)((position_gauche)/tailleMur),(int)(position_bas/tailleMur))!='1')
+				positionY += (((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas;
+			
+			score = setScore(carte, position_gauche, position_haut, score);
+		}
+	}
 }

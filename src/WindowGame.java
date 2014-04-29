@@ -40,26 +40,27 @@ public class WindowGame extends StateBasedGame
     	      //this.container = (AppGameContainer) container;
     	// on stocke le conteneur du jeu !
 
-       	 menu = new MainMenuState();
-       	 multi = new MultiState();
-    	 option = new MenuOption();
-    	 game= new GameState();
-    	 game2= new GameState2();
-    	 game3=new GameState3();
-    	 game4=new GameState4();
-    	 game5=new GameState5();
-    	 gameOver= new GameOverState();
-
-    	 addState(menu);
-    	 addState(multi);
-    	 addState(option);
-    	 addState(game);
-    	 addState(game2);
-    	 addState(game3);
-    	 addState(game4);
-    	 addState(game5);
-    	 addState(gameOver);
-    	 container.setShowFPS(false);}
+	       	 menu = new MainMenuState();
+	       	 multi = new MultiState();
+	    	 option = new MenuOption();
+	    	 game= new GameState();
+	    	 game2= new GameState2();
+	    	 game3=new GameState3();
+	    	 game4=new GameState4();
+	    	 game5=new GameState5();
+	    	 gameOver= new GameOverState();
+	
+	    	 addState(menu);
+	    	 addState(multi);
+	    	 addState(option);
+	    	 addState(game);
+	    	 addState(game2);
+	    	 addState(game3);
+	    	 addState(game4);
+	    	 addState(game5);
+	    	 addState(gameOver);
+	    	 container.setShowFPS(false);
+    	 }
     }
     
    /* //affiche le contenu du jeu
