@@ -91,6 +91,12 @@ public class GameState extends BasicGameState
     	
     	if(cs.getGameOver())
     	{
+    		try{
+    		//cs.resetGameOver(); // Reset le game entier.
+    		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
+	    	fantomes = cs.getFantomes();
+    		carte.reinitMap("map/map1.txt");
+    		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     	}
     }

@@ -11,8 +11,8 @@ public class GameOverState extends BasicGameState
 	public static final int stateID = 2;
      
     private Image fond;
-    private Fenetre fenetreOptions;
-	
+    private Fenetre fenetre;
+    private JoueurPacman cs;
      
  
     @Override
@@ -27,24 +27,28 @@ public class GameOverState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException 
     {
     	fond =new Image("sprites/menu/gameOver.png");
+    	 
     }
  
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg2) throws SlickException 
     {
     	fond.draw(0,0);
-    	if (gc.getInput().isKeyDown((Input.KEY_ENTER))) 
-    	{
-    		fenetreOptions = new Fenetre();
-    		fenetreOptions.setVisible(true);
-    	}
-    		
     }
  
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
-    	if (gc.getInput().isKeyDown((Input.KEY_ENTER)) && !fenetreOptions.isVisible()) 
-    			sbg.enterState(MainMenuState.stateID);
+    	if (gc.getInput().isKeyDown((Input.KEY_ENTER)) && fenetre==null) 
+    	{
+    		fenetre = new Fenetre();	
+	    	fenetre.setVisible(true);
+    	}
+    	if(fenetre!=null && !fenetre.isVisible())
+    	{
+	    	fenetre = null;
+    		sbg.enterState(MainMenuState.stateID);
+    	}
+    	
     }
 }

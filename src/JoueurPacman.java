@@ -97,6 +97,16 @@ public class JoueurPacman extends Joueur
 		return gameOver;
 	}
 	
+	public void resetGameOver()
+	{
+		gameOver= false;
+		nbObjet=0;
+		cptPieces=0;
+		vie=3;
+		score=0;
+	}
+	
+	
 	public boolean getInvincible()
 	{
 		return invincible;
@@ -149,6 +159,7 @@ public class JoueurPacman extends Joueur
 				&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
 				&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
 			{
+				System.out.println("test");
 				if(vie > 1)
 				{
 					vie--;

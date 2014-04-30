@@ -1,4 +1,5 @@
 import java.io.*;
+
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -26,6 +27,27 @@ public class Map
 		
 		FileInputStream fichier = new FileInputStream(path); 
 		//on lit chaque caractere du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
+
+		for(int j=0; j<height; j++)	
+		{
+			for(int i=0; i<width; i++)
+			{
+				c = fichier.read();
+				if(c != 10 && c != 13) 	//10 = '\n' =retour a la ligne
+					carte[i][j] = c;
+				else
+					i--;
+			}		
+		}
+		fichier.close();
+	}
+	
+	public void reinitMap(String path) throws IOException
+	{
+		int c;
+		FileInputStream fichier = new FileInputStream(path); 
+		//on lit chaque caractere du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
+		
 
 		for(int j=0; j<height; j++)	
 		{

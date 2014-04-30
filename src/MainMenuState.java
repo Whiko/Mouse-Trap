@@ -77,21 +77,27 @@ public class MainMenuState extends BasicGameState
         {
             //jouer
         	sbg.enterState(GameState.stateID);
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 380 && mouseX < multi.getWidth() + 380) && (mouseY >= 230 && mouseY <= multi.getHeight() + 230)) 
         {
         	sbg.enterState(MultiState.stateID);
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 320 && mouseX < options.getWidth() + 320) && (mouseY >= 380 && mouseY <= options.getHeight() + 380)) 
         {
         	sbg.enterState(MenuOption.stateID);
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 530 && mouseX < quitter.getWidth() + 530) && (mouseY >= 530 && mouseY <= quitter.getHeight() + 530)) 
         {
-        	//gc.exit();
+        	gc.exit();
         }    
     }
 }

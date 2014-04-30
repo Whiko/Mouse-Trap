@@ -8,6 +8,7 @@ import javax.swing.JButton;
 
 
 
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -17,6 +18,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 
 import javax.swing.JTextField;
+
+import org.newdawn.slick.Input;
 
 
 public class Fenetre extends JFrame{
@@ -33,7 +36,7 @@ public class Fenetre extends JFrame{
 	    this.setTitle("Enregistrement");
 	    this.setSize(300, 240);
 	    this.setLocationRelativeTo(null); //fenetre au centre
-	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	    this.setLocationRelativeTo(null);
 	    
 	    //Changement de la couleur du texte
@@ -50,7 +53,13 @@ public class Fenetre extends JFrame{
 	    Font police = new Font("Comic sans MS", Font.BOLD, 14);
 	    jtf.setFont(police);
 	    jtf.setPreferredSize(new Dimension(150, 30));
-	    bouton.addActionListener(new BoutonListener());
+	    bouton.addActionListener(new ActionListener(){
+	    	public void actionPerformed(ActionEvent e) {
+	  	      System.out.println("Pseudo: " + jtf.getText());
+	  	      //JoueurPacman.setPseudo(jtf.getText());
+	  	      setVisible(false);
+	  	    }
+	    });
 	    cancelBouton.addActionListener(new ActionListener(){
 	      public void actionPerformed(ActionEvent arg0) {
 	        setVisible(false);
@@ -74,12 +83,13 @@ public class Fenetre extends JFrame{
 	
 	
 	
-	class BoutonListener implements ActionListener{
+	/*class BoutonListener implements ActionListener{
 	    public void actionPerformed(ActionEvent e) {
 	      System.out.println("Pseudo: " + jtf.getText());
 	      //JoueurPacman.setPseudo(jtf.getText());
+	    
 	    }
-	  }
+	  }*/
     
 }
 
