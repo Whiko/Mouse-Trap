@@ -21,14 +21,13 @@ public class ServeurState extends BasicGameState
 	private Image finPartie;
 	private Image bienJoue;
 	private Image continuer;
+	private Serveur serveur;
    
     @Override
     public int getID() 
     {
         return stateID;
     }
-    
- 
     
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
@@ -45,6 +44,7 @@ public class ServeurState extends BasicGameState
 	    	finPartie= new Image("sprites/menu/mp.png");
 	    	bienJoue= new Image("sprites/menu/bienJoue.png");
 	    	continuer= new Image("sprites/menu/continuer.png");
+	    	serveur = new Serveur();
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -79,10 +79,20 @@ public class ServeurState extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
+    	String requete = "";
+    	try {
+			requete = serveur.reception();
+		} catch (IOException e) {e.printStackTrace();}
+    	
     	//deplacements persos
-    	cs.seDeplacerServeur(gc, carte);
+    	cs.seDeplacerServeur(gc, carte, requete);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacerServeur(gc, carte.getCarte());
+    
+		System.out.println(cs.getY());
+    	
+    	//renvoit les donnees du jeu
+    	//serveur.envoi(cs.getX(), cs.getY());
     	
     }
 }

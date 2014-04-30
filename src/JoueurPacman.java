@@ -112,6 +112,16 @@ public class JoueurPacman extends Joueur
 		return invincible;
 	}
 	
+	public int getX()
+	{
+		return positionX;
+	}
+	
+	public int getY()
+	{
+		return positionY;
+	}
+	
 	public int setScore(Map carte, int position_gauche, int position_haut, int score)
 	{
 		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '3')
@@ -272,7 +282,7 @@ public class JoueurPacman extends Joueur
 		}
 	}
 	
-	public void seDeplacerServeur(GameContainer container, Map carte) 
+	public void seDeplacerServeur(GameContainer container, Map carte, String requete) 
 	{		
 		gestionContact();
 
@@ -283,7 +293,7 @@ public class JoueurPacman extends Joueur
 		int position_bas = positionY-ecartY+taillePacman;
 		int position_haut = positionY-ecartY;
 		
-		if (false)
+		if (requete.contains("gauche"))
 		{
 			mvmt = "left";
 			if (carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_haut/tailleMur))!='1'
@@ -302,8 +312,8 @@ public class JoueurPacman extends Joueur
 		position_gauche = positionX-ecartX;
 		position_bas = positionY-ecartY+taillePacman;
 		position_haut = positionY-ecartY;
-		
-		if (false) 
+
+		if (requete.contains("droite"))
 		{
 			mvmt = "right";
 			if	(carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_haut/tailleMur))!='1'
@@ -327,7 +337,7 @@ public class JoueurPacman extends Joueur
 		position_bas = positionY-ecartY+taillePacman;
 		position_haut = positionY-ecartY;
 		
-		if (false)
+		if (requete.contains("haut"))
 		{
 			if (position_haut - ((position_haut/tailleMur)*tailleMur)-1 != 0)
 				mvmt = "up";
@@ -349,7 +359,7 @@ public class JoueurPacman extends Joueur
 		position_bas = positionY-ecartY+taillePacman;
 		position_haut = positionY-ecartY;
 		
-		if (false)
+		if (requete.contains("bas"))
 		{
 			if ((((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas != 0)
 				mvmt = "down";
@@ -363,7 +373,7 @@ public class JoueurPacman extends Joueur
 			else
 				if  (carte.getCase((int)((position_droit)/tailleMur), (int)(position_bas/tailleMur))!='1'
 				&& carte.getCase((int)((position_gauche)/tailleMur),(int)(position_bas/tailleMur))!='1')
-				positionY += (((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas;
+					positionY += (((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas;
 			
 			score = setScore(carte, position_gauche, position_haut, score);
 		}

@@ -7,5 +7,5 @@ ecartY=120
 pointDepartFantomeX=520
 pointDepartFantomeY=330
 vitesse=2
-nbFantomes=1
+nbFantomes=5
 nbPoints=132

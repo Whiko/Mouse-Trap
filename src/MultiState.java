@@ -18,6 +18,7 @@ public class MultiState extends BasicGameState
 	private Configuration config;
 	private int nbFantomes, ecartX;
 	private Image vie;
+	private Client client;
 	
 	@Override
     public int getID() 
@@ -37,6 +38,7 @@ public class MultiState extends BasicGameState
 	    	cs= new JoueurPacman("map/map1.txt", "config/config_multi.txt");
 	    	fantomes = cs.getFantomes();
 	    	vie = new Image("sprites/heart.png");
+	    	client = new Client();
 	    } catch (IOException e)	{e.printStackTrace();}
     }
 	
@@ -69,6 +71,11 @@ public class MultiState extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
+    	try {
+			client.gererClavierClient(gc);
+			//client.reception();
+		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
+    	
     	//deplacements persos
     	cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
