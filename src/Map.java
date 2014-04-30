@@ -25,14 +25,14 @@ public class Map
 		int c;
 		
 		FileInputStream fichier = new FileInputStream(path); 
-		//on lit chaque caractère du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
+		//on lit chaque caractere du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
 
 		for(int j=0; j<height; j++)	
 		{
 			for(int i=0; i<width; i++)
 			{
 				c = fichier.read();
-				if(c != 10) 	//10 = '\n' =retour a la ligne
+				if(c != 10 && c != 13) 	//10 = '\n' =retour a la ligne
 					carte[i][j] = c;
 				else
 					i--;
@@ -75,7 +75,7 @@ public class Map
 		{
 			for(int i=0; i<width; i++)
 			{
-				if (carte[i][j] == '1')		//pour chaque caractère '1', on affiche la texture du mur
+				if (carte[i][j] == '1')		//pour chaque caractere '1', on affiche la texture du mur
 					fenetre.drawImage(mur, i*tailleMur+ecartX, j*tailleMur+ecartY);
 				else if(carte[i][j] == '3')
 					fenetre.drawImage(piece, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
