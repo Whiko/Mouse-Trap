@@ -1,0 +1,11 @@
+height=15
+width=20
+tailleMur=30
+taillePerso=28
+ecartX=160
+ecartY=120
+pointDepartFantomeX=430
+pointDepartFantomeY=328
+vitesse=2
+nbFantomes=1
+nbPoints=119
