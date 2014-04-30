@@ -33,9 +33,9 @@ public class Map
 			{
 				c = fichier.read();
 				if(c != 10) 	//10 = '\n' =retour a la ligne
-				{
 					carte[i][j] = c;
-				}
+				else
+					i--;
 			}		
 		}
 		fichier.close();
