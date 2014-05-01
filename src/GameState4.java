@@ -95,6 +95,10 @@ public class GameState4 extends BasicGameState
     		try{
     		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
 	    	fantomes = new Fantome[nbFantomes];
+	    	for(int i=0; i<nbFantomes; i++)
+			{
+				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+			}
     		carte.reinitMap("map/map4.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState5.stateID);
@@ -105,6 +109,10 @@ public class GameState4 extends BasicGameState
     		try{
     		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
 	    	fantomes = new Fantome[nbFantomes];
+	    	for(int i=0; i<nbFantomes; i++)
+			{
+				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+			}
     		carte.reinitMap("map/map4.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);

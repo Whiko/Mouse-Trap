@@ -60,9 +60,6 @@ public class Fantome extends Joueur
 		fantome.drawImage(fantomeimg, positionX, positionY);
 	}
 	
-	// les fantomes peuvent revenir sur leurs pas a une intersection, si leur vitesse <1... je sais pas pourquoi. A creuser.
-	// Les commentaires d'explication du code sont sur le 1er cas : lorsqu'on se dirige vers la gauche, les autres cas sont construits de la meme maniere.
-	// fantomes peut etre un peu rapides, meme avec une vitesse =1...?
 	public void seDeplacer(GameContainer container, int carte[][])
 	{
 
