@@ -5,16 +5,14 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.FlowLayout;
-import java.awt.GridLayout; 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JTextField;
-import org.newdawn.slick.Input;
 
 
 public class Fenetre extends JFrame{
+	private static final long serialVersionUID = 1L;
 	public JPanel container;
 	private JButton bouton;
 	private JButton cancelBouton;
