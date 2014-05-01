@@ -11,12 +11,11 @@ import org.newdawn.slick.SlickException;
 public class JoueurPacman extends Joueur
 {
 	private int nbObjet;
-	private int positionX, positionY, pointDepartX, pointDepartY, tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
+	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
 	private Hashtable <String, Image> pacman_img; 
 	private Configuration config;
-	private boolean gameOver, invincible;
-	private GestionEntite gestion;
-	private int ferme;
+	private boolean gameOver, invincible, invisible;
+	private int ferme, timer;
 	private String mvmt;
 	
 	public JoueurPacman(String path, String configu) throws SlickException, IOException
@@ -46,7 +45,8 @@ public class JoueurPacman extends Joueur
 		pointDepartY = positionY;
 		gameOver = false;
 		invincible = false;
-		gestion = new GestionEntite();
+		invisible = true;
+		timer = 150;
 		mvmt = "right";
 	}
 	
@@ -117,12 +117,27 @@ public class JoueurPacman extends Joueur
 		return score;
 	}
 	
+	public void setEtoile(Map carte,int position_gauche, int position_haut)
+	{
+		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '2')
+		{
+			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
+					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
+			{
+				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
+				nbObjet += 1;
+				cptPieces +=1;
+			}
+	 	}
+	}
+	
 	public void affichePacman(Graphics pacman)
 	{
 		String img = "pacman_"+mvmt;
 		if (ferme > 15)
 			img = img+"_ferme";
 		
+		if (timer % 15 < 10)
 		pacman.drawImage(pacman_img.get(img), positionX, positionY);
 	}
 
@@ -136,26 +151,55 @@ public class JoueurPacman extends Joueur
 		int position_bas = positionY-ecartY+taillePacman;
 		int position_haut = positionY-ecartY;
 		
-		while(i<nbFantomes && !gameOver)
+		if (!invisible)
 		{
-			if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
-				&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
-				&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
-				&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
+			if(invincible)
 			{
-				System.out.println("test");
-				if(vie > 1)
+				for(i=0; i<nbFantomes; i++)
 				{
-					vie--;
-					positionX = pointDepartX;
-					positionY = pointDepartY;
+					if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+							&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
+							&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
+							&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
+						{
+							fantomes[i].resetPosition();
+						}
 				}
-				
-				else
-					gameOver = true;
 			}
 			
-			i++;
+			else		
+			{
+				while(i<nbFantomes && !gameOver)
+				{
+					if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+						&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
+						&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
+						&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
+					{
+						if(vie > 1)
+						{
+							
+							vie--;
+							positionX = pointDepartX;
+							positionY = pointDepartY;
+							timer = 150;
+							invisible = true;
+						}
+						
+						else
+							gameOver = true;
+					}
+					
+					i++;
+				}
+			}
+		}
+		else
+		{
+			if(timer > 0)
+				timer--;
+			else
+				invisible = false;
 		}
 	}
 

@@ -19,7 +19,7 @@ public class Fantome extends Joueur
 	{
 		mvmt = "haut"; // indique la direction actuelle du fantome
 		config = new Configuration(configu);
-		positionX = config.getValeur("pointDepartFantomeX");	//indique les positions en x et y
+		positionX = config.getValeur("pointDepartFantomeX");
 		positionY = config.getValeur("pointDepartFantomeY");
 		pointDepartX = positionX;
 		pointDepartY = positionY;
@@ -53,6 +53,11 @@ public class Fantome extends Joueur
 	public int getBas()
 	{
 		return position_bas;
+	}
+	public void resetPosition()
+	{
+		positionY = pointDepartY;
+		positionX = pointDepartX;
 	}
 	
 	public void afficheFantome(Graphics fantome)
