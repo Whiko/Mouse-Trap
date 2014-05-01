@@ -111,7 +111,7 @@ public class GameState2 extends BasicGameState
 	    	fantomes = new Fantome[nbFantomes];
 	    	for(int i=0; i<nbFantomes; i++)
 			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+				fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt", i);
 			}
     		carte.reinitMap("map/map2.txt");
     		} catch (IOException e)	{e.printStackTrace();}

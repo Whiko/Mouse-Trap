@@ -85,10 +85,7 @@ public class GameState extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
     	//deplacements persos
-    	cs.gestionContact(fantomes);
-    	cs.seDeplacer(gc, carte);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    
     	
     	//changements d'etats
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
@@ -106,7 +103,7 @@ public class GameState extends BasicGameState
     		sbg.enterState(GameState2.stateID);
     	}
     	
-    	if(cs.getGameOver())
+    	else if(cs.getGameOver())
     	{
     		try{
     		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
@@ -119,5 +116,14 @@ public class GameState extends BasicGameState
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     	}
+    	
+    	else if(!cs.getGameOver() || cs.getCptPieces()<=config.getValeur("nbPoints"))
+    	{
+    		cs.gestionContact(fantomes);
+    		cs.seDeplacer(gc, carte);
+    		for(int i=0; i<nbFantomes; i++)
+    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    	}
+    	
     }
 }

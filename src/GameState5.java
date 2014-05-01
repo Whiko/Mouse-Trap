@@ -19,6 +19,8 @@ public class GameState5 extends BasicGameState
 	private Image vie;
 	private Image finPartie;
 	private Image bienJoue;
+    private Fenetre fenetre;
+	private Image continuer;
 	
     @Override
     public int getID() 
@@ -41,6 +43,7 @@ public class GameState5 extends BasicGameState
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
+    	continuer= new Image("sprites/menu/continuer.png");
     	
     	for(int i=0; i<nbFantomes; i++)
 		{
@@ -74,6 +77,7 @@ public class GameState5 extends BasicGameState
     	{
     		finPartie.draw(400,270);
     		bienJoue.draw(321,400);
+    		continuer.draw(55,450);
     	}
     }
  
@@ -89,19 +93,29 @@ public class GameState5 extends BasicGameState
     	//changements d'etats
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		
-    		try{
+        	if (fenetre==null) 
+        	{
+        		fenetre = new Fenetre();	
+    	    	fenetre.setVisible(true);
+        	}
+    	}
+    	
+    	if(fenetre!=null && !fenetre.isVisible())
+    	{
+    		System.out.println("test");
+	    	fenetre = null;
+	    	try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
 	    	fantomes = new Fantome[nbFantomes];
 	    	for(int i=0; i<nbFantomes; i++)
 			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+				fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
 			}
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(MainMenuState.stateID);
     	}
-    	
+		
     	if(cs.getGameOver())
     	{
     		try{
@@ -109,11 +123,12 @@ public class GameState5 extends BasicGameState
 	    	fantomes = new Fantome[nbFantomes];
 	    	for(int i=0; i<nbFantomes; i++)
 			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+				fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
 			}
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     	}
+    	
     }
 }
