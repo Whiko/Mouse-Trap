@@ -81,6 +81,7 @@ public class GameState5 extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
     	//deplacements persos
+    	cs.gestionContact(fantomes);
     	cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacer(gc, carte.getCarte());
