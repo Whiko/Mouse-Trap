@@ -19,7 +19,6 @@ public class Serveur
 		port = 8081;
 		serveur = new DatagramSocket(port);
 		donneesReponse = new byte[4000];
-		donneesRequete = new byte[4000];
 		requete = "";
 	}
 	
@@ -33,6 +32,7 @@ public class Serveur
 	
 	public String reception() throws IOException
 	{
+		donneesRequete = new byte[4000];
 		paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length);
 		serveur.receive(paquetRequete);
 		requete = new String(paquetRequete.getData());

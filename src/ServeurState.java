@@ -88,8 +88,6 @@ public class ServeurState extends BasicGameState
     	cs.seDeplacerServeur(gc, carte, requete);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacerServeur(gc, carte.getCarte());
-    
-		System.out.println(cs.getY());
     	
     	//renvoit les donnees du jeu
     	//serveur.envoi(cs.getX(), cs.getY());

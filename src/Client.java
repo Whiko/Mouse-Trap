@@ -29,17 +29,21 @@ public class Client
 	
 	public void gererClavierClient(GameContainer container) throws IOException, ClassNotFoundException
 	{
+		String direction = "";
+		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT))
-			envoi("gauche");
+			direction += "gauche"; 
 
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) 
-			envoi("droite");
+			direction += "droite"; 
 
 		if (container.getInput().isKeyDown(Input.KEY_UP))
-			envoi("haut");
+			direction += "haut"; 
 
-		if (container.getInput().isKeyPressed(Input.KEY_DOWN))
-			envoi("bas");
+		if (container.getInput().isKeyDown(Input.KEY_DOWN))
+			direction += "bas"; 
+		
+		envoi(direction);
 	}
 	
 	public void envoi(String direction) throws IOException

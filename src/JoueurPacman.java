@@ -358,7 +358,7 @@ public class JoueurPacman extends Joueur
 		position_gauche = positionX-ecartX;
 		position_bas = positionY-ecartY+taillePacman;
 		position_haut = positionY-ecartY;
-		
+
 		if (requete.contains("bas"))
 		{
 			if ((((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas != 0)

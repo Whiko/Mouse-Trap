@@ -77,9 +77,9 @@ public class MultiState extends BasicGameState
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
     	
     	//deplacements persos
-    	cs.seDeplacer(gc, carte);
+    	/*cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].dplcmtMulti(gc, carte.getCarte());
+    		fantomes[i].dplcmtMulti(gc, carte.getCarte());*/
     	
     }
 }
