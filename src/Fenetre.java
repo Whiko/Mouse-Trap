@@ -55,7 +55,7 @@ public class Fenetre extends JFrame{
 	    
 	    bouton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e) {
-	    		if(jtf.getText().equals(""))
+	    		if(jtf.getText().equals("Votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
 	  	      	//Joueur.setPseudo(jtf.getText());
