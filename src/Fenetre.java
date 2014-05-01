@@ -1,14 +1,8 @@
 import java.awt.Color;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
-
-
-
-
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.FlowLayout;
@@ -16,48 +10,56 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-
 import javax.swing.JTextField;
-
 import org.newdawn.slick.Input;
 
 
 public class Fenetre extends JFrame{
-	private JButton bouton = new JButton("Enregistrer");
-	private JButton cancelBouton = new JButton("Annuler");
-	public JPanel container = new JPanel();
-	private JTextField jtf = new JTextField("votre nom");
-	private JLabel label = new JLabel("Pseudo: ");
-	private JLabel label2 = new JLabel("Votre score: ");
-	private JLabel label3 = new JLabel("0"/*+JoueurPacman.getScore()*/);
-
+	public JPanel container;
+	private JButton bouton;
+	private JButton cancelBouton;
+	private JTextField jtf;
+	private JTextField jtf2;
+	private JLabel pseudo;
+	private JLabel score;
+	private JLabel label;
+	private JLabel IP;
 
 	public Fenetre(){
+		container = new JPanel();
+		
 	    this.setTitle("Enregistrement");
-	    this.setSize(300, 240);
+	    this.setSize(260, 200);
 	    this.setLocationRelativeTo(null); //fenetre au centre
-	    //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	    this.setLocationRelativeTo(null);
-	    
-	    //Changement de la couleur du texte
-	    //label.setForeground(Color.blue);
-	    //On modifie l'alignement du texte grâce aux attributs statiques
-	    //de la classe JLabel
-	    //label.setHorizontalAlignment(JLabel.CENTER);
-	          
-	    
-	    this.setLayout(new GridLayout(3, 2));
 	    container.setBackground(Color.white);
 	    container.setLayout(new BorderLayout());
+	    
+	    bouton = new JButton("Enregistrer");
+	    cancelBouton = new JButton("Annuler");
+	    
+	    score = new JLabel("Votre score: ");
+	    pseudo= new JLabel("Votre pseudo: ");
+	    label = new JLabel("0"/*+Joueur.getScore()*/);
+	    IP=new JLabel("IP serveur:");
+	    
 	    JPanel top = new JPanel();
+	    JPanel top2=new JPanel();
+	    JPanel boutons=new JPanel();
+	    
 	    Font police = new Font("Comic sans MS", Font.BOLD, 14);
+	    jtf = new JTextField("votre nom");
+	    jtf2 = new JTextField();
 	    jtf.setFont(police);
 	    jtf.setPreferredSize(new Dimension(150, 30));
+	    jtf2.setPreferredSize(new Dimension(150, 30));
+	    
 	    bouton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e) {
-	  	      System.out.println("Pseudo: " + jtf.getText());
-	  	      //JoueurPacman.setPseudo(jtf.getText());
-	  	      setVisible(false);
+	    		if(jtf.getText().equals(""))
+					jtf.setText("Anonyme");
+	    		System.out.println("Pseudo: " + jtf.getText());
+	  	      	//Joueur.setPseudo(jtf.getText());
+	  	      	setVisible(false);
 	  	    }
 	    });
 	    cancelBouton.addActionListener(new ActionListener(){
@@ -65,31 +67,20 @@ public class Fenetre extends JFrame{
 	        setVisible(false);
 	      }      
 	    });
-	    JPanel label5=new JPanel();
-	    label5.add(label2);
-	    label5.add(label3);
-	    top.add(label);
+	    
+	    top2.add(score);
+	    top2.add(label);
+	    top.add(pseudo);
 	    top.add(jtf);
-	    JPanel boutons=new JPanel();
+	    top.add(IP);
+	    top.add(jtf2);
+	    
 	    boutons.add(bouton);
 	    boutons.add(cancelBouton);
-	    this.getContentPane().add(label5, BorderLayout.NORTH);
+	    this.getContentPane().add(top2, BorderLayout.NORTH);
 	    this.getContentPane().add(top, BorderLayout.CENTER);
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
-	    this.setVisible(true);         
-	    
-	    
-	  }
-	
-	
-	
-	/*class BoutonListener implements ActionListener{
-	    public void actionPerformed(ActionEvent e) {
-	      System.out.println("Pseudo: " + jtf.getText());
-	      //JoueurPacman.setPseudo(jtf.getText());
-	    
-	    }
-	  }*/
-    
+	    this.setVisible(true);
+	  } 
 }
 

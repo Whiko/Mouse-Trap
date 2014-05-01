@@ -50,25 +50,22 @@ public class GameState2 extends BasicGameState
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
     	try{
-    	carte.afficheMap(arg);
-    	cs.affichePacman(arg);
-    	
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].afficheFantome(arg);
-    	cs.seDeplacer(gc, carte);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc, carte.getCarte());
-    	
-    	//bandeau fenetre jeu
-    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
-    	arg.drawString("Vie : ", ecartX+20, 80);
-    	for(int i=0; i<cs.getVie(); i++) 
-    	{
-			arg.drawImage(vie, ecartX+75+15*i,85);
-		}
-    	
+    		//affichage entites
+	    	carte.afficheMap(arg);
+	    	cs.affichePacman(arg);
+	    	for(int i=0; i<nbFantomes; i++)
+	    		fantomes[i].afficheFantome(arg);
+	    	
+	    	//bandeau fenetre jeu
+	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
+	    	arg.drawString("Vie : ", ecartX+20, 80);
+	    	for(int i=0; i<cs.getVie(); i++) 
+	    	{
+				arg.drawImage(vie, ecartX+75+15*i,85);
+			}
 	    } catch (IOException e)			{e.printStackTrace();}
     	
+    	    
     	if(cs.getCptPieces()==config.getValeur("nbPoints"))
     	{
     		finPartie.draw(400,270);
@@ -80,13 +77,29 @@ public class GameState2 extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
+    	//deplacements persos
+    	cs.seDeplacer(gc, carte);
+    	for(int i=0; i<nbFantomes; i++)
+    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    	
+    	//changements d'etats
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
+    		try{
+        		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
+    	    	fantomes = cs.getFantomes();
+        		carte.reinitMap("map/map2.txt");
+        		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState3.stateID);
     	}
     	
     	if(cs.getGameOver())
     	{
+    		try{
+    		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
+	    	fantomes = cs.getFantomes();
+    		carte.reinitMap("map/map2.txt");
+    		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     	}
     }

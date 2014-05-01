@@ -28,7 +28,6 @@ public class GameState extends BasicGameState
     }
     
  
-    
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
@@ -39,7 +38,7 @@ public class GameState extends BasicGameState
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
 	    	cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
 	    	vie = new Image("sprites/heart.png");
 	    	finPartie= new Image("sprites/menu/mp.png");
 	    	bienJoue= new Image("sprites/menu/bienJoue.png");
@@ -69,6 +68,7 @@ public class GameState extends BasicGameState
     	//configuration fin niveau
     	if(cs.getCptPieces()==config.getValeur("nbPoints"))
     	{
+    		
     		finPartie.draw(400,200);
     		bienJoue.draw(321,350);
     		continuer.draw(55,450);
@@ -86,15 +86,20 @@ public class GameState extends BasicGameState
     	//changements d'etats
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
+    		
+    		try{
+        		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
+    	    	fantomes = cs.getFantomes();
+        		carte.reinitMap("map/map1.txt");
+        		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState2.stateID);
     	}
     	
     	if(cs.getGameOver())
     	{
     		try{
-    		//cs.resetGameOver(); // Reset le game entier.
     		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
-	    	fantomes = cs.getFantomes();
+    		fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map1.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);

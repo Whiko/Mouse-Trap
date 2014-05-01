@@ -48,7 +48,6 @@ public class Map
 		FileInputStream fichier = new FileInputStream(path); 
 		//on lit chaque caractere du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
 		
-
 		for(int j=0; j<height; j++)	
 		{
 			for(int i=0; i<width; i++)

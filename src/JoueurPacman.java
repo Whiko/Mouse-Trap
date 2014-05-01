@@ -96,16 +96,7 @@ public class JoueurPacman extends Joueur
 	{
 		return gameOver;
 	}
-	
-	public void resetGameOver()
-	{
-		gameOver= false;
-		nbObjet=0;
-		cptPieces=0;
-		vie=3;
-		score=0;
-	}
-	
+		
 	
 	public boolean getInvincible()
 	{
