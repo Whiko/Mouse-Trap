@@ -1,13 +1,16 @@
 import java.awt.Color;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import javax.swing.JTextField;
 
 
@@ -23,7 +26,7 @@ public class Fenetre extends JFrame{
 	private JLabel label;
 	private JLabel IP;
 
-	public Fenetre(){
+	public Fenetre(int getscore){
 		container = new JPanel();
 		
 	    this.setTitle("Enregistrement");
@@ -37,7 +40,7 @@ public class Fenetre extends JFrame{
 	    
 	    score = new JLabel("Votre score: ");
 	    pseudo= new JLabel("Votre pseudo: ");
-	    label = new JLabel("0"/*+Joueur.getScore()*/);
+	    label = new JLabel(Integer.toString(getscore));
 	    IP=new JLabel("IP serveur:");
 	    
 	    JPanel top = new JPanel();
@@ -53,7 +56,7 @@ public class Fenetre extends JFrame{
 	    
 	    bouton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e) {
-	    		if(jtf.getText().equals("Votre nom") || jtf.getText().equals(""))
+	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
 	  	      	//Joueur.setPseudo(jtf.getText());

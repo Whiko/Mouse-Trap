@@ -11,6 +11,6 @@ public abstract class Joueur
 	{
 		pseudo = "";
 		score = 0;
-		vie = 10;
+		vie = 1;
 	}
 }

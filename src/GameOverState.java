@@ -12,13 +12,18 @@ public class GameOverState extends BasicGameState
      
     private Image fond;
     private Fenetre fenetre;
-    private JoueurPacman cs;
      
  
     @Override
     public int getID() 
     {
         return stateID;
+    }
+    
+    public static int getScore()
+    {
+    	int scoreTot= GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore()+GameState5.getScore();
+    	return scoreTot;
     }
  
     
@@ -41,7 +46,7 @@ public class GameOverState extends BasicGameState
     {
     	if (gc.getInput().isKeyDown((Input.KEY_ENTER)) && fenetre==null) 
     	{
-    		fenetre = new Fenetre();	
+    		fenetre = new Fenetre(GameOverState.getScore());	
 	    	fenetre.setVisible(true);
     	}
     	if(fenetre!=null && !fenetre.isVisible())

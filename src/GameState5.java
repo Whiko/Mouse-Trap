@@ -12,7 +12,7 @@ public class GameState5 extends BasicGameState
 {
 	public static final int stateID = 9;
 	private Map carte;
-	private JoueurPacman cs;
+	private static JoueurPacman cs;
 	private Fantome[] fantomes;
 	private Configuration config;
 	private int nbFantomes, ecartX;
@@ -21,6 +21,7 @@ public class GameState5 extends BasicGameState
 	private Image bienJoue;
     private Fenetre fenetre;
 	private Image continuer;
+	private static int score;
 	
     @Override
     public int getID() 
@@ -28,6 +29,12 @@ public class GameState5 extends BasicGameState
         return stateID;
     }
  
+    public static int getScore()
+    {
+    	int scoreTot=score+GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore()+GameState5.getScore();
+    	return scoreTot;
+    }
+    
     
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
@@ -100,7 +107,7 @@ public class GameState5 extends BasicGameState
     	{
         	if (fenetre==null) 
         	{
-        		fenetre = new Fenetre();	
+        		fenetre = new Fenetre(GameState5.getScore());	
     	    	fenetre.setVisible(true);
         	}
     	}
@@ -108,7 +115,7 @@ public class GameState5 extends BasicGameState
     	//game over
     	if(fenetre!=null && !fenetre.isVisible())
     	{
-    		System.out.println("test");
+    		score=cs.getScore();
 	    	fenetre = null;
 	    	try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
@@ -124,6 +131,7 @@ public class GameState5 extends BasicGameState
 		
     	if(cs.getGameOver())
     	{
+    		score=cs.getScore();
     		try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
 	    	fantomes = new Fantome[nbFantomes];

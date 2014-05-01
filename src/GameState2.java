@@ -12,7 +12,7 @@ public class GameState2 extends BasicGameState
 {
 	public static final int stateID = 6;
 	private Map carte;
-	private JoueurPacman cs;
+	private static JoueurPacman cs;
 	private Fantome[] fantomes;
 	private Configuration config;
 	private int nbFantomes, ecartX;
@@ -20,11 +20,17 @@ public class GameState2 extends BasicGameState
 	private Image finPartie;
 	private Image bienJoue;
 	private Image continuer;
+	private static int score;
 	
     @Override
     public int getID() 
     {
         return stateID;
+    }
+    
+    public static int getScore()
+    {
+    	return score;
     }
  
     
@@ -97,6 +103,7 @@ public class GameState2 extends BasicGameState
     	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
+    		score=cs.getScore();
     		try{
         		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
     	    	fantomes = new Fantome[nbFantomes];
@@ -112,6 +119,7 @@ public class GameState2 extends BasicGameState
     	//game over
     	if(cs.getGameOver())
     	{
+    		score=cs.getScore();
     		try{
     		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
 	    	fantomes = new Fantome[nbFantomes];
