@@ -83,12 +83,17 @@ public class GameState3 extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
     	//deplacements persos
-    	cs.gestionContact(fantomes);
-    	cs.seDeplacer(gc, carte);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
+    	{
+    		carte.spawnEtoile();
+    		cs.gestionContact(fantomes);
+    		cs.seDeplacer(gc, carte);
+    		for(int i=0; i<nbFantomes; i++)
+    			fantomes[i].seDeplacer(gc, carte.getCarte());
+    	}
     	
     	//changements d'etats
+    	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
     		try{
@@ -102,7 +107,8 @@ public class GameState3 extends BasicGameState
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState4.stateID);
     	}
-    	
+
+    	//game over
     	if(cs.getGameOver())
     	{
     		try{

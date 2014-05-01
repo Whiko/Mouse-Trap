@@ -57,6 +57,7 @@ public class GameState2 extends BasicGameState
     {
     	try{
     		//affichage entites
+    		carte.spawnEtoile();
 	    	carte.afficheMap(arg);
 	    	cs.affichePacman(arg);
 	    	for(int i=0; i<nbFantomes; i++)
@@ -84,12 +85,16 @@ public class GameState2 extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
     	//deplacements persos
-    	cs.gestionContact(fantomes);
-    	cs.seDeplacer(gc, carte);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacer(gc, carte.getCarte());
+    	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
+    	{
+    		cs.gestionContact(fantomes);
+    		cs.seDeplacer(gc, carte);
+    		for(int i=0; i<nbFantomes; i++)
+    			fantomes[i].seDeplacer(gc, carte.getCarte());
+    	}
     	
     	//changements d'etats
+    	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
     		try{
@@ -103,7 +108,8 @@ public class GameState2 extends BasicGameState
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState3.stateID);
     	}
-    	
+
+    	//game over
     	if(cs.getGameOver())
     	{
     		try{
