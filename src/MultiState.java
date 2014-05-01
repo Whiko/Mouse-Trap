@@ -36,9 +36,15 @@ public class MultiState extends BasicGameState
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
 	    	cs= new JoueurPacman("map/map1.txt", "config/config_multi.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
 	    	vie = new Image("sprites/heart.png");
 	    	client = new Client();
+	    	
+	    	for(int i=0; i<nbFantomes; i++)
+			{
+				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt", i);
+			}
+	    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
 	
