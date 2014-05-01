@@ -38,11 +38,17 @@ public class GameState4 extends BasicGameState
 		ecartX = config.getValeur("ecartX");
     	carte = new Map("map/map4.txt");
     	cs= new JoueurPacman("map/map4.txt", "config/config_map4.txt");
-    	fantomes = cs.getFantomes();
+    	fantomes = new Fantome[nbFantomes];
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
     	continuer= new Image("sprites/menu/continuer.png");
+    	
+    	for(int i=0; i<nbFantomes; i++)
+		{
+			fantomes[i] = new Fantome("map/map4.txt", "config/config_map4.txt", i);
+		}
+    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -78,6 +84,7 @@ public class GameState4 extends BasicGameState
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
     	//deplacements persos
+    	cs.gestionContact(fantomes);
     	cs.seDeplacer(gc, carte);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacer(gc, carte.getCarte());
@@ -87,7 +94,7 @@ public class GameState4 extends BasicGameState
     	{
     		try{
     		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map4.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState5.stateID);
@@ -97,7 +104,7 @@ public class GameState4 extends BasicGameState
     	{
     		try{
     		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map4.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);

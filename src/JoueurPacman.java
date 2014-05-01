@@ -14,7 +14,6 @@ public class JoueurPacman extends Joueur
 	private int positionX, positionY, pointDepartX, pointDepartY, tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
 	private Hashtable <String, Image> pacman_img; 
 	private Configuration config;
-	private Fantome[] fantomes;
 	private boolean gameOver, invincible;
 	private GestionEntite gestion;
 	private int ferme;
@@ -48,18 +47,7 @@ public class JoueurPacman extends Joueur
 		gameOver = false;
 		invincible = false;
 		gestion = new GestionEntite();
-		fantomes = new Fantome[nbFantomes];
 		mvmt = "right";
-		
-		for(int i=0; i<nbFantomes; i++)
-		{
-			fantomes[i] = new Fantome("map/map1.txt", configu, i);
-		}
-	}
-	
-	public Fantome[] getFantomes()
-	{
-		return fantomes;
 	}
 	
 	public void setPseudo(String pseudo)
@@ -137,13 +125,8 @@ public class JoueurPacman extends Joueur
 		
 		pacman.drawImage(pacman_img.get(img), positionX, positionY);
 	}
-	
-	public void gestionPacman()
-	{
-		
-	}
 
-	public void gestionContact()
+	public void gestionContact(Fantome[] fantomes)
 	{
 		int i=0;
 		
@@ -177,9 +160,7 @@ public class JoueurPacman extends Joueur
 	}
 
 	public void seDeplacer(GameContainer container, Map carte) 
-	{		
-		gestionContact();
-
+	{
 		ferme = (ferme + 1) % 30;
 		
 		int position_droit = positionX-ecartX+taillePacman;
@@ -275,8 +256,6 @@ public class JoueurPacman extends Joueur
 	
 	public void seDeplacerServeur(GameContainer container, Map carte, String requete) 
 	{		
-		gestionContact();
-
 		ferme = (ferme + 1) % 30;
 		
 		int position_droit = positionX-ecartX+taillePacman;

@@ -39,7 +39,7 @@ public class ServeurState extends BasicGameState
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
 	    	cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
 	    	vie = new Image("sprites/heart.png");
 	    	finPartie= new Image("sprites/menu/mp.png");
 	    	bienJoue= new Image("sprites/menu/bienJoue.png");
@@ -85,6 +85,7 @@ public class ServeurState extends BasicGameState
 		} catch (IOException e) {e.printStackTrace();}
     	
     	//deplacements persos
+    	cs.gestionContact(fantomes);
     	cs.seDeplacerServeur(gc, carte, requete);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacerServeur(gc, carte.getCarte());

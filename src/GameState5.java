@@ -37,10 +37,16 @@ public class GameState5 extends BasicGameState
 		ecartX = config.getValeur("ecartX");
     	carte = new Map("map/map5.txt");
     	cs= new JoueurPacman("map/map5.txt", "config/config_map5.txt");
-    	fantomes = cs.getFantomes();
+    	fantomes = new Fantome[nbFantomes];
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
+    	
+    	for(int i=0; i<nbFantomes; i++)
+		{
+			fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
+		}
+    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -85,7 +91,7 @@ public class GameState5 extends BasicGameState
     		
     		try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(MainMenuState.stateID);
@@ -95,7 +101,7 @@ public class GameState5 extends BasicGameState
     	{
     		try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);

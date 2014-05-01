@@ -38,11 +38,16 @@ public class GameState3 extends BasicGameState
 		ecartX = config.getValeur("ecartX");
     	carte = new Map("map/map3.txt");
     	cs= new JoueurPacman("map/map3.txt", "config/config_map3.txt");
-    	fantomes = cs.getFantomes();
+    	fantomes = new Fantome[nbFantomes];
     	vie = new Image("sprites/heart.png");
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
     	continuer= new Image("sprites/menu/continuer.png");
+    	for(int i=0; i<nbFantomes; i++)
+		{
+			fantomes[i] = new Fantome("map/map3.txt", "config/config_map3.txt", i);
+		}
+    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
@@ -87,7 +92,7 @@ public class GameState3 extends BasicGameState
     	{
     		try{
         		cs = new JoueurPacman("map/map3.txt", "config/config_map3.txt");
-    	    	fantomes = cs.getFantomes();
+    	    	fantomes = new Fantome[nbFantomes];
         		carte.reinitMap("map/map3.txt");
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState4.stateID);
@@ -97,7 +102,7 @@ public class GameState3 extends BasicGameState
     	{
     		try{
     		cs = new JoueurPacman("map/map3.txt", "config/config_map3.txt");
-	    	fantomes = cs.getFantomes();
+	    	fantomes = new Fantome[nbFantomes];
     		carte.reinitMap("map/map3.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
