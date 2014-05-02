@@ -68,6 +68,7 @@ public class GameState3 extends BasicGameState
     {
     	try{
     		//affichage entites
+    		carte.spawnEtoile();
 	    	carte.afficheMap(arg);
 	    	cs.affichePacman(arg);
 	    	for(int i=0; i<nbFantomes; i++)
@@ -97,7 +98,6 @@ public class GameState3 extends BasicGameState
     	//deplacements persos
     	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
     	{
-    		carte.spawnEtoile();
     		cs.gestionContact(fantomes);
     		cs.seDeplacer(gc, carte);
     		for(int i=0; i<nbFantomes; i++)
@@ -116,12 +116,13 @@ public class GameState3 extends BasicGameState
     		}
     		try{
         		cs = new JoueurPacman("map/map3.txt", "config/config_map3.txt");
+        		carte.reinitMap("map/map3.txt");
     	    	fantomes = new Fantome[nbFantomes];
     	    	for(int i=0; i<nbFantomes; i++)
     			{
-    				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+    				fantomes[i] = new Fantome("map/map3.txt", "config/config_map3.txt", i);
     			}
-        		carte.reinitMap("map/map3.txt");
+        		
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState4.stateID);
     		i=0;
@@ -136,13 +137,13 @@ public class GameState3 extends BasicGameState
     			i++;
     		}
     		try{
-    		cs = new JoueurPacman("map/map3.txt", "config/config_map3.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map3.txt", "config/config_map3.txt", i);
-			}
-    		carte.reinitMap("map/map3.txt");
+	    		cs = new JoueurPacman("map/map3.txt", "config/config_map3.txt");
+		    	fantomes = new Fantome[nbFantomes];
+		    	for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map3.txt", "config/config_map3.txt", i);
+				}
+	    		carte.reinitMap("map/map3.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     		i=0;

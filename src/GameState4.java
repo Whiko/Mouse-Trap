@@ -70,6 +70,7 @@ public class GameState4 extends BasicGameState
     {
     	try{
     		//affichage entites
+    		carte.spawnEtoile();
 	    	carte.afficheMap(arg);
 	    	cs.affichePacman(arg);
 	    	for(int i=0; i<nbFantomes; i++)
@@ -78,7 +79,7 @@ public class GameState4 extends BasicGameState
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
 	    	arg.drawString("Vie : ", ecartX+20, 80);
-	    	for(int i=0; i<cs.getVie(); i++) 
+	    	for(int i=0; i<GameState3.getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+75+15*i,85);
 			}
@@ -99,7 +100,6 @@ public class GameState4 extends BasicGameState
     	//deplacements persos
     	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
     	{
-    		carte.spawnEtoile();
     		cs.gestionContact(fantomes);
     		cs.seDeplacer(gc, carte);
     		for(int i=0; i<nbFantomes; i++)
@@ -116,14 +116,15 @@ public class GameState4 extends BasicGameState
     			csVie=cs.getVie();
     			i++;
     		}
+    		
     		try{
-    		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
-			}
-    		carte.reinitMap("map/map4.txt");
+	    		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
+	    		carte.reinitMap("map/map4.txt");
+		    	fantomes = new Fantome[nbFantomes];
+		    	for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map4.txt", "config/config_map4.txt", i);
+				}
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState5.stateID);
     		i=0;
@@ -138,13 +139,13 @@ public class GameState4 extends BasicGameState
     			i++;
     		}
     		try{
-    		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map4.txt", "config/config_map4.txt", i);
-			}
-    		carte.reinitMap("map/map4.txt");
+	    		cs = new JoueurPacman("map/map4.txt", "config/config_map4.txt");
+		    	fantomes = new Fantome[nbFantomes];
+		    	for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map4.txt", "config/config_map4.txt", i);
+				}
+	    		carte.reinitMap("map/map4.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     		i=0;

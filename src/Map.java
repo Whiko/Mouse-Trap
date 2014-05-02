@@ -100,12 +100,15 @@ public class Map
 		{
 			int x = 0;
 			int y = 0;
-			while(carte[x][y] == '1' || carte[x][y] == '4')
+			while(carte[x][y] == '1' || carte[x][y] == '4' || carte[x][y] == '2' || carte[x][y] == '5')
 			{
 				x = (int)(Math.random()*(width-2)+1);
 				y = (int)(Math.random()*(height-2)+1);
 			}
-			carte[x][y] = '2';
+			if(carte[x][y]=='3')
+				carte[x][y] = '2';
+			if(carte[x][y] == '0')
+				carte[x][y]='5';
 			timer = 2000;
 		}
 	}
@@ -123,6 +126,9 @@ public class Map
 					fenetre.drawImage(piece, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
 				
 				else if(carte[i][j] == '2')
+					fenetre.drawImage(etoile, i*tailleMur+ecartX, j*tailleMur+ecartY);
+				
+				else if(carte[i][j] == '5')
 					fenetre.drawImage(etoile, i*tailleMur+ecartX, j*tailleMur+ecartY);
 			}
 		}	

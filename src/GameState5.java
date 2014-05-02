@@ -73,6 +73,7 @@ public class GameState5 extends BasicGameState
     {
     	try{
     		//affichage entites
+    		carte.spawnEtoile();
 	    	carte.afficheMap(arg);
 	    	cs.affichePacman(arg);
 	    	for(int i=0; i<nbFantomes; i++)
@@ -102,7 +103,6 @@ public class GameState5 extends BasicGameState
     	//deplacements persos
     	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
     	{
-    		carte.spawnEtoile();
     		cs.gestionContact(fantomes);
     		cs.seDeplacer(gc, carte);
     		for(int i=0; i<nbFantomes; i++)
@@ -131,13 +131,13 @@ public class GameState5 extends BasicGameState
     		}
 	    	fenetre = null;
 	    	try{
-    		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
-			}
-    		carte.reinitMap("map/map5.txt");
+	    		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
+		    	fantomes = new Fantome[nbFantomes];
+		    	for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
+				}
+	    		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(MainMenuState.stateID);
     		i=0;
@@ -151,17 +151,16 @@ public class GameState5 extends BasicGameState
     			i++;
     		}
     		try{
-    		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
-			}
-    		carte.reinitMap("map/map5.txt");
+	    		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
+		    	fantomes = new Fantome[nbFantomes];
+		    	for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map5.txt", "config/config_map5.txt", i);
+				}
+	    		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
     		i=0;
     	}
-    	
     }
 }

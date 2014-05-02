@@ -15,7 +15,7 @@ public class JoueurPacman extends Joueur
 	private Hashtable <String, Image> pacman_img; 
 	private Configuration config;
 	private boolean gameOver, invincible, invisible;
-	private int ferme, timer;
+	private int ferme, timer, timerInvincible=1000;
 	private String mvmt;
 	
 	public JoueurPacman(String path, String configu) throws SlickException, IOException
@@ -113,6 +113,29 @@ public class JoueurPacman extends Joueur
 				cptPieces +=1;
 			}
 	 	}
+		
+		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '2')
+		{
+			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
+					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
+			{
+				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
+				invincible=true;
+				score += 200;
+				cptPieces +=1;
+			}
+	 	}
+		
+		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '5')
+		{
+			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
+					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
+			{
+				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
+				invincible=true;
+				score += 200;
+			}
+	 	}
 			
 		return score;
 	}
@@ -129,6 +152,16 @@ public class JoueurPacman extends Joueur
 				cptPieces +=1;
 			}
 	 	}
+		
+		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '5')
+		{
+			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
+					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
+			{
+				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
+				nbObjet += 1;
+			}
+	 	}
 	}
 	
 	public void affichePacman(Graphics pacman)
@@ -139,6 +172,9 @@ public class JoueurPacman extends Joueur
 		
 		if (timer % 15 < 10)
 		pacman.drawImage(pacman_img.get(img), positionX, positionY);
+		
+		if (timerInvincible >0 && timerInvincible <1000)
+			pacman.drawImage(pacman_img.get(img), positionX, positionY);
 	}
 
 	public void gestionContact(Fantome[] fantomes)
@@ -155,16 +191,28 @@ public class JoueurPacman extends Joueur
 		{
 			if(invincible)
 			{
-				for(i=0; i<nbFantomes; i++)
-				{
-					if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
-							&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
-							&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
-							&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
-						{
-							fantomes[i].resetPosition();
-						}
+				if(timerInvincible > 0)
+				{	
+					timerInvincible --;
+					for(i=0; i<nbFantomes; i++)
+					{
+						if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+								&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
+								&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
+								&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
+							{
+								fantomes[i].resetPosition();
+								score += 300;
+								
+							}
+					}
 				}
+				if(timerInvincible==0)
+				{
+					timerInvincible=1000;
+					invincible=false;
+				}
+				
 			}
 			
 			else		

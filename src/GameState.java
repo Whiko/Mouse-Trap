@@ -108,7 +108,6 @@ public class GameState extends BasicGameState
     			fantomes[i].seDeplacer(gc, carte.getCarte());
     	} 	
     	
-    	
     	//changements d'etats
     	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
@@ -153,7 +152,4 @@ public class GameState extends BasicGameState
     		i=0;
     	}
     }
-
-
-	
 }
