@@ -22,7 +22,9 @@ public class GameState5 extends BasicGameState
     private Fenetre fenetre;
 	private Image continuer;
 	private static int score;
+	private static int csVie;
 	private int i=0;
+	
 	
     @Override
     public int getID() 
@@ -30,11 +32,16 @@ public class GameState5 extends BasicGameState
         return stateID;
     }
  
-    /*public static int getScore()
+    public static int getScore()
     {
-    	int scoreTot=score+GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore()+GameState5.getScore();
+    	int scoreTot=score+GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore();
     	return scoreTot;
-    }*/
+    }
+    
+    public static int getVie()
+    {
+    	return csVie;
+    }
     
     
     @Override
@@ -74,7 +81,7 @@ public class GameState5 extends BasicGameState
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
 	    	arg.drawString("Vie : ", ecartX+20, 80);
-	    	for(int i=0; i<cs.getVie(); i++) 
+	    	for(int i=0; i<GameState4.getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+75+15*i,85);
 			}
@@ -119,6 +126,7 @@ public class GameState5 extends BasicGameState
     		if(i==0)
     		{
     			score= cs.getScore();
+    			csVie=cs.getVie();
     			i++;
     		}
 	    	fenetre = null;

@@ -21,6 +21,7 @@ public class GameState2 extends BasicGameState
 	private Image bienJoue;
 	private Image continuer;
 	private static int score;
+	private static int csVie;
 	private int i=0;
 	
     @Override
@@ -32,6 +33,11 @@ public class GameState2 extends BasicGameState
     public static int getScore()
     {
     	return score;
+    }
+    
+    public static int getVie()
+    {
+    	return csVie;
     }
  
     
@@ -73,7 +79,7 @@ public class GameState2 extends BasicGameState
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
 	    	arg.drawString("Vie : ", ecartX+20, 80);
-	    	for(int i=0; i<cs.getVie(); i++) 
+	    	for(int i=0; i<GameState.getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+75+15*i,85);
 			}
@@ -107,6 +113,7 @@ public class GameState2 extends BasicGameState
     		if(i==0)
     		{
     			score= cs.getScore();
+    			csVie=cs.getVie();
     			i++;
     		}
     		try{

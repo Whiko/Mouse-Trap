@@ -21,6 +21,7 @@ public class GameState4 extends BasicGameState
 	private Image bienJoue;
 	private Image continuer;
 	private static int score;
+	private static int csVie;
 	private int i=0;
 	
     @Override
@@ -32,6 +33,12 @@ public class GameState4 extends BasicGameState
     public static int getScore()
     {
     	return score;
+    }
+    
+    
+    public static int getVie()
+    {
+    	return csVie;
     }
     
     @Override
@@ -106,6 +113,7 @@ public class GameState4 extends BasicGameState
     		if(i==0)
     		{
     			score= cs.getScore();
+    			csVie=cs.getVie();
     			i++;
     		}
     		try{
