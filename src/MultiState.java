@@ -38,11 +38,11 @@ public class MultiState extends BasicGameState
 	    	cs= new JoueurPacman("map/map1.txt", "config/config_multi.txt");
 	    	fantomes = new Fantome[nbFantomes];
 	    	vie = new Image("sprites/heart.png");
-	    	client = new Client();
+	    	client = new Client(cs, carte);
 	    	
 	    	for(int i=0; i<nbFantomes; i++)
 			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt", i);
+				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt");
 			}
 	    	
 	    } catch (IOException e)	{e.printStackTrace();}
@@ -51,12 +51,13 @@ public class MultiState extends BasicGameState
 	@Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
+    	GestionGraphismes g = new GestionGraphismes();
     	try{
     		//affichage entites
-	    	carte.afficheMap(arg);
-	    	cs.affichePacman(arg);
+	    	carte.afficheMap(arg, g);
+	    	cs.affichePacman(arg, g);
 	    	for(int i=0; i<nbFantomes; i++)
-	    		fantomes[i].afficheFantome(arg);
+	    		fantomes[i].afficheFantome(arg, g, i);
 	    	
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score PacMan : "+cs.getScore(), ecartX+20, 60);
@@ -79,8 +80,11 @@ public class MultiState extends BasicGameState
     {    	
     	try {
 			client.gererClavierClient(gc);
-			//client.reception();
+			client.reception();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
+    	
+    	cs = (JoueurPacman)client.getJoueur();
+    	carte = client.getMap();
     	
     	//deplacements persos
     	/*cs.seDeplacer(gc, carte);

@@ -1,7 +1,6 @@
 import org.newdawn.slick.GameContainer;
 
-
-public abstract class Joueur 
+public abstract class Joueur
 {
 	protected String pseudo;
 	protected int score;

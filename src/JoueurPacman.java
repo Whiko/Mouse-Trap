@@ -12,7 +12,6 @@ public class JoueurPacman extends Joueur
 {
 	private int nbObjet;
 	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
-	private Hashtable <String, Image> pacman_img; 
 	private Configuration config;
 	private boolean gameOver, invincible, invisible;
 	private int ferme, timer, timerInvincible=1000;
@@ -30,15 +29,6 @@ public class JoueurPacman extends Joueur
 		vitesse = config.getValeur("vitesse");
 		nbFantomes = config.getValeur("nbFantomes");
 		nbPieces = config.getValeur("nbPoints");
-		pacman_img = new Hashtable<String, Image>();
-		pacman_img.put("pacman_right_ferme", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_right_ferme.png"));
-		pacman_img.put("pacman_left_ferme", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_left_ferme.png"));
-		pacman_img.put("pacman_up_ferme", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_up_ferme.png"));
-		pacman_img.put("pacman_down_ferme", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_down_ferme.png"));
-		pacman_img.put("pacman_right", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_right.png"));
-		pacman_img.put("pacman_left", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_left.png"));
-		pacman_img.put("pacman_up", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_up.png"));
-		pacman_img.put("pacman_down", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_down.png"));
 		positionX = ecartX + tailleMur;
 		positionY = ecartY + tailleMur;
 		pointDepartX = positionX;
@@ -164,17 +154,17 @@ public class JoueurPacman extends Joueur
 	 	}
 	}
 	
-	public void affichePacman(Graphics pacman)
+	public void affichePacman(Graphics pacman, GestionGraphismes g)
 	{
 		String img = "pacman_"+mvmt;
 		if (ferme > 15)
 			img = img+"_ferme";
 		
 		if (timer % 15 < 10)
-		pacman.drawImage(pacman_img.get(img), positionX, positionY);
+		pacman.drawImage(g.getPacman(img), positionX, positionY);
 		
 		if (timerInvincible >0 && timerInvincible <1000)
-			pacman.drawImage(pacman_img.get(img), positionX, positionY);
+			pacman.drawImage(g.getPacman(img), positionX, positionY);
 	}
 
 	public void gestionContact(Fantome[] fantomes)

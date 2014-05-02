@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Hashtable;
 
-public class Configuration
+public class Configuration implements Serializable
 {	
 	private Hashtable<String, Integer> constantes;
 

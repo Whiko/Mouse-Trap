@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.*;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
@@ -13,26 +13,36 @@ public class Serveur
 	private DatagramSocket serveur;
 	private byte[] donneesReponse, donneesRequete; 
 	private String requete;
+	private InfoPerso perso; 
 	
 	public Serveur() throws UnknownHostException, SocketException
 	{
 		port = 8081;
 		serveur = new DatagramSocket(port);
-		donneesReponse = new byte[4000];
+		donneesReponse = new byte[500];
 		requete = "";
 	}
 	
-	/*public void envoi(int positionX, int positionY) throws IOException
+	public void envoi(Joueur joueur, Map map) throws IOException
 	{
+		perso = new InfoPerso (joueur, map);
+		try{
+			FileOutputStream fileOut = new FileOutputStream("config/donnees_serveur.ser");
+			ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			out.writeObject(perso);
+			out.flush();
+			out.close();
+			fileOut.close();
+		}catch(IOException i)
+	      {
+	          i.printStackTrace();
+	      }
 		
-		donneesReponse = reponse.getBytes();
-		paquetReponse = new DatagramPacket(donneesReponse, donneesReponse.length, paquetRequete.getAddress(), paquetRequete.getPort());
-		serveur.send(paquetRequete);
-	}*/
+	}
 	
 	public String reception() throws IOException
 	{
-		donneesRequete = new byte[4000];
+		donneesRequete = new byte[500];
 		paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length);
 		serveur.receive(paquetRequete);
 		requete = new String(paquetRequete.getData());

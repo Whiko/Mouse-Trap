@@ -14,17 +14,22 @@ public class Client
 	private DatagramPacket paquetRequete, paquetReponse;
 	private DatagramSocket client;
 	//private BufferedReader entree;
-	private byte[] donneesReponse, donneesRequete; 
+	private byte[] donneesReponse, donneesRequete;
+	private InfoPerso perso;
+	private Joueur joueur;
+	private Map map;
 	
-	public Client() throws UnknownHostException, SocketException
+	public Client(Joueur joueur, Map map) throws UnknownHostException, SocketException
 	{
 		nomHote = "localhost";
 		adresse = InetAddress.getByName(nomHote);
 		ip = adresse.getHostAddress();
 		port = 8081;
 		client = new DatagramSocket();
-		donneesReponse = new byte[4000];
-		donneesRequete = new byte[4000];
+		donneesReponse = new byte[500];
+		donneesRequete = new byte[500];
+		this.joueur = joueur;
+		this.map = map;
 	}
 	
 	public void gererClavierClient(GameContainer container) throws IOException, ClassNotFoundException
@@ -56,7 +61,27 @@ public class Client
 	
 	public void reception() throws IOException
 	{
-		paquetReponse = new DatagramPacket(donneesReponse, donneesReponse.length);
-		client.receive(paquetReponse);
+		perso = null;
+		FileInputStream fileIn = new FileInputStream("config/donnees_serveur.ser");
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+        try {
+			perso = (InfoPerso) in.readObject();
+		} catch (ClassNotFoundException e) {e.printStackTrace();}
+        
+        in.close();
+        fileIn.close();
+        
+        joueur = perso.getJoueur();
+        map = perso.getMap();
+	}
+	
+	public Joueur getJoueur()
+	{
+		return joueur;
+	}
+	
+	public Map getMap()
+	{
+		return map;
 	}
 }

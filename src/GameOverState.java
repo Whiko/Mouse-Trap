@@ -9,7 +9,6 @@ import org.newdawn.slick.state.StateBasedGame;
 public class GameOverState extends BasicGameState
 {
 	public static final int stateID = 2;
-     
     private Image fond;
     private Fenetre fenetre;
      
@@ -25,8 +24,6 @@ public class GameOverState extends BasicGameState
     	int scoreTot= GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore();//+GameState5.getScore();
     	return scoreTot;
     }
- 
-    
  
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException 

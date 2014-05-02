@@ -45,18 +45,25 @@ public class ServeurState extends BasicGameState
 	    	bienJoue= new Image("sprites/menu/bienJoue.png");
 	    	continuer= new Image("sprites/menu/continuer.png");
 	    	serveur = new Serveur();
+	    	
+	    	for(int i=0; i<nbFantomes; i++)
+			{
+				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt");
+			}
+	    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
  
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
+    	/*GestionGraphismes g = new GestionGraphismes();
     	try{
     		//affichage entites
-	    	carte.afficheMap(arg);
-	    	cs.affichePacman(arg);
+	    	carte.afficheMap(arg, g);
+	    	cs.affichePacman(arg, g);
 	    	for(int i=0; i<nbFantomes; i++)
-	    		fantomes[i].afficheFantome(arg);
+	    		fantomes[i].afficheFantome(arg, g, i);
 	    	
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
@@ -73,7 +80,7 @@ public class ServeurState extends BasicGameState
     		finPartie.draw(400,200);
     		bienJoue.draw(321,350);
     		continuer.draw(55,450);
-    	}
+    	}*/
     }
  
     @Override
@@ -89,6 +96,10 @@ public class ServeurState extends BasicGameState
     	cs.seDeplacerServeur(gc, carte, requete);
     	for(int i=0; i<nbFantomes; i++)
     		fantomes[i].seDeplacerServeur(gc, carte.getCarte());
+    	
+    	try {
+			serveur.envoi(cs, carte);
+		} catch (IOException e) {e.printStackTrace();}
     	
     	//renvoit les donnees du jeu
     	//serveur.envoi(cs.getX(), cs.getY());

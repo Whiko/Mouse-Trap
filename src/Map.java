@@ -8,7 +8,6 @@ import org.newdawn.slick.SlickException;
 public class Map 
 {
 	private int[][] carte;
-	private Image mur, piece, etoile; 
 	private Configuration config = new Configuration("config/config_map.txt");
 	private int height, width, tailleMur, ecartX, ecartY, timer;
 	
@@ -20,9 +19,6 @@ public class Map
 		tailleMur = config.getValeur("tailleMur");
 		ecartX = config.getValeur("ecartX");	
 		ecartY = config.getValeur("ecartY");	
-		mur = new Image("sprites/sprites_Cyriaque/sprites_Julie/mur.png");
-		piece = new Image("sprites/sprites_Cyriaque/originales/piece.png");
-		etoile = new Image("sprites/sprites_Cyriaque/originales/star.png");
 		carte = new int[width][height];	//taille de la map
 		timer = 1000;
 		int c;
@@ -113,23 +109,23 @@ public class Map
 		}
 	}
 	
-	public void afficheMap(Graphics fenetre) throws IOException
+	public void afficheMap(Graphics fenetre, GestionGraphismes g) throws IOException
 	{
 		for(int j=0; j<height; j++)
 		{
 			for(int i=0; i<width; i++)
 			{
 				if (carte[i][j] == '1')		//pour chaque caractere '1', on affiche la texture du mur
-					fenetre.drawImage(mur, i*tailleMur+ecartX, j*tailleMur+ecartY);
+					fenetre.drawImage(g.getImage("mur"), i*tailleMur+ecartX, j*tailleMur+ecartY);
 				
 				else if(carte[i][j] == '3')
-					fenetre.drawImage(piece, i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
+					fenetre.drawImage(g.getImage("piece"), i*tailleMur+ecartX+tailleMur/2, j*tailleMur+ecartY+tailleMur/3);
 				
 				else if(carte[i][j] == '2')
-					fenetre.drawImage(etoile, i*tailleMur+ecartX, j*tailleMur+ecartY);
+					fenetre.drawImage(g.getImage("etoile"), i*tailleMur+ecartX, j*tailleMur+ecartY);
 				
 				else if(carte[i][j] == '5')
-					fenetre.drawImage(etoile, i*tailleMur+ecartX, j*tailleMur+ecartY);
+					fenetre.drawImage(g.getImage("etoile"), i*tailleMur+ecartX, j*tailleMur+ecartY);
 			}
 		}	
 	}

@@ -60,7 +60,7 @@ public class GameState2 extends BasicGameState
     	cs.setVie(csVie);
     	for(int i=0; i<nbFantomes; i++)
 		{
-			fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt", i);
+			fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt");
 		}
     	
 	    } catch (IOException e)	{e.printStackTrace();}
@@ -70,13 +70,14 @@ public class GameState2 extends BasicGameState
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
+    	GestionGraphismes g = new GestionGraphismes();
     	try{
     		//affichage entites
     		carte.spawnEtoile();
-	    	carte.afficheMap(arg);
-	    	cs.affichePacman(arg);
+	    	carte.afficheMap(arg, g);
+	    	cs.affichePacman(arg, g);
 	    	for(int i=0; i<nbFantomes; i++)
-	    		fantomes[i].afficheFantome(arg);
+	    		fantomes[i].afficheFantome(arg, g, i);
 	    	
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
@@ -123,7 +124,7 @@ public class GameState2 extends BasicGameState
     	    	fantomes = new Fantome[nbFantomes];
     	    	for(int i=0; i<nbFantomes; i++)
     			{
-    				fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt", i);
+    				fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt");
     			}
         		carte.reinitMap("map/map2.txt");
         		} catch (IOException e)	{e.printStackTrace();}
@@ -144,7 +145,7 @@ public class GameState2 extends BasicGameState
 		    	fantomes = new Fantome[nbFantomes];
 		    	for(int i=0; i<nbFantomes; i++)
 				{
-					fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt", i);
+					fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt");
 				}
 	    		carte.reinitMap("map/map2.txt");
     		} catch (IOException e)	{e.printStackTrace();}

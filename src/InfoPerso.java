@@ -1,6 +1,8 @@
+import java.io.Serializable;
 
-public class InfoPerso 
+public class InfoPerso implements Serializable
 {	
+	private static final long serialVersionUID = 1L;
 	private Joueur perso;
 	private Map map;
 	

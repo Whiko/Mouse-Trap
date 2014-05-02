@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -7,15 +8,14 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 
-public class Fantome extends Joueur
+public class Fantome extends Joueur implements Serializable
 {
 	private String mvmt;
 	private int positionX, positionY, tailleMur, tailleFantome, ecartX, ecartY, vitesse, position_droit, position_gauche, position_haut,
 				position_bas, pointDepartX, pointDepartY;
 	private Configuration config;
-	private Image fantomeimg;
 	
-	public Fantome(String path, String configu, int i) throws IOException, SlickException
+	public Fantome(String path, String configu) throws IOException, SlickException
 	{
 		mvmt = "haut"; // indique la direction actuelle du fantome
 		config = new Configuration(configu);
@@ -28,7 +28,6 @@ public class Fantome extends Joueur
 		ecartX = config.getValeur("ecartX");	//ecart entre le bord de la fenetre et la map
 		ecartY = config.getValeur("ecartY");
 		vitesse = config.getValeur("vitesse");
-		fantomeimg = new Image("sprites/sprites_Cyriaque/sprites_Julie/fantome_"+(i+1)+".png");
 		position_droit = positionX-ecartX+tailleFantome;
 		position_gauche = positionX-ecartX;
 		position_bas = positionY-ecartY+tailleFantome;
@@ -60,9 +59,9 @@ public class Fantome extends Joueur
 		positionX = pointDepartX;
 	}
 	
-	public void afficheFantome(Graphics fantome)
+	public void afficheFantome(Graphics fantome, GestionGraphismes g, int i)
 	{
-		fantome.drawImage(fantomeimg, positionX, positionY);
+		fantome.drawImage(g.getImage("fantomeimg"+(i+1)), positionX, positionY);
 	}
 	
 	public void seDeplacer(GameContainer container, int carte[][])
