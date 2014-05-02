@@ -21,6 +21,7 @@ public class GameState2 extends BasicGameState
 	private Image bienJoue;
 	private Image continuer;
 	private static int score;
+	private int i=0;
 	
     @Override
     public int getID() 
@@ -103,7 +104,11 @@ public class GameState2 extends BasicGameState
     	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		score=cs.getScore();
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
     		try{
         		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
     	    	fantomes = new Fantome[nbFantomes];
@@ -114,12 +119,17 @@ public class GameState2 extends BasicGameState
         		carte.reinitMap("map/map2.txt");
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState3.stateID);
+    		i=0;
     	}
 
     	//game over
     	if(cs.getGameOver())
     	{
-    		score=cs.getScore();
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
     		try{
     		cs = new JoueurPacman("map/map2.txt", "config/config_map2.txt");
 	    	fantomes = new Fantome[nbFantomes];
@@ -130,6 +140,7 @@ public class GameState2 extends BasicGameState
     		carte.reinitMap("map/map2.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
+    		i=0;
     	}
     }
 }

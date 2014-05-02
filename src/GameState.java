@@ -21,6 +21,7 @@ public class GameState extends BasicGameState
 	private Image bienJoue;
 	private Image continuer;
 	private static int score;
+	private int i=0;
    
     @Override
     public int getID() 
@@ -28,13 +29,13 @@ public class GameState extends BasicGameState
         return stateID;
     }
     
+    
     public static int getScore()
     {
     	return score;
     }
  
     
- 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
@@ -106,7 +107,11 @@ public class GameState extends BasicGameState
     	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
-    		
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
     		try{
         		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
         		carte.reinitMap("map/map1.txt");
@@ -117,22 +122,28 @@ public class GameState extends BasicGameState
     			}
         		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameState2.stateID);
+    		i=0;
     	}
     	
     	//game over
     	if(cs.getGameOver())
     	{
-    		score= cs.getScore();
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
     		try{
-    		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
-    		fantomes = new Fantome[nbFantomes];
-    		for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
-			}
-    		carte.reinitMap("map/map1.txt");
+	    		fantomes = new Fantome[nbFantomes];
+	    		for(int i=0; i<nbFantomes; i++)
+				{
+					fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt", i);
+				}
+	    		carte.reinitMap("map/map1.txt");
+	    		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
+    		i=0;
     	}
     }
 }

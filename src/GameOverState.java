@@ -22,7 +22,7 @@ public class GameOverState extends BasicGameState
     
     public static int getScore()
     {
-    	int scoreTot= GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore()+GameState5.getScore();
+    	int scoreTot= GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore();//+GameState5.getScore();
     	return scoreTot;
     }
  

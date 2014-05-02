@@ -22,6 +22,7 @@ public class GameState5 extends BasicGameState
     private Fenetre fenetre;
 	private Image continuer;
 	private static int score;
+	private int i=0;
 	
     @Override
     public int getID() 
@@ -29,11 +30,11 @@ public class GameState5 extends BasicGameState
         return stateID;
     }
  
-    public static int getScore()
+    /*public static int getScore()
     {
     	int scoreTot=score+GameState.getScore()+GameState2.getScore()+GameState3.getScore()+GameState4.getScore()+GameState5.getScore();
     	return scoreTot;
-    }
+    }*/
     
     
     @Override
@@ -107,7 +108,7 @@ public class GameState5 extends BasicGameState
     	{
         	if (fenetre==null) 
         	{
-        		fenetre = new Fenetre(GameState5.getScore());	
+        		fenetre = new Fenetre(0);//GameState5.getScore());	
     	    	fenetre.setVisible(true);
         	}
     	}
@@ -115,7 +116,11 @@ public class GameState5 extends BasicGameState
     	//game over
     	if(fenetre!=null && !fenetre.isVisible())
     	{
-    		score=cs.getScore();
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
 	    	fenetre = null;
 	    	try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
@@ -127,11 +132,16 @@ public class GameState5 extends BasicGameState
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(MainMenuState.stateID);
+    		i=0;
     	}
 		
     	if(cs.getGameOver())
     	{
-    		score=cs.getScore();
+    		if(i==0)
+    		{
+    			score= cs.getScore();
+    			i++;
+    		}
     		try{
     		cs = new JoueurPacman("map/map5.txt", "config/config_map5.txt");
 	    	fantomes = new Fantome[nbFantomes];
@@ -142,6 +152,7 @@ public class GameState5 extends BasicGameState
     		carte.reinitMap("map/map5.txt");
     		} catch (IOException e)	{e.printStackTrace();}
     		sbg.enterState(GameOverState.stateID);
+    		i=0;
     	}
     	
     }
