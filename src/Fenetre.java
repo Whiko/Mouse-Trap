@@ -27,7 +27,6 @@ public class Fenetre extends JFrame{
 	private JLabel pseudo;
 	private JLabel score;
 	private JLabel label;
-	private Hashtable<String, Integer> scoresSave;
 
 	public Fenetre(final int getscore){
 		container = new JPanel();
@@ -87,7 +86,6 @@ public class Fenetre extends JFrame{
 	
 	public void saveScore(int getscore) throws IOException
 	{
-		scoresSave = new Hashtable<String, Integer>();
 		FileWriter fw = new FileWriter("config/scores.txt", true);
 		BufferedWriter output = new BufferedWriter(fw);
 		output.write(jtf.getText()+":");

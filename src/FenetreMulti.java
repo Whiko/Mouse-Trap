@@ -13,6 +13,10 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+
 
 public class FenetreMulti extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -26,7 +30,7 @@ public class FenetreMulti extends JFrame{
 	private JLabel label;
 	private JLabel IP;
 
-	public FenetreMulti(int getscore){
+	public FenetreMulti(final int getscore){
 		container = new JPanel();
 		
 	    this.setTitle("Enregistrement");
@@ -59,6 +63,9 @@ public class FenetreMulti extends JFrame{
 	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
+	    		try {
+					saveScore(getscore);
+				} catch (IOException e1) {e1.printStackTrace();}
 	  	      	//Joueur.setPseudo(jtf.getText());
 	  	      	setVisible(false);
 	  	    }
@@ -83,5 +90,15 @@ public class FenetreMulti extends JFrame{
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    this.setVisible(true);
 	  } 
+	
+	public void saveScore(int getscore) throws IOException
+	{
+		FileWriter fw = new FileWriter("config/scores.txt", true);
+		BufferedWriter output = new BufferedWriter(fw);
+		output.write(jtf.getText()+":");
+	    output.write(Integer.toString(getscore)+"\n");
+		output.flush();
+		output.close();
+	}
 }
 
