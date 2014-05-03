@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -44,7 +46,15 @@ public class GameOverState extends BasicGameState
     {
     	if (gc.getInput().isKeyDown((Input.KEY_ENTER)) && fenetre==null) 
     	{
-    		fenetre = new Fenetre(GameOverState.getScore());
+    		try {
+				fenetre = new Fenetre(GameOverState.getScore());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    	fenetre.setVisible(true);
     	}
     	if(fenetre!=null && !fenetre.isVisible())

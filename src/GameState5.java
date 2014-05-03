@@ -123,7 +123,15 @@ public class GameState5 extends BasicGameState
     	{
         	if (fenetre==null) 
         	{
-        		fenetre = new Fenetre(0);//GameState5.getScore());	
+        		try {
+					fenetre = new Fenetre(0);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (ClassNotFoundException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}//GameState5.getScore());	
     	    	fenetre.setVisible(true);
         	}
     	}

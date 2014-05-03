@@ -14,8 +14,13 @@ import java.awt.Font;
 import javax.swing.JTextField;
 
 import java.io.BufferedWriter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.Hashtable;
 
 public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -26,9 +31,12 @@ public class Fenetre extends JFrame{
 	private JLabel pseudo;
 	private JLabel score;
 	private JLabel label;
+	private Hashtable<String, String> scoresTable;
 
-	public Fenetre(final int getscore){
+	public Fenetre(final int getscore) throws IOException, ClassNotFoundException{
 		container = new JPanel();
+		scoresTable = new Hashtable<String, String>();
+		getScores();
 		
 	    this.setTitle("Enregistrement");
 	    this.setSize(260, 160);
@@ -57,8 +65,9 @@ public class Fenetre extends JFrame{
 	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
+	    		scoresTable.put(jtf.getText(), score.getText());
 	    		try {
-					saveScore(getscore);
+					saveScores();
 				} catch (IOException e1) {e1.printStackTrace();}
 	  	      	//Joueur.setPseudo(jtf.getText());
 	  	      	setVisible(false);
@@ -82,16 +91,30 @@ public class Fenetre extends JFrame{
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    this.setVisible(true);
 	 } 
-	
-	public void saveScore(int getscore) throws IOException
+
+	public void saveScores () throws IOException
 	{
-		FileWriter fw = new FileWriter("config/scores.txt", true);
-		BufferedWriter output = new BufferedWriter(fw);
-		output.write(jtf.getText()+":");
-	    output.write(Integer.toString(getscore)+"\n");
-		output.flush();
-		output.close();
+		FileOutputStream fosConfig = new FileOutputStream("config/scores.dat");
+		ObjectOutputStream oosConfig = new ObjectOutputStream(fosConfig);
+
+		oosConfig.writeObject(scoresTable);
+		oosConfig.flush();
+		oosConfig.close();
 	}
 	
+	public void getScores () throws IOException, ClassNotFoundException
+	{
+		System.out.println("loading config");
+		try {
+			FileInputStream fisConfig = new FileInputStream("config/scores.dat");
+			ObjectInputStream oisConfig = new ObjectInputStream(fisConfig);
+			scoresTable = (Hashtable<String, String>)oisConfig.readObject();
+			
+			oisConfig.close();
+		} catch (Exception e) {
+			System.out.println("scores loading failed. scores reset");
+			saveScores();
+		}
+	}
 }
 

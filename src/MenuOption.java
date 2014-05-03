@@ -1,3 +1,10 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Set;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -19,6 +26,7 @@ public class MenuOption extends BasicGameState
     private Image retour=null;
     private int mouseX = 0;
     private int mouseY = 0;
+    private Hashtable<String, String> scoresTable;
     
 
 	@Override
@@ -47,6 +55,7 @@ public class MenuOption extends BasicGameState
         commandes=new Image("sprites/menu/commandes.png");
         MScores=new Image("sprites/menu/MScores.png");
         retour= new Image("sprites/menu/retour.png");
+        scoresTable = new Hashtable<String, String>();
     }
     
     
@@ -91,7 +100,25 @@ public class MenuOption extends BasicGameState
         if ((mouseX > 270 && mouseX < desactiver.getWidth() + 270) && (mouseY >= 400 && mouseY <= desactiver.getHeight() + 400)) 
         {
         	//Meilleurs scores
+        	// utiliser la methode getScores(), ca retourne une HashTable des scores enregistrés.
         }
         
     }
+    
+
+    // cette methode serialize une Hashtable, qui enregistre les scores. Ces scores ne sont pas triés ni selectionnés...
+	public void getScores () throws IOException, ClassNotFoundException
+	{
+		System.out.println("loading config");
+		try {
+			FileInputStream fisConfig = new FileInputStream("config/scores.dat");
+			ObjectInputStream oisConfig = new ObjectInputStream(fisConfig);
+			scoresTable = (Hashtable<String, String>)oisConfig.readObject();
+			
+			oisConfig.close();
+			
+		} catch (Exception e) {
+			System.out.println("scores loading failed. scores reset");
+		}
+	}
 }
