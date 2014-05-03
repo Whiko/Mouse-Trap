@@ -11,6 +11,7 @@ public class GameOverState extends BasicGameState
 	public static final int stateID = 2;
     private Image fond;
     private Fenetre fenetre;
+    
      
  
     @Override
@@ -43,7 +44,7 @@ public class GameOverState extends BasicGameState
     {
     	if (gc.getInput().isKeyDown((Input.KEY_ENTER)) && fenetre==null) 
     	{
-    		fenetre = new Fenetre(GameOverState.getScore());	
+    		fenetre = new Fenetre(GameOverState.getScore());
 	    	fenetre.setVisible(true);
     	}
     	if(fenetre!=null && !fenetre.isVisible())

@@ -129,7 +129,6 @@ public class GameState extends BasicGameState
         		} catch (IOException e)	{e.printStackTrace();}
     		i=0;
     		sbg.enterState(GameState2.stateID);
-    		
     	}
     	
     	//game over
@@ -151,7 +150,6 @@ public class GameState extends BasicGameState
     		} catch (IOException e)	{e.printStackTrace();}
     		i=0;
     		sbg.enterState(GameOverState.stateID);
-    		
     	}
     }
 }

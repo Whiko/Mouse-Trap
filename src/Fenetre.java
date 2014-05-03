@@ -13,6 +13,10 @@ import java.awt.Font;
 
 import javax.swing.JTextField;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Hashtable;
 
 public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
@@ -23,8 +27,9 @@ public class Fenetre extends JFrame{
 	private JLabel pseudo;
 	private JLabel score;
 	private JLabel label;
+	private Hashtable<String, Integer> scoresSave;
 
-	public Fenetre(int getscore){
+	public Fenetre(final int getscore){
 		container = new JPanel();
 		
 	    this.setTitle("Enregistrement");
@@ -54,6 +59,9 @@ public class Fenetre extends JFrame{
 	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
+	    		try {
+					saveScore(getscore);
+				} catch (IOException e1) {e1.printStackTrace();}
 	  	      	//Joueur.setPseudo(jtf.getText());
 	  	      	setVisible(false);
 	  	    }
@@ -75,6 +83,18 @@ public class Fenetre extends JFrame{
 	    this.getContentPane().add(top2, BorderLayout.CENTER);
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    this.setVisible(true);
-	  } 
+	 } 
+	
+	public void saveScore(int getscore) throws IOException
+	{
+		scoresSave = new Hashtable<String, Integer>();
+		FileWriter fw = new FileWriter("config/scores.txt", true);
+		BufferedWriter output = new BufferedWriter(fw);
+		output.write(jtf.getText()+":");
+	    output.write(Integer.toString(getscore)+"\n");
+		output.flush();
+		output.close();
+	}
+	
 }
 
