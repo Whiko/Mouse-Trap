@@ -5,7 +5,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 
-public class Map 
+public class Map implements Serializable
 {
 	private int[][] carte;
 	private Configuration config = new Configuration("config/config_map.txt");

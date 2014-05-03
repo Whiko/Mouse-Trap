@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -83,6 +85,10 @@ public class MainMenuState extends BasicGameState
         
         if ((mouseX > 380 && mouseX < multi.getWidth() + 380) && (mouseY >= 230 && mouseY <= multi.getHeight() + 230)) 
         {
+        	
+        	try {
+				MultiState.initClient();
+			} catch (IOException e) {e.printStackTrace();}
         	sbg.enterState(MultiState.stateID);
         	mouseX = 0;
             mouseY = 0;

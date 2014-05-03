@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.*;
+import java.nio.channels.*;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Input;
@@ -16,10 +17,12 @@ public class Client
 	//private BufferedReader entree;
 	private byte[] donneesReponse, donneesRequete;
 	private InfoPerso perso;
-	private Joueur joueur;
+	private JoueurPacman joueur;
 	private Map map;
+	private SocketChannel soc;
+	private ObjectInputStream ois;
 	
-	public Client(Joueur joueur, Map map) throws UnknownHostException, SocketException
+	public Client() throws IOException
 	{
 		nomHote = "localhost";
 		adresse = InetAddress.getByName(nomHote);
@@ -28,8 +31,11 @@ public class Client
 		client = new DatagramSocket();
 		donneesReponse = new byte[500];
 		donneesRequete = new byte[500];
-		this.joueur = joueur;
-		this.map = map;
+		joueur = null;
+		map = null;
+	    soc = SocketChannel.open();
+	    soc.connect(new InetSocketAddress(ip, port));
+        ois = new ObjectInputStream(soc.socket().getInputStream());
 	}
 	
 	public void gererClavierClient(GameContainer container) throws IOException, ClassNotFoundException
@@ -62,20 +68,15 @@ public class Client
 	public void reception() throws IOException
 	{
 		perso = null;
-		FileInputStream fileIn = new FileInputStream("config/donnees_serveur.ser");
-        ObjectInputStream in = new ObjectInputStream(fileIn);
         try {
-			perso = (InfoPerso) in.readObject();
+			perso = (InfoPerso) ois.readObject();
 		} catch (ClassNotFoundException e) {e.printStackTrace();}
-        
-        in.close();
-        fileIn.close();
-        
+
         joueur = perso.getJoueur();
         map = perso.getMap();
 	}
 	
-	public Joueur getJoueur()
+	public JoueurPacman getJoueur()
 	{
 		return joueur;
 	}

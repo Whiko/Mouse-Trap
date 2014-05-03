@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.Hashtable;
 
 import org.newdawn.slick.GameContainer;
@@ -8,7 +9,7 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
 
-public class JoueurPacman extends Joueur
+public class JoueurPacman extends Joueur implements Serializable
 {
 	private int nbObjet;
 	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;

@@ -12,19 +12,23 @@ import org.newdawn.slick.state.StateBasedGame;
 public class MultiState extends BasicGameState
 {
 	public static final int stateID = 10;
-	private Map carte;
-	private JoueurPacman cs;
+	private static Map carte;
+	private static JoueurPacman cs;
 	private Fantome[] fantomes;
 	private Configuration config;
 	private int nbFantomes, ecartX;
 	private Image vie;
-	private Client client;
+	private static Client client;
 	
 	@Override
     public int getID() 
     {
         return stateID;
     }
+	public static void initClient() throws IOException
+	{
+    	client = new Client();
+	}
 	
 	@Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
@@ -35,10 +39,9 @@ public class MultiState extends BasicGameState
 			nbFantomes = config.getValeur("nbFantomes");
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
-	    	cs= new JoueurPacman("map/map1.txt", "config/config_multi.txt");
+	    	cs = new JoueurPacman("map/map1.txt", "config/config_multi.txt");
 	    	fantomes = new Fantome[nbFantomes];
 	    	vie = new Image("sprites/heart.png");
-	    	client = new Client(cs, carte);
 	    	
 	    	for(int i=0; i<nbFantomes; i++)
 			{
@@ -83,7 +86,7 @@ public class MultiState extends BasicGameState
 			client.reception();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
     	
-    	cs = (JoueurPacman)client.getJoueur();
+    	cs = client.getJoueur();
     	carte = client.getMap();
     	
     	//deplacements persos

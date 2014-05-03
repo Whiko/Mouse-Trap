@@ -1,6 +1,8 @@
+import java.io.Serializable;
+
 import org.newdawn.slick.GameContainer;
 
-public abstract class Joueur
+public abstract class Joueur implements Serializable
 {
 	protected String pseudo;
 	protected int score;

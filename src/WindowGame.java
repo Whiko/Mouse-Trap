@@ -43,12 +43,12 @@ public class WindowGame extends StateBasedGame
 	       	 menu = new MainMenuState();
 	       	 multi = new MultiState();
 	    	 option = new MenuOption();
-	    	 game= new GameState();
-	    	 game2= new GameState2();
-	    	 game3=new GameState3();
-	    	 game4=new GameState4();
-	    	 game5=new GameState5();
-	    	 gameOver= new GameOverState();
+	    	 game = new GameState();
+	    	 game2 = new GameState2();
+	    	 game3 = new GameState3();
+	    	 game4 = new GameState4();
+	    	 game5 = new GameState5();
+	    	 gameOver = new GameOverState();
 	
 	    	 addState(menu);
 	    	 addState(multi);

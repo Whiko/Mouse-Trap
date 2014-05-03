@@ -57,7 +57,7 @@ public class ServeurState extends BasicGameState
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
-    	/*GestionGraphismes g = new GestionGraphismes();
+    	GestionGraphismes g = new GestionGraphismes();
     	try{
     		//affichage entites
 	    	carte.afficheMap(arg, g);
@@ -80,7 +80,7 @@ public class ServeurState extends BasicGameState
     		finPartie.draw(400,200);
     		bienJoue.draw(321,350);
     		continuer.draw(55,450);
-    	}*/
+    	}
     }
  
     @Override
