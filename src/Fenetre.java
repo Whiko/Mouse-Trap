@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Hashtable;
 
 public class Fenetre extends JFrame{
 	private static final long serialVersionUID = 1L;
