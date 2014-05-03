@@ -90,7 +90,6 @@ public class GameState extends BasicGameState
     	//configuration fin niveau
     	if(cs.getCptPieces()==config.getValeur("nbPoints"))
     	{
-    		
     		finPartie.draw(400,200);
     		bienJoue.draw(321,350);
     		continuer.draw(55,450);
@@ -128,8 +127,9 @@ public class GameState extends BasicGameState
     				fantomes[i] = new Fantome("map/map1.txt", "config/config_map.txt");
     			}
         		} catch (IOException e)	{e.printStackTrace();}
-    		sbg.enterState(GameState2.stateID);
     		i=0;
+    		sbg.enterState(GameState2.stateID);
+    		
     	}
     	
     	//game over
@@ -149,8 +149,9 @@ public class GameState extends BasicGameState
 	    		carte.reinitMap("map/map1.txt");
 	    		cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
     		} catch (IOException e)	{e.printStackTrace();}
-    		sbg.enterState(GameOverState.stateID);
     		i=0;
+    		sbg.enterState(GameOverState.stateID);
+    		
     	}
     }
 }

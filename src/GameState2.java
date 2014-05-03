@@ -21,8 +21,8 @@ public class GameState2 extends BasicGameState
 	private Image bienJoue;
 	private Image continuer;
 	private static int score;
-	private static int csVie=GameState.getVie();
-	private int i=0;
+	private static int csVie;
+	private int i=0,j=0;
 	
 	
     @Override
@@ -57,7 +57,7 @@ public class GameState2 extends BasicGameState
     	finPartie= new Image("sprites/menu/mp.png");
     	bienJoue= new Image("sprites/menu/bienJoue.png");
     	continuer= new Image("sprites/menu/continuer.png");
-    	cs.setVie(csVie);
+    	
     	for(int i=0; i<nbFantomes; i++)
 		{
 			fantomes[i] = new Fantome("map/map2.txt", "config/config_map2.txt");
@@ -82,7 +82,8 @@ public class GameState2 extends BasicGameState
 	    	//bandeau fenetre jeu
 	    	arg.drawString("Score : "+cs.getScore(), ecartX+20, 60);
 	    	arg.drawString("Vie : ", ecartX+20, 80);
-	    	for(int i=0; i<cs.getVie(); i++) 
+	    	
+	    	for(int i=0; j!=0 && i<cs.getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+75+15*i,85);
 			}
@@ -100,6 +101,11 @@ public class GameState2 extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {
+    	if(j==0)
+	    	{
+	    		cs.setVie(GameState.getVie());
+	    		j++;
+	    	}
     	//deplacements persos
     	if(!cs.getGameOver() && cs.getCptPieces()<config.getValeur("nbPoints"))
     	{
@@ -128,8 +134,10 @@ public class GameState2 extends BasicGameState
     			}
         		carte.reinitMap("map/map2.txt");
         		} catch (IOException e)	{e.printStackTrace();}
-    		sbg.enterState(GameState3.stateID);
+    		j=0;
     		i=0;
+    		sbg.enterState(GameState3.stateID);
+    		
     	}
 
     	//game over
@@ -149,8 +157,10 @@ public class GameState2 extends BasicGameState
 				}
 	    		carte.reinitMap("map/map2.txt");
     		} catch (IOException e)	{e.printStackTrace();}
-    		sbg.enterState(GameOverState.stateID);
     		i=0;
+    		j=0;
+    		sbg.enterState(GameOverState.stateID);
+    		
     	}
     }
 }

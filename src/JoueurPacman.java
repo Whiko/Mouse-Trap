@@ -15,7 +15,7 @@ public class JoueurPacman extends Joueur implements Serializable
 	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
 	private Configuration config;
 	private boolean gameOver, invincible, invisible;
-	private int ferme, timer, timerInvincible=1000;
+	private int ferme, timer, timerInvincible=500;
 	private String mvmt;
 	
 	public JoueurPacman(String path, String configu) throws SlickException, IOException
@@ -164,7 +164,7 @@ public class JoueurPacman extends Joueur implements Serializable
 		if (timer % 15 < 10)
 		pacman.drawImage(g.getPacman(img), positionX, positionY);
 		
-		if (timerInvincible >0 && timerInvincible <1000)
+		if (timerInvincible >0 && timerInvincible <500)
 			pacman.drawImage(g.getPacman(img), positionX, positionY);
 	}
 
@@ -200,7 +200,7 @@ public class JoueurPacman extends Joueur implements Serializable
 				}
 				if(timerInvincible==0)
 				{
-					timerInvincible=1000;
+					timerInvincible=500;
 					invincible=false;
 				}
 				
