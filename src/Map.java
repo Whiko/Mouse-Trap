@@ -43,6 +43,7 @@ public class Map implements Serializable
 	public void reinitMap(String path) throws IOException
 	{
 		int c;
+		timer = 1000;
 		FileInputStream fichier = new FileInputStream(path); 
 		//on lit chaque caractere du fichier .txt qui contient la map et on les stocke de le tableau carte[][]
 		

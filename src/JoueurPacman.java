@@ -15,7 +15,7 @@ public class JoueurPacman extends Joueur implements Serializable
 	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
 	private Configuration config;
 	private boolean gameOver, invincible, invisible;
-	private int ferme, timer, timerInvincible=500;
+	private int ferme, timer;
 	private String mvmt;
 	
 	public JoueurPacman(String path, String configu) throws SlickException, IOException
@@ -112,6 +112,8 @@ public class JoueurPacman extends Joueur implements Serializable
 			{
 				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
 				invincible=true;
+				timer=500;
+				invisible = false;
 				score += 200;
 				cptPieces +=1;
 			}
@@ -124,6 +126,8 @@ public class JoueurPacman extends Joueur implements Serializable
 			{
 				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
 				invincible=true;
+				timer=500;
+				invisible = false;
 				score += 200;
 			}
 	 	}
@@ -160,11 +164,10 @@ public class JoueurPacman extends Joueur implements Serializable
 		String img = "pacman_"+mvmt;
 		if (ferme > 15)
 			img = img+"_ferme";
+		if (invincible && (timer > 100 || timer%10<5))
+			img = img+"_invincible";
 		
-		if (timer % 15 < 10)
-		pacman.drawImage(g.getPacman(img), positionX, positionY);
-		
-		if (timerInvincible >0 && timerInvincible <500)
+		if (!invisible || (invisible && timer % 15 < 10))
 			pacman.drawImage(g.getPacman(img), positionX, positionY);
 	}
 
@@ -178,62 +181,56 @@ public class JoueurPacman extends Joueur implements Serializable
 		int position_bas = positionY-ecartY+taillePacman;
 		int position_haut = positionY-ecartY;
 		
-		if (!invisible)
+		if(invincible)
 		{
-			if(invincible)
-			{
-				if(timerInvincible > 0)
-				{	
-					timerInvincible --;
-					for(i=0; i<nbFantomes; i++)
-					{
-						if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
-								&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
-								&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
-								&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
-							{
-								fantomes[i].resetPosition();
-								score += 300;
-								
-							}
-					}
-				}
-				if(timerInvincible==0)
-				{
-					timerInvincible=500;
-					invincible=false;
-				}
-				
-			}
-			
-			else		
-			{
-				while(i<nbFantomes && !gameOver)
+			if(timer > 0)
+			{	
+				timer --;
+				for(i=0; i<nbFantomes; i++)
 				{
 					if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
-						&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
-						&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
-						&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
-					{
-						if(vie > 1)
+							&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
+							&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
+							&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
 						{
+							fantomes[i].resetPosition();
+							score += 300;
 							
-							vie--;
-							positionX = pointDepartX;
-							positionY = pointDepartY;
-							timer = 150;
-							invisible = true;
 						}
-						
-						else
-							gameOver = true;
-					}
-					
-					i++;
 				}
 			}
+			if(timer==0)
+				invincible=false;
+			
 		}
-		else
+		
+		else if (!invisible)
+		{
+			while(i<nbFantomes && !gameOver)
+			{
+				if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+					&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
+					&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
+					&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
+				{
+					if(vie > 1)
+					{
+						
+						vie--;
+						positionX = pointDepartX;
+						positionY = pointDepartY;
+						timer = 150;
+						invisible = true;
+					}
+					
+					else
+						gameOver = true;
+				}
+				
+				i++;
+			}
+		}
+		else if (invisible)
 		{
 			if(timer > 0)
 				timer--;

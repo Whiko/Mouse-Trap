@@ -7,7 +7,6 @@ import org.newdawn.slick.SlickException;
 public class GestionGraphismes 
 {
 	private Hashtable<String, Image> sprites, pacman_img;
-	private Image mur, piece, etoile, fantomeimg1, fantomeimg2, fantomeimg3, fantomeimg4, fantomeimg5, fantomeimg6;
 	
 	public GestionGraphismes () throws SlickException
 	{
@@ -36,6 +35,15 @@ public class GestionGraphismes
 		pacman_img.put("pacman_left", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_left.png"));
 		pacman_img.put("pacman_up", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_up.png"));
 		pacman_img.put("pacman_down", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_down.png"));
+
+		pacman_img.put("pacman_right_ferme_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_right_ferme_invincible.png"));
+		pacman_img.put("pacman_left_ferme_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_left_ferme_invincible.png"));
+		pacman_img.put("pacman_up_ferme_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_up_ferme_invincible.png"));
+		pacman_img.put("pacman_down_ferme_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_down_ferme_invincible.png"));
+		pacman_img.put("pacman_right_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_right_invincible.png"));
+		pacman_img.put("pacman_left_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_left_invincible.png"));
+		pacman_img.put("pacman_up_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_up_invincible.png"));
+		pacman_img.put("pacman_down_invincible", new Image("sprites/sprites_Cyriaque/sprites_Julie/pacman_down_invincible.png"));
 	}
 	
 	public Image getImage(String nom)
