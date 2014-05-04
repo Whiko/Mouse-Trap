@@ -14,4 +14,6 @@ public abstract class Joueur implements Serializable
 		score = 0;
 		vie = 3;
 	}
+	
+	public void seDeplacerServeur(Map carte, String requete) {}
 }

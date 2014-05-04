@@ -3,22 +3,34 @@ import java.io.Serializable;
 public class InfoPerso implements Serializable
 {	
 	private static final long serialVersionUID = 1L;
-	private JoueurPacman perso;
+	private Joueur[] joueurs;
 	private Map map;
+	private int id;
 	
-	public InfoPerso(JoueurPacman joueur, Map carte)
+	public InfoPerso(Joueur[] joueurs, Map carte)
 	{
-		perso = joueur;
+		this.joueurs = joueurs;
 		map = carte;
+		id = 0;
 	}
 	
-	public JoueurPacman getJoueur()
+	public Joueur[] getJoueur()
 	{
-		return perso;
+		return joueurs;
 	}
-	
+
 	public Map getMap()
 	{
 		return map;
+	}
+
+	public void setId(int id)
+	{
+		this.id = id;
+	}
+	
+	public int getId()
+	{
+		return id;
 	}
 }

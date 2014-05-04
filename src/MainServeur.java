@@ -1,20 +1,13 @@
+import java.io.IOException;
+
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.SlickException;
 
-
 public class MainServeur 
 {
-	public static void main(String[] args) throws SlickException
+	public static void main(String[] args) throws IOException
     {
-    	AppGameContainer container = new AppGameContainer(new WindowGameServeur(), 900, 600, false);
-        try {
-            container.setTargetFrameRate(60);
-            container.setMultiSample(4);
-            container.setVSync(true);
-       	 	container.setShowFPS(false);
-            container.setAlwaysRender(true);
-            container.start();
-       } catch (SlickException e) {e.printStackTrace();}
-       
+    	Serveur serveur = new Serveur();
+    	serveur.acceptJoueur();
     }
 }

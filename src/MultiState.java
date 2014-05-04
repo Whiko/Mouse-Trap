@@ -13,18 +13,19 @@ public class MultiState extends BasicGameState
 {
 	public static final int stateID = 10;
 	private static Map carte;
-	private static JoueurPacman cs;
-	private Fantome[] fantomes;
+	private static Joueur[] joueurs;
 	private Configuration config;
 	private int nbFantomes, ecartX;
 	private Image vie;
 	private static Client client;
+	private int nbMaxJoueurs;
 	
 	@Override
     public int getID() 
     {
         return stateID;
     }
+	
 	public static void initClient() throws IOException
 	{
     	client = new Client();
@@ -35,18 +36,13 @@ public class MultiState extends BasicGameState
     {
     	
     	try{
+    		nbMaxJoueurs = 10;
 			config = new Configuration("config/config_multi.txt");
 			nbFantomes = config.getValeur("nbFantomes");
 			ecartX = config.getValeur("ecartX");
 	    	carte = new Map("map/map1.txt");
-	    	cs = new JoueurPacman("map/map1.txt", "config/config_multi.txt");
-	    	fantomes = new Fantome[nbFantomes];
+	    	joueurs = new Joueur[nbMaxJoueurs];
 	    	vie = new Image("sprites/heart.png");
-	    	
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt");
-			}
 	    	
 	    } catch (IOException e)	{e.printStackTrace();}
     }
@@ -58,24 +54,23 @@ public class MultiState extends BasicGameState
     	try{
     		//affichage entites
 	    	carte.afficheMap(arg, g);
-	    	cs.affichePacman(arg, g);
-	    	for(int i=0; i<nbFantomes; i++)
-	    		fantomes[i].afficheFantome(arg, g, i);
+	    	for (int i=0; i<nbMaxJoueurs; i++)
+	    	{
+	    		if(joueurs[i] instanceof JoueurPacman)
+	    			((JoueurPacman)joueurs[i]).affichePacman(arg, g);
+	    		
+	    		else if(joueurs[i] instanceof Fantome)
+	    			((Fantome)joueurs[i]).afficheFantome(arg, g, i);
+	    	}
 	    	
 	    	//bandeau fenetre jeu
-	    	arg.drawString("Score PacMan : "+cs.getScore(), ecartX+20, 60);
+	    	arg.drawString("Score PacMan : "+ ((JoueurPacman)joueurs[0]).getScore(), ecartX+20, 60);
 	    	arg.drawString("Vie PacMan : ", ecartX+20, 80);
-	    	for(int i=0; i<cs.getVie(); i++) 
+	    	for(int i=0; i<((JoueurPacman)joueurs[0]).getVie(); i++) 
 	    	{
 				arg.drawImage(vie, ecartX+135+15*i,85);
 			}
-	    } catch (IOException e)			{e.printStackTrace();}
-    	
-    	//configuration fin niveau
-    	if(cs.getCptPieces()==config.getValeur("nbPoints"))
-    	{
-    		
-    	}
+	    } catch (IOException e)	{e.printStackTrace();}
     }
 	
     @Override
@@ -85,14 +80,8 @@ public class MultiState extends BasicGameState
 			client.gererClavierClient(gc);
 			client.reception();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
-    	
-    	cs = client.getJoueur();
-    	carte = client.getMap();
-    	
-    	//deplacements persos
-    	/*cs.seDeplacer(gc, carte);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].dplcmtMulti(gc, carte.getCarte());*/
-    	
+
+    	joueurs = client.getJoueur();
+    	carte = client.getMap();    	
     }
 }

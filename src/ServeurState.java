@@ -1,4 +1,4 @@
-import java.io.IOException;
+/*import java.io.IOException;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -12,16 +12,7 @@ import org.newdawn.slick.state.StateBasedGame;
 public class ServeurState extends BasicGameState
 {
 	public static final int stateID = 5;
-	private Map carte;
-	private JoueurPacman cs;
-	private Fantome[] fantomes;
-	private Configuration config;
-	private int nbFantomes, ecartX;
-	private Image vie;
-	private Image finPartie;
-	private Image bienJoue;
-	private Image continuer;
-	private Serveur serveur;
+	
    
     @Override
     public int getID() 
@@ -33,25 +24,7 @@ public class ServeurState extends BasicGameState
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException
     {
     	
-    	try{
-			config = new Configuration("config/config_map.txt");
-			nbFantomes = config.getValeur("nbFantomes");
-			ecartX = config.getValeur("ecartX");
-	    	carte = new Map("map/map1.txt");
-	    	cs = new JoueurPacman("map/map1.txt", "config/config_map.txt");
-	    	fantomes = new Fantome[nbFantomes];
-	    	vie = new Image("sprites/heart.png");
-	    	finPartie= new Image("sprites/menu/mp.png");
-	    	bienJoue= new Image("sprites/menu/bienJoue.png");
-	    	continuer= new Image("sprites/menu/continuer.png");
-	    	serveur = new Serveur();
-	    	
-	    	for(int i=0; i<nbFantomes; i++)
-			{
-				fantomes[i] = new Fantome("map/map1.txt", "config/config_multi.txt");
-			}
-	    	
-	    } catch (IOException e)	{e.printStackTrace();}
+    	
     }
  
     @Override
@@ -86,23 +59,10 @@ public class ServeurState extends BasicGameState
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int delta) throws  SlickException 
     {    	
-    	String requete = "";
-    	try {
-			requete = serveur.reception();
-		} catch (IOException e) {e.printStackTrace();}
     	
-    	//deplacements persos
-    	cs.gestionContact(fantomes);
-    	cs.seDeplacerServeur(gc, carte, requete);
-    	for(int i=0; i<nbFantomes; i++)
-    		fantomes[i].seDeplacerServeur(gc, carte.getCarte());
-    	
-    	try {
-			serveur.envoi(cs, carte);
-		} catch (IOException e) {e.printStackTrace();}
     	
     	//renvoit les donnees du jeu
     	//serveur.envoi(cs.getX(), cs.getY());
     	
     }
-}
+}*/

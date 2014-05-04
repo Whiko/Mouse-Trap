@@ -1,12 +1,9 @@
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.Hashtable;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
-import org.newdawn.slick.SlickException;
 
 
 public class JoueurPacman extends Joueur implements Serializable
@@ -18,7 +15,7 @@ public class JoueurPacman extends Joueur implements Serializable
 	private int ferme, timer;
 	private String mvmt;
 	
-	public JoueurPacman(String path, String configu) throws SlickException, IOException
+	public JoueurPacman(String path, String configu) throws IOException
 	{
 		nbObjet = 0;
 		cptPieces = 0;
@@ -186,16 +183,16 @@ public class JoueurPacman extends Joueur implements Serializable
 			if(timer > 0)
 			{	
 				timer --;
-				for(i=0; i<nbFantomes; i++)
+				for(i=0; i<fantomes.length; i++)
 				{
-					if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+						if  (  fantomes[i] != null
+							&& position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
 							&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
 							&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
 							&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
 						{
 							fantomes[i].resetPosition();
 							score += 300;
-							
 						}
 				}
 			}
@@ -206,9 +203,10 @@ public class JoueurPacman extends Joueur implements Serializable
 		
 		else if (!invisible)
 		{
-			while(i<nbFantomes && !gameOver)
+			while(i<fantomes.length && !gameOver)
 			{
-				if  (  position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
+				if  (  fantomes[i] != null
+					&& position_gauche >= fantomes[i].getGauche()-config.getValeur("taillePerso")+7
 					&& position_droit  <= fantomes[i].getDroit()+config.getValeur("taillePerso")-7
 					&& position_haut   >= fantomes[i].getHaut()-config.getValeur("taillePerso")+7
 					&& position_bas    <= fantomes[i].getBas()+config.getValeur("taillePerso")-7)
@@ -334,7 +332,7 @@ public class JoueurPacman extends Joueur implements Serializable
 		}
 	}
 	
-	public void seDeplacerServeur(GameContainer container, Map carte, String requete) 
+	public void seDeplacerServeur(Map carte, String requete) 
 	{		
 		ferme = (ferme + 1) % 30;
 		

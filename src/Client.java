@@ -8,19 +8,21 @@ import org.newdawn.slick.Input;
 
 public class Client 
 {
-	private String nomHote, requete, reponse;
+	private String nomHote, requete;
 	private InetAddress adresse;
 	private String ip;
 	private final int port;
-	private DatagramPacket paquetRequete, paquetReponse;
+	private final int portDatagram;
+	private DatagramPacket paquetRequete;
 	private DatagramSocket client;
 	//private BufferedReader entree;
-	private byte[] donneesReponse, donneesRequete;
+	private byte[] donneesRequete;
 	private InfoPerso perso;
-	private JoueurPacman joueur;
+	private Joueur[] joueurs;
 	private Map map;
 	private SocketChannel soc;
 	private ObjectInputStream ois;
+	private int id;
 	
 	public Client() throws IOException
 	{
@@ -28,10 +30,10 @@ public class Client
 		adresse = InetAddress.getByName(nomHote);
 		ip = adresse.getHostAddress();
 		port = 8081;
+		portDatagram = 8082;
 		client = new DatagramSocket();
-		donneesReponse = new byte[500];
 		donneesRequete = new byte[500];
-		joueur = null;
+		joueurs = null;
 		map = null;
 	    soc = SocketChannel.open();
 	    soc.connect(new InetSocketAddress(ip, port));
@@ -40,7 +42,7 @@ public class Client
 	
 	public void gererClavierClient(GameContainer container) throws IOException, ClassNotFoundException
 	{
-		String direction = "";
+		String direction = Integer.toString(id);
 		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT))
 			direction += "gauche"; 
@@ -59,9 +61,10 @@ public class Client
 	
 	public void envoi(String direction) throws IOException
 	{
+		System.out.println(direction);
 		requete = direction;
 		donneesRequete = requete.getBytes();
-		paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length, adresse, port);
+		paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length, adresse, portDatagram);
 		client.send(paquetRequete);
 	}
 	
@@ -72,13 +75,14 @@ public class Client
 			perso = (InfoPerso) ois.readObject();
 		} catch (ClassNotFoundException e) {e.printStackTrace();}
 
-        joueur = perso.getJoueur();
+        joueurs = perso.getJoueur();
         map = perso.getMap();
+        id = perso.getId();
 	}
 	
-	public JoueurPacman getJoueur()
+	public Joueur[] getJoueur()
 	{
-		return joueur;
+		return joueurs;
 	}
 	
 	public Map getMap()

@@ -1,8 +1,6 @@
 import java.io.*;
 
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
 
 
 public class Map implements Serializable
@@ -12,7 +10,7 @@ public class Map implements Serializable
 	private int height, width, tailleMur, ecartX, ecartY, timer;
 	
 
-	public Map(String path) throws SlickException, IOException
+	public Map(String path) throws IOException
 	{	
 		height = config.getValeur("height");		
 		width = config.getValeur("width");		
