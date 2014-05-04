@@ -27,6 +27,7 @@ public class MenuOption extends BasicGameState
     private int mouseX = 0;
     private int mouseY = 0;
     private Hashtable<String, String> scoresTable;
+    FenetreScores f;
     
 
 	@Override
@@ -79,28 +80,44 @@ public class MenuOption extends BasicGameState
  
         if ((mouseX > 670 && mouseX < retour.getWidth() + 670) && (mouseY >= 530 && mouseY <= retour.getHeight() + 530)) 
         {
-        	sbg.enterState(MainMenuState.stateID);      
+        	sbg.enterState(MainMenuState.stateID);  
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 370 && mouseX < activer.getWidth() + 370) && (mouseY >= 170 && mouseY <= activer.getHeight() + 170)) 
         {
         	//activer son
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 370 && mouseX < desactiver.getWidth() + 370) && (mouseY >= 210 && mouseY <= desactiver.getHeight() + 210)) 
         {
         	//desactiver son
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 270 && mouseX < desactiver.getWidth() + 270) && (mouseY >= 300 && mouseY <= desactiver.getHeight() + 300)) 
         {
         	//commandes
+        	mouseX = 0;
+            mouseY = 0;
         }
         
         if ((mouseX > 270 && mouseX < desactiver.getWidth() + 270) && (mouseY >= 400 && mouseY <= desactiver.getHeight() + 400)) 
         {
         	//Meilleurs scores
-        	// utiliser la methode getScores(), ca retourne une HashTable des scores enregistrés.
+        	// utiliser la methode getScores(), ca retourne une HashTable des scores enregistres.
+        	
+        	try {
+        		f= new FenetreScores();
+			} catch (IOException e) {e.printStackTrace();}
+        	  catch (ClassNotFoundException e) {e.printStackTrace();}
+	    	f.setVisible(true);
+        	mouseX = 0;
+            mouseY = 0;
         }
         
     }

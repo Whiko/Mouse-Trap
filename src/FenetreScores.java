@@ -22,85 +22,76 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Hashtable;
 
-public class Fenetre extends JFrame{
+public class FenetreScores extends JFrame{
 	private static final long serialVersionUID = 1L;
 	public JPanel container;
 	private JButton bouton;
-	private JButton cancelBouton;
-	private JTextField jtf;
-	private JLabel pseudo;
-	private JLabel score;
-	private JLabel label;
+	private JLabel pseudo1;
+	private JLabel pseudo2;
+	private JLabel pseudo3;
+	private JLabel pseudo4;
+	private JLabel pseudo5;
+	private JLabel score1;
+	private JLabel score2;
+	private JLabel score3;
+	private JLabel score4;
+	private JLabel score5;
 	private Hashtable<String, String> scoresTable;
 
-	public Fenetre(int getscore) throws IOException, ClassNotFoundException{
+	public FenetreScores() throws IOException, ClassNotFoundException{
 		container = new JPanel();
 		scoresTable = new Hashtable<String, String>();
 		getScores();
 		
-	    this.setTitle("Enregistrement");
-	    this.setSize(260, 160);
+	    this.setTitle("Meilleurs scores");
+	    this.setSize(260, 300);
 	    this.setLocationRelativeTo(null); //fenetre au centre
 	    container.setBackground(Color.white);
 	    container.setLayout(new BorderLayout());
 	    
-	    bouton = new JButton("Enregistrer");
-	    cancelBouton = new JButton("Annuler");
+	    bouton = new JButton("OK");
 	    
-	    score = new JLabel("Votre score: ");
-	    pseudo= new JLabel("Votre pseudo: ");
-	    label = new JLabel(Integer.toString(getscore));
+	    pseudo1 = new JLabel("1- ");
+	    pseudo2 = new JLabel("2- ");
+	    pseudo3 = new JLabel("3- ");
+	    pseudo4 = new JLabel("4- ");
+	    pseudo5 = new JLabel("5- ");
+	    score1 = new JLabel("1- ");
+	    score2 = new JLabel("2- ");
+	    score3 = new JLabel("3- ");
+	    score4 = new JLabel("4- ");
+	    score5 = new JLabel("5- ");
 	    
 	    JPanel top = new JPanel();
 	    JPanel top2=new JPanel();
 	    JPanel boutons=new JPanel();
 	    
-	    Font police = new Font("Comic sans MS", Font.BOLD, 14);
-	    jtf = new JTextField("votre nom");
-	    jtf.setFont(police);
-	    jtf.setPreferredSize(new Dimension(150, 30));
-	    
+	  	    
 	    bouton.addActionListener(new ActionListener(){
 	    	public void actionPerformed(ActionEvent e) {
-	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
-					jtf.setText("Anonyme");
-	    		System.out.println("Pseudo: " + jtf.getText());
-	    		scoresTable.put(jtf.getText(), score.getText());
-	    		try {
-					saveScores();
-				} catch (IOException e1) {e1.printStackTrace();}
-	  	      	//Joueur.setPseudo(jtf.getText());
-	  	      	setVisible(false);
+	    	  	setVisible(false);
 	  	    }
 	    });
-	    cancelBouton.addActionListener(new ActionListener(){
-	      public void actionPerformed(ActionEvent arg0) {
-	        setVisible(false);
-	      }      
-	    });
 	    
-	    top.add(score);
-	    top.add(label);
-	    top2.add(pseudo);
-	    top2.add(jtf);
+	    top.add(pseudo1);
+	    top.add(pseudo2);
+	    top.add(pseudo3);
+	    top.add(pseudo4);
+	    top.add(pseudo5);
+	    top.add(score1);
+	    top.add(score2);
+	    top.add(score3);
+	    top.add(score4);
+	    top.add(score5);
+	    
 	    
 	    boutons.add(bouton);
-	    boutons.add(cancelBouton);
 	    this.getContentPane().add(top, BorderLayout.NORTH);
 	    this.getContentPane().add(top2, BorderLayout.CENTER);
 	    this.getContentPane().add(boutons, BorderLayout.SOUTH);
 	    this.setVisible(true);
 	 } 
 
-	public void saveScores () throws IOException
-	{
-		FileOutputStream fosConfig = new FileOutputStream("config/scores.dat");
-		ObjectOutputStream oosConfig = new ObjectOutputStream(fosConfig);
-
-		oosConfig.writeObject(scoresTable);
-		oosConfig.flush();
-		oosConfig.close();
-	}
 	
 	public void getScores () throws IOException, ClassNotFoundException
 	{
@@ -111,10 +102,8 @@ public class Fenetre extends JFrame{
 			scoresTable = (Hashtable<String, String>)oisConfig.readObject();
 			
 			oisConfig.close();
-		} catch (Exception e) {
-			System.out.println("scores loading failed. scores reset");
-			saveScores();
-		}
+			
+		} catch (Exception e) {System.out.println("scores loading failed. scores reset");}
 	}
 }
 
