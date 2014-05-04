@@ -62,10 +62,12 @@ public class Client
 	public void envoi(String direction) throws IOException
 	{
 		System.out.println(direction);
-		requete = direction;
-		donneesRequete = requete.getBytes();
-		paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length, adresse, portDatagram);
-		client.send(paquetRequete);
+		if (direction.length() >= 3) {
+			requete = direction;
+			donneesRequete = requete.getBytes();
+			paquetRequete = new DatagramPacket(donneesRequete, donneesRequete.length, adresse, portDatagram);
+			client.send(paquetRequete);
+		}
 	}
 	
 	public void reception() throws IOException
