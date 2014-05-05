@@ -36,7 +36,6 @@ public class Fenetre extends JFrame{
 	public Fenetre(int getscore) throws IOException, ClassNotFoundException{
 		container = new JPanel();
 		scoresTable = new Hashtable<String, String>();
-		getScores();
 		
 	    this.setTitle("Enregistrement");
 	    this.setSize(260, 160);
@@ -65,11 +64,10 @@ public class Fenetre extends JFrame{
 	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
 	    		System.out.println("Pseudo: " + jtf.getText());
-	    		scoresTable.put(jtf.getText(), score.getText());
+	    		scoresTable.put(jtf.getText(), label.getText());
 	    		try {
 					saveScores();
 				} catch (IOException e1) {e1.printStackTrace();}
-	  	      	//Joueur.setPseudo(jtf.getText());
 	  	      	setVisible(false);
 	  	    }
 	    });

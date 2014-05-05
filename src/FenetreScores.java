@@ -41,7 +41,6 @@ public class FenetreScores extends JFrame{
 	public FenetreScores() throws IOException, ClassNotFoundException{
 		container = new JPanel();
 		scoresTable = new Hashtable<String, String>();
-		getScores();
 		
 	    this.setTitle("Meilleurs scores");
 	    this.setSize(260, 300);
@@ -50,7 +49,6 @@ public class FenetreScores extends JFrame{
 	    container.setLayout(new BorderLayout());
 	    
 	    bouton = new JButton("OK");
-	    
 	    pseudo1 = new JLabel("1- ");
 	    pseudo2 = new JLabel("2- ");
 	    pseudo3 = new JLabel("3- ");

@@ -61,7 +61,7 @@ public class MenuOption extends BasicGameState
     
     
     @Override
-    public void render(GameContainer arg0, StateBasedGame arg1, Graphics arg2) throws SlickException 
+    public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
     	fond.draw(0,0);
         son.draw(270, 170);
@@ -99,14 +99,14 @@ public class MenuOption extends BasicGameState
             mouseY = 0;
         }
         
-        if ((mouseX > 270 && mouseX < desactiver.getWidth() + 270) && (mouseY >= 300 && mouseY <= desactiver.getHeight() + 300)) 
+        if ((mouseX > 270 && mouseX < commandes.getWidth() + 270) && (mouseY >= 300 && mouseY <= commandes.getHeight() + 300)) 
         {
-        	//commandes
+        	sbg.enterState(MenuCommandes.stateID);
         	mouseX = 0;
             mouseY = 0;
         }
         
-        if ((mouseX > 270 && mouseX < desactiver.getWidth() + 270) && (mouseY >= 400 && mouseY <= desactiver.getHeight() + 400)) 
+        if ((mouseX > 270 && mouseX < MScores.getWidth() + 270) && (mouseY >= 400 && mouseY <= MScores.getHeight() + 400)) 
         {
         	//Meilleurs scores
         	// utiliser la methode getScores(), ca retourne une HashTable des scores enregistres.

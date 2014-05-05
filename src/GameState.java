@@ -4,7 +4,9 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
+import org.newdawn.slick.Music;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.Sound;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -23,6 +25,7 @@ public class GameState extends BasicGameState
 	private static int score;
 	private static int csVie;
 	private int i=0;
+	private Sound debut;
    
     @Override
     public int getID() 
@@ -57,6 +60,8 @@ public class GameState extends BasicGameState
 	    	finPartie= new Image("sprites/menu/mp.png");
 	    	bienJoue= new Image("sprites/menu/bienJoue.png");
 	    	continuer= new Image("sprites/menu/continuer.png");
+	    	debut = new Sound("sons/pacman_beginning.wav");
+	    	//debut.loop();
 
 			for(int i=0; i<nbFantomes; i++)
 			{
@@ -69,6 +74,7 @@ public class GameState extends BasicGameState
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
+    	
     	GestionGraphismes g = new GestionGraphismes();
     	try{
     		//affichage entites
@@ -112,6 +118,7 @@ public class GameState extends BasicGameState
     	//niveau suivant
     	if(cs.getCptPieces()==config.getValeur("nbPoints") && gc.getInput().isKeyDown((Input.KEY_ENTER)))
     	{
+    		debut.loop();
     		if(i==0)
     		{
     			score= cs.getScore();
@@ -128,7 +135,9 @@ public class GameState extends BasicGameState
     			}
         		} catch (IOException e)	{e.printStackTrace();}
     		i=0;
+    		
     		sbg.enterState(GameState2.stateID);
+    		debut.stop();
     	}
     	
     	//game over

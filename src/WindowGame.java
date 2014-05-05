@@ -17,6 +17,7 @@ public class WindowGame extends StateBasedGame
 {
     private MainMenuState menu;
     private MenuOption option;
+    private MenuCommandes commandes;
     private MultiState multi;
     private GameState game;
     private GameState2 game2;
@@ -43,6 +44,7 @@ public class WindowGame extends StateBasedGame
 	       	 menu = new MainMenuState();
 	       	 multi = new MultiState();
 	    	 option = new MenuOption();
+	    	 commandes= new MenuCommandes();
 	    	 game = new GameState();
 	    	 game2 = new GameState2();
 	    	 game3 = new GameState3();
@@ -53,6 +55,7 @@ public class WindowGame extends StateBasedGame
 	    	 addState(menu);
 	    	 addState(multi);
 	    	 addState(option);
+	    	 addState(commandes);
 	    	 addState(game);
 	    	 addState(game2);
 	    	 addState(game3);
