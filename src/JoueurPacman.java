@@ -248,7 +248,9 @@ public class JoueurPacman extends Joueur implements Serializable
 		
 		if (container.getInput().isKeyDown(Input.KEY_LEFT))
 		{
-			mvmt = "left";
+			if (position_gauche - ((position_gauche/tailleMur)*tailleMur)-1 != 0)
+				mvmt = "left";
+			
 			if (carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_haut/tailleMur))!='1'
 				&& carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_bas/tailleMur))!='1')
 			{
@@ -268,7 +270,9 @@ public class JoueurPacman extends Joueur implements Serializable
 		
 		if (container.getInput().isKeyDown(Input.KEY_RIGHT)) 
 		{
-			mvmt = "right";
+			if ((((position_droit/tailleMur)+1)*tailleMur)-1 - position_droit != 0)
+				mvmt = "right";
+			
 			if	(carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_haut/tailleMur))!='1'
 				&& carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_bas/tailleMur))!='1')
 			{
@@ -343,7 +347,9 @@ public class JoueurPacman extends Joueur implements Serializable
 		
 		if (requete.contains("gauche"))
 		{
-			mvmt = "left";
+			if (position_gauche - ((position_gauche/tailleMur)*tailleMur)-1 != 0)
+				mvmt = "left";
+		
 			if (carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_haut/tailleMur))!='1'
 				&& carte.getCase((int)((position_gauche-(vitesse+1))/tailleMur), (int)(position_bas/tailleMur))!='1')
 			{
@@ -363,7 +369,9 @@ public class JoueurPacman extends Joueur implements Serializable
 
 		if (requete.contains("droite"))
 		{
-			mvmt = "right";
+			if ((((position_droit/tailleMur)+1)*tailleMur)-1 - position_droit != 0)
+				mvmt = "right";
+			
 			if	(carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_haut/tailleMur))!='1'
 				&& carte.getCase((int)((position_droit+vitesse+1)/tailleMur), (int)(position_bas/tailleMur))!='1')
 			{

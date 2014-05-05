@@ -29,6 +29,8 @@ public class MultiState extends BasicGameState
 	public static void initClient() throws IOException
 	{
     	client = new Client();
+    	client.reception();
+    	client.start();
 	}
 	
 	@Override
@@ -36,7 +38,7 @@ public class MultiState extends BasicGameState
     {
     	
     	try{
-    		nbMaxJoueurs = 10;
+    		nbMaxJoueurs = 5;
 			config = new Configuration("config/config_multi.txt");
 			nbFantomes = config.getValeur("nbFantomes");
 			ecartX = config.getValeur("ecartX");
@@ -51,26 +53,29 @@ public class MultiState extends BasicGameState
     public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
     {
     	GestionGraphismes g = new GestionGraphismes();
-    	try{
-    		//affichage entites
-	    	carte.afficheMap(arg, g);
-	    	for (int i=0; i<nbMaxJoueurs; i++)
-	    	{
-	    		if(joueurs[i] instanceof JoueurPacman)
-	    			((JoueurPacman)joueurs[i]).affichePacman(arg, g);
-	    		
-	    		else if(joueurs[i] instanceof Fantome)
-	    			((Fantome)joueurs[i]).afficheFantome(arg, g, i);
-	    	}
-	    	
-	    	//bandeau fenetre jeu
-	    	arg.drawString("Score PacMan : "+ ((JoueurPacman)joueurs[0]).getScore(), ecartX+20, 60);
-	    	arg.drawString("Vie PacMan : ", ecartX+20, 80);
-	    	for(int i=0; i<((JoueurPacman)joueurs[0]).getVie(); i++) 
-	    	{
-				arg.drawImage(vie, ecartX+135+15*i,85);
-			}
-	    } catch (IOException e)	{e.printStackTrace();}
+    	if (carte != null && joueurs != null)
+    	{
+	    	try{
+	    		//affichage entites
+		    	carte.afficheMap(arg, g);
+		    	for (int i=0; i<nbMaxJoueurs; i++)
+		    	{
+		    		if(joueurs[i] instanceof JoueurPacman)
+		    			((JoueurPacman)joueurs[i]).affichePacman(arg, g);
+		    		
+		    		else if(joueurs[i] instanceof Fantome)
+		    			((Fantome)joueurs[i]).afficheFantome(arg, g, i);
+		    	}
+		    	
+		    	//bandeau fenetre jeu
+		    	arg.drawString("Score PacMan : "+ ((JoueurPacman)joueurs[0]).getScore(), ecartX+20, 60);
+		    	arg.drawString("Vie PacMan : ", ecartX+20, 80);
+		    	for(int i=0; i<((JoueurPacman)joueurs[0]).getVie(); i++) 
+		    	{
+					arg.drawImage(vie, ecartX+135+15*i,85);
+				}
+		    } catch (IOException e)	{e.printStackTrace();}
+    	}
     }
 	
     @Override
@@ -78,10 +83,12 @@ public class MultiState extends BasicGameState
     {    	
     	try {
 			client.gererClavierClient(gc);
-			client.reception();
 		} catch (IOException e) {e.printStackTrace();} catch (ClassNotFoundException e) {e.printStackTrace();}
 
     	joueurs = client.getJoueur();
-    	carte = client.getMap();    	
+    	carte = client.getMap();
+    	
+    	if (client.getFin())
+    		sbg.enterState(MainMenuState.stateID);
     }
 }
