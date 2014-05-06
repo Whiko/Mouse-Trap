@@ -56,7 +56,7 @@ public class Fenetre extends JFrame{
 	    JPanel boutons=new JPanel();
 	    
 	    Font police = new Font("Comic sans MS", Font.BOLD, 14);
-	    jtf = new JTextField("votre nom");
+	    jtf = new JTextField("Votre nom");
 	    jtf.setFont(police);
 	    jtf.setPreferredSize(new Dimension(150, 30));
 	    

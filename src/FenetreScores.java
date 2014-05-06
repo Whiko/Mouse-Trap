@@ -35,7 +35,7 @@ public class FenetreScores extends JFrame{
 	    JButton buttonOK = new JButton("OK");
 	    
 	    JTextArea scores = new JTextArea(infoScores.toString());
-	    scores.disable();
+	    scores.disable();	//empeche d'ecrire
 	    JPanel top = new JPanel();
 	    JPanel boutons=new JPanel();
 	    
