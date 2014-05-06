@@ -1,14 +1,7 @@
 import java.io.*;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
-import java.nio.channels.ServerSocketChannel;
-import java.nio.channels.SocketChannel;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Set;
 
 public class PartieMulti extends Thread
 {
@@ -16,15 +9,14 @@ public class PartieMulti extends Thread
 	private Joueur[] joueurs;
 	private ThreadEnvoi envoi;
 	private int port;
-	private DatagramPacket paquetRequete;
 	private DatagramChannel socDatagram;
 	private ByteBuffer buf;
 	private String requete;
-	private SocketChannel s;
 	private int nbMaxJoueurs;
 	
 	public PartieMulti()
 	{
+		super();
     	port = 8082;
 		try{
 			nbMaxJoueurs = 5;

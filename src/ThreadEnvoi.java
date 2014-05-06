@@ -54,7 +54,7 @@ public class ThreadEnvoi extends Thread
 						oos[i].reset();
 						oos[i].flush();
 					} catch(IOException e) {
-						// si on a un probleme de connexion le joueur i, on le supprime.
+						// si on a un probleme de connexion avec le joueur i, on le supprime.
 						System.out.println("connexion perdue avec le joueur "+i);
 						oos[i]=null;
 					}
