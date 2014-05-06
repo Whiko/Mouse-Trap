@@ -19,6 +19,7 @@ public class MultiState extends BasicGameState
 	private Image vie;
 	private static Client client;
 	private int nbMaxJoueurs;
+	private int i=0;
 	
 	@Override
     public int getID() 
@@ -90,5 +91,11 @@ public class MultiState extends BasicGameState
     	
     	if (client.getFin())
     		sbg.enterState(MainMenuState.stateID);
+    	
+    	//game over
+    	if(((JoueurPacman)joueurs[0]).getGameOver())
+    	{
+    		sbg.enterState(GameOverState.stateID);
+    	}
     }
 }

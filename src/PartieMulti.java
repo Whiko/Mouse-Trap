@@ -100,10 +100,7 @@ public class PartieMulti extends Thread
 			envoi.setInfoPerso(joueurs, carte);
 			try {
 				sleep(15);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (InterruptedException e) {e.printStackTrace();}
 		}
 	}
 }

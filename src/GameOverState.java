@@ -48,13 +48,8 @@ public class GameOverState extends BasicGameState
     	{
     		try {
 				fenetre = new Fenetre(GameOverState.getScore());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			} catch (IOException e) {e.printStackTrace();} 
+    		  catch (ClassNotFoundException e) {e.printStackTrace();}
 	    	fenetre.setVisible(true);
     	}
     	if(fenetre!=null && !fenetre.isVisible())

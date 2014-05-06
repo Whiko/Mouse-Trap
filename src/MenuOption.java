@@ -24,10 +24,10 @@ public class MenuOption extends BasicGameState
     private Image commandes=null;
     private Image MScores=null;
     private Image retour=null;
-    private int mouseX = 0;
-    private int mouseY = 0;
-    private Hashtable<String, String> scoresTable;
-    FenetreScores f;
+    private int mouseX;
+    private int mouseY;
+    private InfoScores infoScores;
+    FenetreScores fenetreScores;
     
 
 	@Override
@@ -39,7 +39,8 @@ public class MenuOption extends BasicGameState
     private void getPosClicked(GameContainer gc) 
     {
         Input input = gc.getInput();
-        if (input.isMouseButtonDown(0)) {
+        if (input.isMousePressed(0))
+        {
             mouseX = input.getMouseX();
             mouseY = input.getMouseY();
         }
@@ -56,12 +57,14 @@ public class MenuOption extends BasicGameState
         commandes=new Image("sprites/menu/commandes.png");
         MScores=new Image("sprites/menu/MScores.png");
         retour= new Image("sprites/menu/retour.png");
-        scoresTable = new Hashtable<String, String>();
+        infoScores = new InfoScores();
+        mouseX = 0;
+        mouseY = 0;
     }
     
     
     @Override
-    public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException 
+    public void render(GameContainer gc, StateBasedGame sbg, Graphics arg) throws SlickException
     {
     	fond.draw(0,0);
         son.draw(270, 170);
@@ -109,33 +112,13 @@ public class MenuOption extends BasicGameState
         if ((mouseX > 270 && mouseX < MScores.getWidth() + 270) && (mouseY >= 400 && mouseY <= MScores.getHeight() + 400)) 
         {
         	//Meilleurs scores
-        	// utiliser la methode getScores(), ca retourne une HashTable des scores enregistres.
-        	
-        	try {
-        		f= new FenetreScores();
-			} catch (IOException e) {e.printStackTrace();}
-        	  catch (ClassNotFoundException e) {e.printStackTrace();}
-	    	f.setVisible(true);
+    		try {
+    			fenetreScores = new FenetreScores();
+    		} catch (IOException e) {e.printStackTrace();}
+    		  catch (ClassNotFoundException e) {e.printStackTrace();}
         	mouseX = 0;
             mouseY = 0;
         }
         
     }
-    
-
-    // cette methode serialize une Hashtable, qui enregistre les scores. Ces scores ne sont pas triés ni selectionnés...
-	public void getScores () throws IOException, ClassNotFoundException
-	{
-		System.out.println("loading config");
-		try {
-			FileInputStream fisConfig = new FileInputStream("config/scores.dat");
-			ObjectInputStream oisConfig = new ObjectInputStream(fisConfig);
-			scoresTable = (Hashtable<String, String>)oisConfig.readObject();
-			
-			oisConfig.close();
-			
-		} catch (Exception e) {
-			System.out.println("scores loading failed. scores reset");
-		}
-	}
 }

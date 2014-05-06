@@ -29,13 +29,14 @@ public class Fenetre extends JFrame{
 	private JButton cancelBouton;
 	private JTextField jtf;
 	private JLabel pseudo;
+	private JLabel scoretxt;
 	private JLabel score;
-	private JLabel label;
-	private Hashtable<String, String> scoresTable;
+	private InfoScores infoScores;
 
-	public Fenetre(int getscore) throws IOException, ClassNotFoundException{
+	public Fenetre(int newscore) throws IOException, ClassNotFoundException{
 		container = new JPanel();
-		scoresTable = new Hashtable<String, String>();
+		infoScores = new InfoScores();
+		getScores();
 		
 	    this.setTitle("Enregistrement");
 	    this.setSize(260, 160);
@@ -46,9 +47,9 @@ public class Fenetre extends JFrame{
 	    bouton = new JButton("Enregistrer");
 	    cancelBouton = new JButton("Annuler");
 	    
-	    score = new JLabel("Votre score: ");
+	    scoretxt = new JLabel("Votre score: ");
 	    pseudo= new JLabel("Votre pseudo: ");
-	    label = new JLabel(Integer.toString(getscore));
+	    score = new JLabel(Integer.toString(newscore));
 	    
 	    JPanel top = new JPanel();
 	    JPanel top2=new JPanel();
@@ -63,11 +64,11 @@ public class Fenetre extends JFrame{
 	    	public void actionPerformed(ActionEvent e) {
 	    		if(jtf.getText().equals("votre nom") || jtf.getText().equals(""))
 					jtf.setText("Anonyme");
-	    		System.out.println("Pseudo: " + jtf.getText());
-	    		scoresTable.put(jtf.getText(), label.getText());
+	    		infoScores.put(jtf.getText(), Integer.parseInt(score.getText()));
 	    		try {
 					saveScores();
 				} catch (IOException e1) {e1.printStackTrace();}
+	  	      	//Joueur.setPseudo(jtf.getText());
 	  	      	setVisible(false);
 	  	    }
 	    });
@@ -76,9 +77,9 @@ public class Fenetre extends JFrame{
 	        setVisible(false);
 	      }      
 	    });
-	    
+
+	    top.add(scoretxt);
 	    top.add(score);
-	    top.add(label);
 	    top2.add(pseudo);
 	    top2.add(jtf);
 	    
@@ -95,18 +96,18 @@ public class Fenetre extends JFrame{
 		FileOutputStream fosConfig = new FileOutputStream("config/scores.dat");
 		ObjectOutputStream oosConfig = new ObjectOutputStream(fosConfig);
 
-		oosConfig.writeObject(scoresTable);
+		oosConfig.writeObject(infoScores);
 		oosConfig.flush();
 		oosConfig.close();
 	}
 	
 	public void getScores () throws IOException, ClassNotFoundException
 	{
-		System.out.println("loading config");
+		System.out.println("scores loading");
 		try {
 			FileInputStream fisConfig = new FileInputStream("config/scores.dat");
 			ObjectInputStream oisConfig = new ObjectInputStream(fisConfig);
-			scoresTable = (Hashtable<String, String>)oisConfig.readObject();
+			infoScores = (InfoScores) oisConfig.readObject();
 			
 			oisConfig.close();
 		} catch (Exception e) {
