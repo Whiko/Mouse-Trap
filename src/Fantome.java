@@ -79,7 +79,7 @@ public class Fantome extends Joueur implements Serializable
 		if(mvmt == "gauche")
 		{
 			distance = position_gauche % tailleMur;
-			if (distance-1 <= vitesse) // Si on est dans une zone ou il va etre possible de tourner...
+			if (distance-1 <= vitesse) // Si on est dans une zone ou il va etre possible de tourner
 			{
 				// tests des directions possibles
 				//direction bas
@@ -100,7 +100,7 @@ public class Fantome extends Joueur implements Serializable
 				
 				else
 				{
-					do// decision aleatoire de la direction a prendre. On tire un nombre aleatoire tant que le chemin choisis n'est pas disponible...
+					do// decision aleatoire de la direction a prendre. On tire un nombre aleatoire tant que le chemin choisi n'est pas disponible
 					{
 						alea = (int)(Math.random()*3);
 					}while(!directions[alea]); 
@@ -285,84 +285,6 @@ public class Fantome extends Joueur implements Serializable
 				mvmt = "droit";
 			}
 		}	
-	}
-	
-	public void dplcmtMulti(GameContainer container, int carte[][])
-	{
-		position_droit = positionX-ecartX+tailleFantome;
-		position_gauche = positionX-ecartX;
-		position_bas = positionY-ecartY+tailleFantome;
-		position_haut = positionY-ecartY;
-		
-		if (container.getInput().isKeyDown(Input.KEY_Q))
-		{
-			if  (carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_haut/tailleMur)]!='1'
-				&& carte[(int)((position_gauche-(vitesse+1))/tailleMur)][(int)(position_bas/tailleMur)]!='1')
-			{
-				positionX -= vitesse;
-			}
-			
-			else
-				positionX -= position_gauche - ((position_gauche/tailleMur)*tailleMur)-1;
-		}
-	
-		position_droit = positionX-ecartX+tailleFantome;
-		position_gauche = positionX-ecartX;
-		position_bas = positionY-ecartY+tailleFantome;
-		position_haut = positionY-ecartY;
-		
-		if (container.getInput().isKeyDown(Input.KEY_D)) 
-		{
-			if	(carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_haut/tailleMur)]!='1'
-				&& carte[(int)((position_droit+vitesse+1)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
-			{
-				positionX += vitesse;
-			}
-			
-			else
-			{
-				if  (carte[(int)((position_droit)/tailleMur)][(int)(position_haut/tailleMur)]!='1'
-					&& carte[(int)((position_droit)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
-					positionX += ((position_droit/tailleMur)*tailleMur)+tailleMur-1 - position_droit;
-			}
-		}
-
-		position_droit = positionX-ecartX+tailleFantome;
-		position_gauche = positionX-ecartX;
-		position_bas = positionY-ecartY+tailleFantome;
-		position_haut = positionY-ecartY;
-		
-		if (container.getInput().isKeyDown(Input.KEY_Z))
-		{
-			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1'
-				&& carte[(int)((position_droit)/tailleMur)][(int)((position_haut-(vitesse+1))/tailleMur)]!='1')
-			{
-				positionY -= vitesse;
-			}
-			
-			else
-				positionY -= position_haut - ((position_haut/tailleMur)*tailleMur)-1;
-			
-		}	
-		
-		position_droit = positionX-ecartX+tailleFantome;
-		position_gauche = positionX-ecartX;
-		position_bas = positionY-ecartY+tailleFantome;
-		position_haut = positionY-ecartY;
-		
-		if (container.getInput().isKeyDown(Input.KEY_S))
-		{
-			if	(carte[(int)(position_gauche/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1'
-				&& carte[(int)(position_droit/tailleMur)][(int)((position_bas+(vitesse+1))/tailleMur)]!='1')
-			{
-				positionY += vitesse;
-			}
-			
-			else
-				if  (carte[(int)((position_droit)/tailleMur)][(int)(position_bas/tailleMur)]!='1'
-				&& carte[(int)((position_gauche)/tailleMur)][(int)(position_bas/tailleMur)]!='1')
-				positionY += (((position_bas/tailleMur)+1)*tailleMur)-1 - position_bas;
-		}
 	}
 	
 	public void seDeplacerServeur(Map carte, String requete)

@@ -132,30 +132,6 @@ public class JoueurPacman extends Joueur implements Serializable
 		return score;
 	}
 	
-	public void setEtoile(Map carte,int position_gauche, int position_haut)
-	{
-		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '2')
-		{
-			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
-					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
-			{
-				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
-				nbObjet += 1;
-				cptPieces +=1;
-			}
-	 	}
-		
-		if(carte.getCase(position_gauche/tailleMur, position_haut/tailleMur) == '5')
-		{
-			if((position_gauche < ((position_gauche/tailleMur)*tailleMur+tailleMur/4) &&  (position_gauche >= ((position_gauche/tailleMur)*tailleMur)-3)) 
-					&& (position_haut < ((position_haut/tailleMur)*tailleMur+tailleMur/2) && (position_haut > ((position_haut/tailleMur)*tailleMur)-3)))
-			{
-				carte.setCase(position_gauche/tailleMur, position_haut/tailleMur, '0');
-				nbObjet += 1;
-			}
-	 	}
-	}
-	
 	public void affichePacman(Graphics pacman, GestionGraphismes g)
 	{
 		String img = "pacman_"+mvmt;
