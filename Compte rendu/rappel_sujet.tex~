@@ -1,0 +1,39 @@
+  \chapter*{Rappel du sujet}
+   \setcounter{chapter}{1}
+    \addcontentsline{toc}{part}{Rappel du sujet}
+    \lhead{Rappel du sujet}
+    
+    \section*{Règles de fonctionnement}
+      Pour notre projet, nous avons choisi le sujet n°2 : le jeu Mouse-Trap. \\
+      Nous rappelons le sujet : ``Le joueur dirige une souris dans un labyrinthe dans le but de manger tous les morceaux de fromage du niveau. Ses ennemis sont des chats et des faucons. La souris 
+      peut collecter des os qui lui permettent, à tout moment, de se transformer en chien quelques instants et de chasser les chats. Le joueur dispose de quatre boutons en plus du joystick 
+      directionnel. Le premier bouton permet au joueur de se transformer en chien s’il possède, au moins, un os. Les trois autres permettent au joueur de fermer ou d’ouvrir, à tout moment, 
+      les portes jaunes, rouges et bleues et ainsi de bloquer ou emprisonner les chats en transformant l’apparence du labyrinthe.``\\
+      Pour notre projet, nous nous sommes inspirées du célèbre jeu \texttt{PacMan}. En ce qui concerne les règles retenues, nous voulions respecter toutes les règles de base du jeu Mouse-Trap tout
+      en gardant l'esprit ''PacMan``, puis au fur et à mesure nous avons préféré nous focaliser sur les points importants du jeu (tels que les déplacements des personnages ou la possibilité
+      de jouer à plusieurs en réseau), pour qu'ensuite potentiellement, une fois fini, nous apportions des améliorations.
+      Cependant, nous n'avons pas eu la possibilité de faire ces modifications avant la présentation du projet (nous pensons personnellement à nous y intéresser après les examens finaux).\\
+      Les principales fonctionnalités du jeu sont la possibilité de jouer à plusieurs niveaux en mode solo (jusqu'à cinq niveaux), ainsi que de jouer à plusieurs personnes en réseau.
+      En mode solo, le joueur controle PacMan et doit ramasser toutes les pièces se trouvant au sol tout en évitant de se faire attraper par les fantomes controlés par l'ordinateur. Lorsque 
+      toutes les pièces sont ramassées, le joueur change de niveau. PacMan a également la possibilité de devenir invincible en ramassant l'étoile rouge qui apparait de temps en temps sur la carte, 
+      et peut ainsi tuer les fantomes qu'il touche. 
+      Lorsque la partie est finie (donc soit que le joueur n'a plus de vie, soit qu'il a réussi à terminer tous les niveaux), le joueur peut entrer son pseudo afin que son score soit
+      enregistré.\\
+      En mode multijoueur, le premier joueur connecté controle PacMan, les joueurs suivants controlent les fantomes. PacMan a pour objectif de récupérer toutes les pièces du niveau, les fantomes 
+      doivent l'en empecher.\\
+      Le menu Options propose d'activer ou de désactiver le son, donne les touches utilisées dans le jeu, et également accès aux meilleurs scores réalisés.\\
+      
+      Les touches utilisées pour controler les personnages sont les fleches directionnelles.
+    
+    \section*{Choix des structures de données}
+      Nous voulions pouvoir travailler chacune sur une partie du code simultanément et pouvoir ensuite complémenter notre code, c'est pourquoi nous avons choisi d'utiliser un gestionnaire 
+      de versions. Nous avons choisi \texttt{Git} dont nous avions déjà entendu parlé et qui est plutot simple et pratique à utiliser.\\
+      Ensuite, lorsque nous avons commencé à réfléchir à notre projet, il nous a fallu trouver une bibliothèque graphique. Nous avons fait quelques recherches : nous avons hésité entre la bibliothèque
+      graphique de base avec Java (AWT) et Slick2D. Notre choix s'est finalement porté sur Slick2D, qui est une bibliothèque complète et simple 
+      d'utilisation (et qui avait l'air assez conseillée pour faire des jeux en 2D). \\
+      
+      Ensuite, dans le code, nous voulions pouvoir modifier les constantes sans problème, c'est pourquoi nous avons créé des fichiers de 
+      configuration dans lesquels se trouvent les constantes (hauteur et largeur de la carte, vitesse des personnages, taille des images du mur et
+      des personnages, positions de départ des fantomes, écart entre le bord de la fenêtre et les bords de la carte etc.). Chaque niveau du mode solo a son propre
+      fichier de configuration.
+	

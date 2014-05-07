@@ -1,0 +1,13 @@
+\select@language {french}
+\contentsline {part}{Rappel du sujet}{2}
+\contentsline {section}{\numberline {1.1}R\IeC {\`e}gles de fonctionnement}{2}
+\contentsline {section}{\numberline {1.2}Choix des structures de donn\IeC {\'e}es}{2}
+\contentsline {part}{Architecture g\IeC {\'e}n\IeC {\'e}rale}{4}
+\contentsline {part}{Fonctionnalit\IeC {\'e}s en d\IeC {\'e}tail}{5}
+\contentsline {section}{\numberline {3.3}Affichage des fenetres - Les \IeC {\'e}tats}{5}
+\contentsline {section}{\numberline {3.4}Affichage de la carte du jeu}{5}
+\contentsline {section}{\numberline {3.5}Les personnages - Classes \texttt {JoueurPacman} et \texttt {Fantome}}{6}
+\contentsline {part}{Impl\IeC {\'e}mentation}{8}
+\contentsline {part}{Tests et utilisation}{9}
+\contentsline {part}{Conclusion et \IeC {\'e}volutions possibles}{10}
+\contentsline {part}{Bibliographie}{11}

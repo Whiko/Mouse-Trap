@@ -1,0 +1,112 @@
+\documentclass[a4paper,10pt]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{courier}
+
+\usepackage{fancyhdr}
+\usepackage{multicol}
+\usepackage{color}
+%\usepackage{vmargin}
+\usepackage{fullpage}
+%\setmarginsrb{60pt}{40pt}{60pt}{40pt}{20pt}{20pt}{20pt}{20pt}
+
+% Console
+\definecolor{Consolebluebg}{rgb}{0.92,1,1}
+\definecolor{Consoledarkblue}{rgb}{0,0.2,0.3}
+
+% C
+\definecolor{Cgraybg}{rgb}{0.95,0.95,0.91}
+\definecolor{Cblue}{rgb}{0,0.1,0.2}
+\definecolor{Cgray}{rgb}{0.5,0.5,0.5}
+\definecolor{Cyellow}{rgb}{0.90,0.6,0.02}
+\definecolor{Cred}{rgb}{0.7,0.4,0.4}
+\definecolor{Cbluegray}{rgb}{0.1,0.6,0.6}
+
+\usepackage{listings}
+
+\lstset{literate=
+  {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1 {ù}{{\`u}}1
+  {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1 {Ú}{{\'U}}1
+  {à}{{\`a}}1 {è}{{\'e}}1 {ì}{{\`i}}1 {ò}{{\`o}}1 {ò}{{\`o}}1
+  {À}{{\`A}}1 {È}{{\'E}}1 {Ì}{{\`I}}1 {Ò}{{\`O}}1 {Ò}{{\`O}}1
+  {ä}{{\"a}}1 {ë}{{\"e}}1 {ï}{{\"i}}1 {ö}{{\"o}}1 {ü}{{\"u}}1
+  {Ä}{{\"A}}1 {Ë}{{\"E}}1 {Ï}{{\"I}}1 {Ö}{{\"O}}1 {Ü}{{\"U}}1
+  {â}{{\^a}}1 {ê}{{\^e}}1 {î}{{\^i}}1 {ô}{{\^o}}1 {û}{{\^u}}1
+  {Â}{{\^A}}1 {Ê}{{\^E}}1 {Î}{{\^I}}1 {Ô}{{\^O}}1 {Û}{{\^U}}1
+  {œ}{{\oe}}1 {Œ}{{\OE}}1 {æ}{{\ae}}1 {Æ}{{\AE}}1 {ß}{{\ss}}1
+  {ç}{{\c c}}1 {Ç}{{\c C}}1 {ø}{{\o}}1 {å}{{\r a}}1 {Å}{{\r A}}1
+  {€}{{\EUR}}1 {£}{{\pounds}}1
+}
+
+\lstdefinestyle{styleConsole}{
+  backgroundcolor=\color{Consolebluebg},
+  basicstyle=\footnotesize\ttfamily\color{Consoledarkblue},       
+  breakatwhitespace=false,        
+  breaklines=true,          
+  captionpos=b,        
+  commentstyle=\color{Consoledarkblue},              
+  extendedchars=true,   
+  frame=lrtb,
+  keepspaces=false,    
+  keywordstyle=\color{Consoledarkblue},             
+  numbers=none,    
+  rulecolor=\color{Consoledarkblue},         
+  showspaces=false,             
+  showstringspaces=false,       
+  stringstyle=\color{Consoledarkblue},       
+  tabsize=2,
+}
+
+\lstdefinestyle{styleC}{
+  backgroundcolor=\color{Cgraybg},
+  basicstyle=\footnotesize\ttfamily\color{Cblue},       
+  breakatwhitespace=false,        
+  breaklines=true,          
+  captionpos=b,                   
+  commentstyle=\color{Cbluegray},       
+  extendedchars=true,
+  frame=lrtb,
+  keepspaces=true,         
+  keywordstyle=\color{Cred},       
+  language=C,
+  numbers=left,                  
+  numbersep=5pt,                 
+  numberstyle=\scriptsize\color{Cgray},
+  rulecolor=\color{black},         
+  showspaces=false,             
+  showstringspaces=false,            
+  stringstyle=\color{Cyellow},
+  tabsize=2,                
+  title=\lstname  
+}
+
+% Title Page
+\title{Compte rendu du projet du module \\\textsc{Info42}}
+\author{Julie \textsc{Guignabert} - Ludivine \textsc{Roy}}
+
+
+\begin{document}
+  \maketitle
+  \pagestyle{fancy}
+  \renewcommand{\headheight}{13pt}
+  \renewcommand{\headrulewidth}{1pt}
+  \renewcommand{\footrulewidth}{1pt}
+  \renewcommand{\headsep}{10pt}
+  \rhead{\thepage}
+  \setcounter{tocdepth}{0}
+  \renewcommand{\contentsname}{Sommaire}
+  \tableofcontents
+
+  \input{rappel_sujet.tex}
+  \input{architecture.tex}
+  \input{fonctionnalites.tex}
+  \input{implementation.tex}
+  \input{tests.tex}
+  \input{conclusion.tex}
+  \input{biblio.tex}
+  
+\end{document}          
