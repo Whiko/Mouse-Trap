@@ -12,7 +12,7 @@ public abstract class Joueur implements Serializable
 	{
 		pseudo = "";
 		score = 0;
-		vie = 1;
+		vie = 3;
 	}
 	
 	public void seDeplacerServeur(Map carte, String requete) {}
