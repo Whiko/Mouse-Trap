@@ -123,6 +123,7 @@ public class Fantome extends Joueur implements Serializable
 					}
 				}
 			}
+			
 			else
 			{
 				positionX -= vitesse;

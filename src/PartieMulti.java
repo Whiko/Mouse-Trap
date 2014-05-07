@@ -91,6 +91,7 @@ public class PartieMulti extends Thread
 			}
 			envoi.setInfoPerso(joueurs, carte);
 			try {
+				//pour economiser du temps processeur
 				sleep(15);
 			} catch (InterruptedException e) {e.printStackTrace();}
 		}
