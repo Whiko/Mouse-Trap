@@ -8,7 +8,7 @@ import org.newdawn.slick.state.StateBasedGame;
 
 public class MenuCommandes extends BasicGameState
 {	
-	public static final int stateID = 12;
+	public static final int stateID = 11;
 	
 	private Image fond= null;
     private Image retour=null;
