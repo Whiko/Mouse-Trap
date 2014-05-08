@@ -3,7 +3,6 @@ import java.io.Serializable;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Input;
 
 
 public class Fantome extends Joueur implements Serializable
@@ -122,7 +121,7 @@ public class Fantome extends Joueur implements Serializable
 						mvmt = "haut";
 					}
 				}
-			}
+			} 
 			
 			else
 			{

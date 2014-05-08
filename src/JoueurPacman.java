@@ -8,8 +8,7 @@ import org.newdawn.slick.Input;
 
 public class JoueurPacman extends Joueur implements Serializable
 {
-	private int nbObjet;
-	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, nbFantomes, nbPieces, cptPieces;
+	private int positionX, positionY, pointDepartX, pointDepartY,tailleMur, taillePacman, ecartX, ecartY, vitesse, cptPieces;
 	private Configuration config;
 	private boolean gameOver, invincible, invisible;
 	private int ferme, timer;
@@ -17,7 +16,6 @@ public class JoueurPacman extends Joueur implements Serializable
 	
 	public JoueurPacman(String path, String configu) throws IOException
 	{
-		nbObjet = 0;
 		cptPieces = 0;
 		config = new Configuration(configu);
 		tailleMur = config.getValeur("tailleMur");
@@ -25,8 +23,6 @@ public class JoueurPacman extends Joueur implements Serializable
 		ecartX = config.getValeur("ecartX");
 		ecartY = config.getValeur("ecartY");
 		vitesse = config.getValeur("vitesse");
-		nbFantomes = config.getValeur("nbFantomes");
-		nbPieces = config.getValeur("nbPoints");
 		positionX = ecartX + tailleMur;
 		positionY = ecartY + tailleMur;
 		pointDepartX = positionX;

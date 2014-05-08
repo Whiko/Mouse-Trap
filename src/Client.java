@@ -29,7 +29,7 @@ public class Client extends Thread
 		fin = false;
 		port = 8081;
 		portDatagram = 8082;
-		nomHote = "192.168.137.246";
+		nomHote = "192.168.1.11";
 		adresse = new InetSocketAddress(nomHote, portDatagram);
 		ip = adresse.getAddress().getHostAddress();
 		socDatagram = DatagramChannel.open();

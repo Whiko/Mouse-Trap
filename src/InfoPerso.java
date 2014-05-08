@@ -2,7 +2,6 @@ import java.io.Serializable;
 
 public class InfoPerso implements Serializable
 {	
-	private static final long serialVersionUID = 1L;
 	private Joueur[] joueurs;
 	private Map map;
 	private int id;
